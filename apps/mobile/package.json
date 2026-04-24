@@ -1,0 +1,46 @@
+{
+  "name": "@fitnessapp/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FitnessApp mobile client — Expo + React Native + TypeScript + MobX.",
+  "license": "MIT",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "lint": "eslint 'src/**/*.{ts,tsx}' '__tests__/**/*.{ts,tsx}'",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "@fitnessapp/shared": "workspace:*",
+    "axios": "1.7.7",
+    "dayjs": "1.11.13",
+    "expo": "~51.0.0",
+    "expo-localization": "~15.0.3",
+    "expo-secure-store": "~13.0.2",
+    "expo-status-bar": "~1.12.1",
+    "i18next": "23.15.1",
+    "mobx": "6.13.3",
+    "mobx-react-lite": "4.0.7",
+    "react": "18.2.0",
+    "react-i18next": "15.0.2",
+    "react-native": "0.74.5",
+    "socket.io-client": "4.8.0",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "12.7.2",
+    "@types/jest": "29.5.13",
+    "@types/react": "18.2.79",
+    "eslint": "9.12.0",
+    "jest": "29.7.0",
+    "jest-expo": "~51.0.4",
+    "react-test-renderer": "18.2.0",
+    "ts-jest": "29.2.5",
+    "typescript": "5.6.3"
+  }
+}

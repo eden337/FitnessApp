@@ -1,0 +1,29 @@
+{
+  "name": "fitnessapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bilingual (HE/EN) couples fitness app: Aba Hatuv diet planner, progress tracking, real-time partner sync.",
+  "license": "MIT",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "scripts": {
+    "lint": "pnpm -r --if-present run lint",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "test": "pnpm -r --if-present run test",
+    "test:coverage": "pnpm -r --if-present run test:coverage",
+    "build": "pnpm -r --if-present run build",
+    "dev:server": "pnpm --filter @fitnessapp/server dev",
+    "dev:mobile": "pnpm --filter @fitnessapp/mobile start",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down"
+  },
+  "devDependencies": {
+    "typescript": "5.6.3"
+  }
+}
