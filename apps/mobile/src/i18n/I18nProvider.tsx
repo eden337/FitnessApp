@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next, useTranslation as useI18nextTranslation } from 'react-i18next';
-import { resources, supportedLocales, type Locale } from './resources';
+import { namespaces, resources, supportedLocales, type Locale } from './resources';
 
 /**
  * Build a fresh i18next instance. Factored out so tests can construct isolated
@@ -15,7 +15,7 @@ export const createI18n = (locale: Locale = 'he'): typeof i18n => {
     fallbackLng: 'he',
     supportedLngs: [...supportedLocales],
     defaultNS: 'common',
-    ns: ['common'],
+    ns: [...namespaces],
     interpolation: { escapeValue: false },
     returnNull: false,
   });

@@ -4,12 +4,14 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/.expo/'],
   moduleNameMapper: {
     '^@fitnessapp/shared$': '<rootDir>/../../packages/shared/src/index.ts',
+    '^react-dom$': '<rootDir>/__mocks__/react-dom.js',
   },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
     '!src/**/index.ts',
-    '!src/app/**',
+    '!src/app/App.tsx',
+    '!src/services/nativeSecureStorage.ts',
   ],
   coverageThreshold: {
     global: {

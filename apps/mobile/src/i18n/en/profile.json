@@ -1,0 +1,35 @@
+{
+  "setup": {
+    "title": "Profile setup",
+    "subtitle": "So we can compute your personalized plan",
+    "currentWeightLabel": "Current weight (kg)",
+    "activityLabel": "Activity level",
+    "activity": {
+      "sedentary": "Sedentary",
+      "light": "Light",
+      "moderate": "Moderate",
+      "high": "High",
+      "athlete": "Athlete"
+    },
+    "goalLabel": "Goal",
+    "goal": {
+      "lose": "Lose",
+      "maintain": "Maintain",
+      "gain": "Gain"
+    },
+    "goalWeightLabel": "Goal weight (kg, optional)",
+    "submit": "Save and continue"
+  },
+  "summary": {
+    "ageYears": "Age",
+    "height": "Height",
+    "weight": "Weight",
+    "bmr": "BMR",
+    "tdee": "TDEE",
+    "target": "Daily target (kcal)",
+    "kcal": "kcal",
+    "kg": "kg",
+    "cm": "cm",
+    "years": "years"
+  }
+}

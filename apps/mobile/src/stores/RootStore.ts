@@ -1,0 +1,49 @@
+import type { AxiosInstance } from 'axios';
+import { createApiClient } from '../services/apiClient';
+import type { SecureStorage } from '../services/secureStorage';
+import { AuthStore } from './AuthStore';
+import { LocaleStore, type LocaleStoreDeps } from './LocaleStore';
+import { ProfileStore } from './ProfileStore';
+
+export type RootStoreDeps = {
+  baseURL: string;
+  storage: SecureStorage;
+  setI18nLanguage: LocaleStoreDeps['setI18nLanguage'];
+  setRtl: LocaleStoreDeps['setRtl'];
+  initialLocale?: 'he' | 'en';
+  /** Optional pre-built axios instance — useful for tests. */
+  api?: AxiosInstance;
+};
+
+/**
+ * Composition root for the mobile app. Creates the api client + stores in
+ * the right order so the api client's auth interceptor can read tokens from
+ * the AuthStore and signal failures back to it.
+ */
+export class RootStore {
+  readonly auth: AuthStore;
+  readonly profile: ProfileStore;
+  readonly locale: LocaleStore;
+  readonly api: AxiosInstance;
+
+  constructor(deps: RootStoreDeps) {
+    let auth!: AuthStore;
+    this.api =
+      deps.api ??
+      createApiClient({
+        baseURL: deps.baseURL,
+        getTokens: () => auth.getTokens(),
+        setTokens: (t) => auth.setTokens(t),
+        onAuthFailure: () => auth.handleAuthFailure(),
+      });
+    auth = new AuthStore({ api: this.api, storage: deps.storage });
+    this.auth = auth;
+    this.profile = new ProfileStore({ api: this.api, authStore: this.auth });
+    this.locale = new LocaleStore({
+      storage: deps.storage,
+      setI18nLanguage: deps.setI18nLanguage,
+      setRtl: deps.setRtl,
+      initial: deps.initialLocale ?? 'he',
+    });
+  }
+}

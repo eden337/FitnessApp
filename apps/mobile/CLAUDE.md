@@ -1,8 +1,15 @@
 # CLAUDE.md — mobile workspace
 
 Expo managed workflow, React Native + TypeScript + MobX + react-i18next.
-Phase 0 ships a bilingual home screen and i18n scaffolding; feature screens
-arrive in Phases 1–4.
+Phase 0 shipped i18n scaffolding. Phase 1 adds:
+- `services/`: secure-store wrapper + axios apiClient with auto-refresh.
+- `stores/`: AuthStore, ProfileStore, LocaleStore, RootStore + StoresContext.
+- `components/`: Button, TextField, SegmentedPicker, LocaleToggle.
+- `screens/auth/`: SignInScreen, SignUpScreen.
+- `screens/profile/`: ProfileSetupScreen.
+- `screens/HomeScreen.tsx`: target/TDEE/BMR summary card after setup.
+- `app/RootNavigator.tsx`: state-driven navigator (auth → setup → home).
+- i18n bundles for `auth` + `profile` in he/en, with key-parity test.
 
 ## Layout
 

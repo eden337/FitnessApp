@@ -1,16 +1,20 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import { App } from '../src/app/App';
+import { createInMemoryStorage } from '../src/services/secureStorage';
 
 describe('App', () => {
-  it('renders the Hebrew app name by default', () => {
-    render(<App />);
-    expect(screen.getByTestId('home-screen')).toBeTruthy();
-    expect(screen.getByText('כושר לזוגות')).toBeTruthy();
+  it('mounts the SignIn screen by default (Hebrew title)', () => {
+    const { getByTestId, getAllByText } = render(<App storage={createInMemoryStorage()} />);
+    expect(getByTestId('signin-screen')).toBeTruthy();
+    expect(getAllByText('התחברות').length).toBeGreaterThan(0);
   });
 
-  it('renders the English app name when locale is en', () => {
-    render(<App locale="en" />);
-    expect(screen.getByText('Couple Fit')).toBeTruthy();
+  it('renders the English SignIn screen when locale is en', () => {
+    const { getByTestId, getAllByText } = render(
+      <App locale="en" storage={createInMemoryStorage()} />,
+    );
+    expect(getByTestId('signin-screen')).toBeTruthy();
+    expect(getAllByText('Sign in').length).toBeGreaterThan(0);
   });
 });
