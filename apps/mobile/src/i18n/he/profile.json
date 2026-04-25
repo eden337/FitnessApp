@@ -1,0 +1,35 @@
+{
+  "setup": {
+    "title": "הגדרת פרופיל",
+    "subtitle": "כדי שנוכל לחשב לכם תוכנית מותאמת",
+    "currentWeightLabel": "משקל נוכחי (ק\"ג)",
+    "activityLabel": "רמת פעילות",
+    "activity": {
+      "sedentary": "יושבני",
+      "light": "קלה",
+      "moderate": "בינונית",
+      "high": "גבוהה",
+      "athlete": "ספורטאי"
+    },
+    "goalLabel": "מטרה",
+    "goal": {
+      "lose": "להוריד",
+      "maintain": "לשמור",
+      "gain": "להעלות"
+    },
+    "goalWeightLabel": "משקל יעד (ק\"ג, אופציונלי)",
+    "submit": "שמרו והמשיכו"
+  },
+  "summary": {
+    "ageYears": "גיל",
+    "height": "גובה",
+    "weight": "משקל",
+    "bmr": "BMR",
+    "tdee": "TDEE",
+    "target": "יעד יומי (קלוריות)",
+    "kcal": "קלוריות",
+    "kg": "ק\"ג",
+    "cm": "ס\"מ",
+    "years": "שנים"
+  }
+}

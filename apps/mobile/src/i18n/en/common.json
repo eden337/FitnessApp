@@ -1,4 +1,28 @@
 {
   "appName": "Couple Fit",
-  "tagline": "Plan, log, and push each other forward"
+  "tagline": "Plan, log, and push each other forward",
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "signOut": "Sign out",
+    "edit": "Edit",
+    "back": "Back"
+  },
+  "locale": {
+    "label": "Language",
+    "he": "עברית",
+    "en": "English"
+  },
+  "home": {
+    "greeting": "Hi {{name}}!",
+    "needsSetup": "Finish profile setup to see your personalized plan"
+  },
+  "validation": {
+    "required": "Required field",
+    "email": "Invalid email address",
+    "passwordLength": "Password must be at least 10 characters",
+    "isoDate": "Date must be in YYYY-MM-DD format",
+    "rangeHeight": "Height must be between 50 and 250 cm",
+    "rangeWeight": "Weight must be between 20 and 300 kg"
+  }
 }
