@@ -32,4 +32,19 @@ describe('loadEnv', () => {
         .DATABASE_URL,
     ).toBe('postgres://u:p@h:5432/d');
   });
+
+  it('falls back to process.env when no source is supplied', () => {
+    const before = { ...process.env };
+    process.env.SERVER_PORT = '5555';
+    try {
+      const env = loadEnv();
+      expect(env.SERVER_PORT).toBe(5555);
+    } finally {
+      // restore so we don't leak state into other tests
+      for (const key of Object.keys(process.env)) {
+        if (!(key in before)) delete process.env[key];
+      }
+      Object.assign(process.env, before);
+    }
+  });
 });
