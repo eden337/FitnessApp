@@ -46,3 +46,6 @@ export const AuthTokensSchema = z
   })
   .strict();
 export type AuthTokens = z.infer<typeof AuthTokensSchema>;
+
+export const RefreshInputSchema = z.object({ refreshToken: z.string().min(20) }).strict();
+export type RefreshInput = z.infer<typeof RefreshInputSchema>;
