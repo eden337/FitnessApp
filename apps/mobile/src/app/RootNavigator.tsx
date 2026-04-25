@@ -5,34 +5,40 @@ import { useStores } from '../stores/StoresContext';
 import { SignInScreen } from '../screens/auth/SignInScreen';
 import { SignUpScreen } from '../screens/auth/SignUpScreen';
 import { ProfileSetupScreen } from '../screens/profile/ProfileSetupScreen';
+import { PairScreen } from '../screens/couple/PairScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { colors } from '../theme';
 
 /**
- * Tiny state-driven navigator. Sufficient for Phase 1; we'll graduate to
+ * Tiny state-driven navigator. Sufficient for Phase 2; we'll graduate to
  * react-navigation once we have a tab bar (diet / progress / partner feed).
  *
  * Decision tree:
- *   status loading       → spinner
- *   unauth + showSignUp  → SignUpScreen
- *   unauth + !showSignUp → SignInScreen
- *   authed + no metrics  → ProfileSetupScreen
- *   authed + has metrics → HomeScreen
+ *   status loading                    → spinner
+ *   unauth + showSignUp               → SignUpScreen
+ *   unauth + !showSignUp              → SignInScreen
+ *   authed + no metrics               → ProfileSetupScreen
+ *   authed + showPair                 → PairScreen (tapped from HomeScreen)
+ *   authed + has metrics              → HomeScreen
  */
 export const RootNavigator: React.FC = observer(() => {
-  const { auth, profile } = useStores();
+  const { auth, profile, couple } = useStores();
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showPair, setShowPair] = useState(false);
 
-  // After authentication, hydrate the profile so the navigator can decide
-  // whether to show setup or home.
   useEffect(() => {
     if (auth.status === 'authenticated' && profile.status === 'idle') {
       void profile.fetch();
     }
-    if (auth.status === 'unauthenticated' && profile.status !== 'idle') {
-      profile.reset();
+    if (auth.status === 'authenticated' && couple.status === 'idle') {
+      void couple.fetch();
     }
-  }, [auth.status, profile, profile.status]);
+    if (auth.status === 'unauthenticated') {
+      if (profile.status !== 'idle') profile.reset();
+      if (couple.status !== 'idle') couple.reset();
+      setShowPair(false);
+    }
+  }, [auth.status, profile, profile.status, couple, couple.status]);
 
   if (auth.status === 'loading' && !auth.user) {
     return (
@@ -50,7 +56,9 @@ export const RootNavigator: React.FC = observer(() => {
     );
   }
 
-  return profile.isMetricsInitialized ? <HomeScreen /> : <ProfileSetupScreen />;
+  if (!profile.isMetricsInitialized) return <ProfileSetupScreen />;
+  if (showPair) return <PairScreen onClose={() => setShowPair(false)} />;
+  return <HomeScreen onPressPartner={() => setShowPair(true)} />;
 });
 
 const styles = StyleSheet.create({

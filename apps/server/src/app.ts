@@ -14,6 +14,10 @@ import { registerAuthRoutes } from './modules/auth/routes.js';
 import { createUsersRepo } from './modules/users/repo.js';
 import { createUsersService } from './modules/users/service.js';
 import { registerUsersRoutes } from './modules/users/routes.js';
+import { createCouplesRepo } from './modules/couples/repo.js';
+import { createCouplesService, type CoupleEventEmitter } from './modules/couples/service.js';
+import { registerCouplesRoutes } from './modules/couples/routes.js';
+import { createSyncGateway, type SyncGateway } from './modules/sync/gateway.js';
 
 export type AppDeps = {
   env: Env;
@@ -23,6 +27,18 @@ export type AppDeps = {
    * pinned to an isolated schema.
    */
   db?: DbClient;
+  /**
+   * When `true`, attach a Socket.IO gateway to the app's HTTP listener.
+   * Defaults to `false` so unit tests using `app.inject()` don't pay the
+   * cost of creating sockets they never use; the live entry point and the
+   * dedicated socket tests opt in explicitly.
+   */
+  attachSync?: boolean;
+};
+
+export type BuiltApp = {
+  app: FastifyInstance;
+  sync: SyncGateway | null;
 };
 
 /**
@@ -31,6 +47,17 @@ export type AppDeps = {
  * `app.inject(...)` or Supertest without binding a port.
  */
 export const buildApp = async ({ env, db: providedDb }: AppDeps): Promise<FastifyInstance> => {
+  const deps: AppDeps = { env, attachSync: false };
+  if (providedDb) deps.db = providedDb;
+  const built = await buildAppWithSync(deps);
+  return built.app;
+};
+
+export const buildAppWithSync = async ({
+  env,
+  db: providedDb,
+  attachSync = false,
+}: AppDeps): Promise<BuiltApp> => {
   const app = Fastify({
     logger: env.NODE_ENV === 'test' ? false : { level: 'info' },
     trustProxy: true,
@@ -49,6 +76,7 @@ export const buildApp = async ({ env, db: providedDb }: AppDeps): Promise<Fastif
 
   // Wire the auth + users stack only when we have a database (tests for the
   // health endpoint don't need it).
+  let sync: SyncGateway | null = null;
   const db = providedDb ?? (env.DATABASE_URL ? createDbClient(env.DATABASE_URL) : null);
   if (db) {
     const hasher = createPasswordHasher(env.BCRYPT_COST);
@@ -71,10 +99,44 @@ export const buildApp = async ({ env, db: providedDb }: AppDeps): Promise<Fastif
     const usersService = createUsersService({ repo: usersRepo, authRepo });
     registerUsersRoutes(app, { service: usersService, requireAuth });
 
+    // Couples + realtime sync. The gateway is created lazily so the same
+    // emitter reference is shared between REST writes and socket fan-out.
+    const eventsRef: { current: CoupleEventEmitter | null } = { current: null };
+    const couplesRepo = createCouplesRepo(db);
+    const couplesService = createCouplesService({
+      repo: couplesRepo,
+      authRepo,
+      events: {
+        emitMemberJoined: (id, p) => eventsRef.current?.emitMemberJoined(id, p),
+        emitMemberLeft: (id, p) => eventsRef.current?.emitMemberLeft(id, p),
+      },
+    });
+    registerCouplesRoutes(app, { service: couplesService, requireAuth });
+
+    if (attachSync) {
+      // The Socket.IO server attaches to the underlying HTTP listener; we
+      // can only do that after `app.ready()` has run, so callers must call
+      // `attachSocket()` once they've called `await app.ready()`.
+      app.addHook('onReady', async () => {
+        sync = createSyncGateway({ app, signer, couplesService });
+        eventsRef.current = sync.emitter;
+      });
+      app.addHook('onClose', async () => {
+        if (sync) await sync.close();
+      });
+    }
+
     app.addHook('onClose', async () => {
       if (!providedDb) await db.destroy();
     });
   }
 
-  return app;
+  // The caller can read `built.sync` only after `await app.ready()`; before
+  // that the gateway hasn't attached.
+  return {
+    app,
+    get sync() {
+      return sync;
+    },
+  } as BuiltApp;
 };

@@ -1,0 +1,34 @@
+{
+  "title": "Pair with your partner",
+  "subtitle": "So you can see each other's progress in real time",
+  "create": {
+    "cta": "Generate invite code",
+    "loading": "Creating…",
+    "instructions": "Share the code with your partner. When they enter it, you'll see each other's progress."
+  },
+  "join": {
+    "label": "Invite code",
+    "placeholder": "AAAA1111",
+    "cta": "Join",
+    "loading": "Joining…"
+  },
+  "code": {
+    "label": "Your invite code",
+    "copyHint": "Tap to select"
+  },
+  "leave": {
+    "cta": "Leave couple",
+    "confirm": "Confirm leave"
+  },
+  "partnerCard": {
+    "label": "Partner",
+    "alone": "Not paired yet"
+  },
+  "errors": {
+    "invite_not_found": "That code is wrong or expired",
+    "already_in_couple": "You're already in a couple",
+    "self_join_forbidden": "You're already in this couple",
+    "invalid_body": "Invalid code format",
+    "fallback": "Something went wrong, please try again"
+  }
+}
