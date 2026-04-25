@@ -2,6 +2,7 @@ import type { AxiosInstance } from 'axios';
 import { createApiClient } from '../services/apiClient';
 import type { SecureStorage } from '../services/secureStorage';
 import { AuthStore } from './AuthStore';
+import { CoupleStore } from './CoupleStore';
 import { LocaleStore, type LocaleStoreDeps } from './LocaleStore';
 import { ProfileStore } from './ProfileStore';
 
@@ -23,6 +24,7 @@ export type RootStoreDeps = {
 export class RootStore {
   readonly auth: AuthStore;
   readonly profile: ProfileStore;
+  readonly couple: CoupleStore;
   readonly locale: LocaleStore;
   readonly api: AxiosInstance;
 
@@ -39,6 +41,7 @@ export class RootStore {
     auth = new AuthStore({ api: this.api, storage: deps.storage });
     this.auth = auth;
     this.profile = new ProfileStore({ api: this.api, authStore: this.auth });
+    this.couple = new CoupleStore({ api: this.api });
     this.locale = new LocaleStore({
       storage: deps.storage,
       setI18nLanguage: deps.setI18nLanguage,

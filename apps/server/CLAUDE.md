@@ -1,14 +1,18 @@
 # CLAUDE.md — server workspace
 
 Node.js 20 + Fastify + Kysely + Postgres + Socket.IO. TypeScript strict mode.
-Phase 0 provided the health endpoint and env loader. Phase 1a adds:
-- DB schema (users, user_metrics, refresh_tokens) via SQL migrations.
-- Pure personalization helpers (BMR, calorie target) in `lib/`.
+
+What's wired so far:
+- DB schema (users, user_metrics, refresh_tokens, couples, couple_members)
+  via numbered SQL migrations.
+- Pure personalization helpers (BMR, calorie target, invite-code generator)
+  in `lib/`.
 - `auth` module: register/login/refresh/logout/me + rate limiting.
 - `users` module: profile + metrics CRUD + server-derived BMR/TDEE/target.
+- `couples` module: create/join/leave/me with invite codes + RBAC scope.
+- `sync` module: Socket.IO gateway with JWT auth on connection, per-couple
+  rooms, and event fan-out for `couple:member-joined / couple:member-left`.
 - `requireAuth` middleware reading Bearer access tokens.
-
-Mobile screens for these flows land in Phase 1b.
 
 ## Layout
 

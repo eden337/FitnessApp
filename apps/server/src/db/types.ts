@@ -44,8 +44,23 @@ export interface RefreshTokensTable {
   created_at: ManagedTimestamp;
 }
 
+export interface CouplesTable {
+  id: Generated<string>;
+  invite_code: string;
+  created_at: ManagedTimestamp;
+}
+
+export interface CoupleMembersTable {
+  couple_id: string;
+  user_id: string;
+  role: 'owner' | 'member';
+  joined_at: ManagedTimestamp;
+}
+
 export interface Database {
   users: UsersTable;
   user_metrics: UserMetricsTable;
   refresh_tokens: RefreshTokensTable;
+  couples: CouplesTable;
+  couple_members: CoupleMembersTable;
 }

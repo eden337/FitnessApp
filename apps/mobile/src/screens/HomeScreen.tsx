@@ -3,11 +3,14 @@ import { observer } from 'mobx-react-lite';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button } from '../components/Button';
 import { LocaleToggle } from '../components/LocaleToggle';
+import { PartnerCard } from '../components/PartnerCard';
 import { useTranslation } from '../i18n/I18nProvider';
 import { useStores } from '../stores/StoresContext';
 import { colors, radii, spacing, typography } from '../theme';
 
-export const HomeScreen: React.FC = observer(() => {
+export type HomeScreenProps = { onPressPartner?: () => void };
+
+export const HomeScreen: React.FC<HomeScreenProps> = observer(({ onPressPartner }) => {
   const { auth, profile } = useStores();
   const { t } = useTranslation();
   const name = auth.user?.displayName ?? '';
@@ -17,6 +20,8 @@ export const HomeScreen: React.FC = observer(() => {
   return (
     <ScrollView contentContainerStyle={styles.scroll} testID="home-screen">
       <Text style={styles.greeting}>{t('common:home.greeting', { name })}</Text>
+
+      <PartnerCard {...(onPressPartner !== undefined && { onPress: onPressPartner })} />
 
       {d && m ? (
         <View style={styles.card}>

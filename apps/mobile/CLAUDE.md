@@ -1,15 +1,19 @@
 # CLAUDE.md — mobile workspace
 
 Expo managed workflow, React Native + TypeScript + MobX + react-i18next.
-Phase 0 shipped i18n scaffolding. Phase 1 adds:
-- `services/`: secure-store wrapper + axios apiClient with auto-refresh.
-- `stores/`: AuthStore, ProfileStore, LocaleStore, RootStore + StoresContext.
-- `components/`: Button, TextField, SegmentedPicker, LocaleToggle.
+What's wired so far:
+- `services/`: secure-store wrapper + axios apiClient with auto-refresh +
+  socket.io client wrapper.
+- `stores/`: AuthStore, ProfileStore, CoupleStore, LocaleStore, RootStore +
+  StoresContext.
+- `components/`: Button, TextField, SegmentedPicker, LocaleToggle, PartnerCard.
 - `screens/auth/`: SignInScreen, SignUpScreen.
 - `screens/profile/`: ProfileSetupScreen.
-- `screens/HomeScreen.tsx`: target/TDEE/BMR summary card after setup.
-- `app/RootNavigator.tsx`: state-driven navigator (auth → setup → home).
-- i18n bundles for `auth` + `profile` in he/en, with key-parity test.
+- `screens/couple/`: PairScreen.
+- `screens/HomeScreen.tsx`: PartnerCard + target/TDEE/BMR summary card.
+- `app/RootNavigator.tsx`: state-driven navigator
+  (loading → auth → setup → home ↔ pair).
+- i18n bundles for `auth` + `profile` + `couple` in he/en, key-parity tested.
 
 ## Layout
 
