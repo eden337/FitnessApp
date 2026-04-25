@@ -1,8 +1,14 @@
 # CLAUDE.md — server workspace
 
 Node.js 20 + Fastify + Kysely + Postgres + Socket.IO. TypeScript strict mode.
-Phase 0 provides only a health endpoint and the env loader; feature modules
-land in Phases 1–4 (see `/docs/architecture/overview.md`).
+Phase 0 provided the health endpoint and env loader. Phase 1a adds:
+- DB schema (users, user_metrics, refresh_tokens) via SQL migrations.
+- Pure personalization helpers (BMR, calorie target) in `lib/`.
+- `auth` module: register/login/refresh/logout/me + rate limiting.
+- `users` module: profile + metrics CRUD + server-derived BMR/TDEE/target.
+- `requireAuth` middleware reading Bearer access tokens.
+
+Mobile screens for these flows land in Phase 1b.
 
 ## Layout
 
