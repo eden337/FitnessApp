@@ -1,6 +1,12 @@
 # ADR 0004 — Aba Hatuv data schema
 
-**Status:** accepted · **Date:** 2026-04-24
+**Status:** **superseded by ADR 0007** · **Date:** 2026-04-24
+
+> ⚠️ The exchange-table model below was never implemented in any migration.
+> Once the Hebrew PDFs were transcribed it became clear Aba Hatuv is a
+> 13-week behavioral program, not a portion-exchange diet. See
+> [ADR 0007](0007-program-not-tier.md) for the replacement schema actually
+> used in `apps/server/src/db/migrations/0003_program.sql`.
 
 ## Context
 

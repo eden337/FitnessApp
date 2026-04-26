@@ -1,9 +1,35 @@
+import 'dotenv/config';
+import { fileURLToPath } from 'node:url';
+import { loadEnv } from '../config/env.js';
+import { createDbClient } from './client.js';
+import { applySeedBundle, readSeedBundle } from './seedLoader.js';
+
 /**
- * Seed runner entry point. Aba Hatuv seeds arrive in Phase 3.
+ * Seed runner: reads the on-disk Aba Hatuv v1 bundle, validates it, and
+ * upserts. Idempotent — rerun whenever the JSON files change.
  */
 export const run = async (): Promise<void> => {
-  console.log('[seed] no seeds yet (Phase 0 scaffolding).');
+  const env = loadEnv();
+  if (!env.DATABASE_URL) {
+    console.error('[seed] DATABASE_URL is required');
+    process.exit(1);
+  }
+  const db = createDbClient(env.DATABASE_URL);
+  try {
+    const bundle = await readSeedBundle('v1');
+    await applySeedBundle(db, bundle);
+    console.log(
+      `[seed] applied program ${bundle.program.version}: ${bundle.weeks.length} weeks, ${bundle.lists.length} lists.`,
+    );
+  } finally {
+    await db.destroy();
+  }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-run();
+const isMain = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+if (isMain) {
+  run().catch((err: unknown) => {
+    console.error('[seed] failed:', err);
+    process.exit(1);
+  });
+}
