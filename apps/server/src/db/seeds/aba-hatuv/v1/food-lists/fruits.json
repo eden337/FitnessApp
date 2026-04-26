@@ -1,0 +1,10 @@
+{
+  "slug": "fruits",
+  "name": { "he": "פירות", "en": "Fruits" },
+  "description": {
+    "he": "כל הפירות בשפע, מלבד תמרים ופירות יבשים.",
+    "en": "All fresh fruit, except dates and dried fruit."
+  },
+  "weekSlug": null,
+  "items": []
+}

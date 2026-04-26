@@ -1,0 +1,32 @@
+{
+  "slug": "cleanse-vacation",
+  "name": { "he": "מאכלים בחופשה מתוכננת", "en": "Foods on planned vacation" },
+  "description": {
+    "he": "מאכלים שיוצאים לחופשה במהלך שבוע הניקוי הלפטיני (לא לעד).",
+    "en": "Foods that take a planned vacation during the leptin cleanse (not forever)."
+  },
+  "weekSlug": "leptin-cleanse",
+  "items": [
+    {
+      "name": { "he": "סוכרים", "en": "Sugars" },
+      "notes": {
+        "he": "סוכר לבן, סוכר חום, אגבה, סילאן, מייפל, וכל ממתיק עם קלוריות וכל מאכל המכיל סוכר.",
+        "en": "White sugar, brown sugar, agave, silan, maple, any caloric sweetener, any food containing sugar."
+      }
+    },
+    {
+      "name": { "he": "קמחים ואוכל טחון", "en": "Flours and ground foods" },
+      "notes": {
+        "he": "כל קמח (רגיל, מלא, כוסמין, שקדים, כוסמת, חומוס וכו'), קוסקוס, סולת, עמילנים מוספים (קורנפלור ודומיו), במבה, אטריות רגילות, אטריות שעועית, אטריות אורז, פריכיות מכל סוג, דפי אורז, דגני בוקר, ניוקי וכל מאכל טחון אחר.",
+        "en": "Any flour (regular, whole-grain, spelt, almond, buckwheat, chickpea, etc.), couscous, semolina, added starches (cornstarch and similar), Bamba, regular noodles, bean noodles, rice noodles, any rice cakes, rice paper, breakfast cereals, gnocchi, and any other ground food."
+      }
+    },
+    {
+      "name": { "he": "מאכלים נוספים בחופשה", "en": "Other foods on vacation" },
+      "notes": {
+        "he": "שוקולד, ריבות ללא סוכר, חטיפי אנרגיה וחלבון (לרוב עם קמח), פירות יבשים ותמרים, אלכוהול המכיל סוכר (בירה ויין יבש מותר), מיצים (סחוטים / טבעיים / אחרים), בורגול, חלבה (עם או בלי סוכר), אינסטנט פודינג.",
+        "en": "Chocolate, sugar-free jams, energy and protein bars (usually contain flour), dried fruit and dates, alcohol containing sugar (dry beer and wine are allowed), juices (squeezed / natural / other), bulgur, halva (with or without sugar), instant pudding."
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "weekNumber": 1,
+  "slug": "leptin-flooding-1",
+  "title": {
+    "he": "שבוע 1 — הצפה לפטינית",
+    "en": "Week 1 — Leptin flooding"
+  },
+  "mission": {
+    "he": "לשתות 2-4 ליטר מים לאורך כל היום. שתי כוסות מים (200-250 מ\"ל) לפני כל פעולת אכילה. אין לשנות שום דבר אחר בתזונה היומית.",
+    "en": "Drink 2-4 liters of water throughout the day. Drink two cups (200-250 ml) of water before every eating event. Do not change anything else in your daily diet."
+  },
+  "rationale": {
+    "he": "התנעת תהליך שחרור נוזלים מהגוף ע\"י הצפת הגוף בכמות הנוזלים הראויה. הפחתת רעב ע\"י מילוי מנגנון הרעב הראשון — צמא. הגברת מודעות לקולות הדופמין שגורמים לתלות, אכילה רגשית והתמכרות.",
+    "en": "Kick-start fluid release by flooding the body with adequate hydration. Reduce hunger by satisfying the first hunger mechanism — thirst. Build awareness of dopamine-driven cravings, emotional eating, and addiction patterns."
+  },
+  "notes": {
+    "he": "צפויה עלייה חדה זמנית בכמות הביקורים בשירותים. ייתכן נפיחות בימים הראשונים — להעלות צריכת מים בהדרגה. אין להישקל השבוע או לנסות לשלוט בפרמטרים נוספים של אכילה.",
+    "en": "Expect a sharp temporary increase in bathroom visits. Some bloating is normal in the first few days — ramp up water intake gradually. Do not weigh yourself this week or try to control additional eating parameters."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": {
+        "he": "לשתות 2-4 ליטר מים בכל יום",
+        "en": "Drink 2-4 L of water every day"
+      },
+      "description": {
+        "he": "ניתן להוסיף לימון או פלחי מלפפון; אין להוסיף פלחי פירות או ממתיק כלשהו בשלב זה.",
+        "en": "Lemon or cucumber slices are allowed; no fruit slices or sweeteners at this stage."
+      }
+    },
+    {
+      "kind": "required",
+      "title": {
+        "he": "שתי כוסות מים לפני כל פעולת אכילה",
+        "en": "Two cups of water before every eating event"
+      },
+      "description": {
+        "he": "כוסות בנות 200-250 מ\"ל. נחשבות בספירה היומית.",
+        "en": "200-250 ml each. They count toward the daily total."
+      }
+    },
+    {
+      "kind": "required",
+      "title": {
+        "he": "להמשיך לאכול רגיל",
+        "en": "Keep eating as usual"
+      },
+      "description": {
+        "he": "לא לשנות שום דבר אחר בתזונה היומית — כדי לוודא איזון הורמונלי הדרגתי.",
+        "en": "Don't change anything else in your daily diet — to allow gradual hormonal balance."
+      }
+    },
+    {
+      "kind": "optional",
+      "title": {
+        "he": "להוריד צריכת שתייה ממותקת",
+        "en": "Reduce sweetened drinks"
+      },
+      "description": null
+    }
+  ]
+}

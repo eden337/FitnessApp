@@ -57,10 +57,65 @@ export interface CoupleMembersTable {
   joined_at: ManagedTimestamp;
 }
 
+export type ProgramTaskKind = 'required' | 'optional';
+
+export interface ProgramWeeksTable {
+  id: Generated<string>;
+  program_version: string;
+  week_number: number;
+  slug: string;
+  title_he: string;
+  title_en: string;
+  mission_he: string;
+  mission_en: string;
+  rationale_he: string | null;
+  rationale_en: string | null;
+  notes_he: string | null;
+  notes_en: string | null;
+}
+
+export interface ProgramTasksTable {
+  id: Generated<string>;
+  week_id: string;
+  ordinal: number;
+  kind: ProgramTaskKind;
+  title_he: string;
+  title_en: string;
+  description_he: string | null;
+  description_en: string | null;
+}
+
+export interface FoodListsTable {
+  id: Generated<string>;
+  program_version: string;
+  slug: string;
+  name_he: string;
+  name_en: string;
+  description_he: string | null;
+  description_en: string | null;
+  week_id: string | null;
+}
+
+export interface FoodItemsTable {
+  id: Generated<string>;
+  list_id: string;
+  ordinal: number;
+  name_he: string;
+  name_en: string;
+  portion_he: string | null;
+  portion_en: string | null;
+  notes_he: string | null;
+  notes_en: string | null;
+}
+
 export interface Database {
   users: UsersTable;
   user_metrics: UserMetricsTable;
   refresh_tokens: RefreshTokensTable;
   couples: CouplesTable;
   couple_members: CoupleMembersTable;
+  program_weeks: ProgramWeeksTable;
+  program_tasks: ProgramTasksTable;
+  food_lists: FoodListsTable;
+  food_items: FoodItemsTable;
 }

@@ -1,0 +1,60 @@
+{
+  "weekNumber": 3,
+  "slug": "leptin-cleanse",
+  "title": {
+    "he": "שבוע 3 — הניקוי הלפטיני",
+    "en": "Week 3 — Leptin cleanse"
+  },
+  "mission": {
+    "he": "להמשיך עם שתי כוסות מים לפני כל פעולת אכילה. בשתי הארוחות הגדולות ביום — לאכול 50% מהארוחה ירקות מנקים, או פעם אחת ביום 50% ירקות מנקים ובפעם השנייה שייק לפטיני. סדר אכילה: קודם הירקות המנקים, לאחר מכן השאר. לקיחת \"חופשה מתוכננת\" ממאכלים טחונים, קמחים, סוכרים וממתיקים מכל הסוגים (לא לעד).",
+    "en": "Continue with two cups of water before each eating event. At your two largest meals of the day, fill 50% of the plate with cleansing vegetables — or once a day 50% cleansing vegetables and the other a leptin smoothie. Eat the cleansing vegetables first, then the rest, for maximum satiety. Take a planned vacation from sugars, flours, ground foods, and sweeteners of every kind (not forever)."
+  },
+  "rationale": {
+    "he": "הורדה משמעותית של רגישות הגוף לאינסולין ורמותיו, וכתוצאה מכך שחרור אפקט החסימה של הורמון הלפטין ושובע הולך וגדל. תהליך מנטלי של שחרור מתלות גופנית ומנטלית במאכלים ממכרים — מאפשר ירידה משמעותית בחשקים לבצקים, מלוחים ומתוקים.",
+    "en": "Significantly lower insulin sensitivity and levels, which releases leptin's blocking effect and grows satiety. A mental process of releasing physical and mental dependence on addictive foods — substantially reduces cravings for doughy, salty, and sweet items."
+  },
+  "notes": {
+    "he": "הקפדה יתרה על עקרונות ההצפה הלפטינית של מים + ירקות. הכוח של הניקוי הוא בהתמסרות אליו — לא לגעת בסוכר וקמח. שימו לב לקולות הדופמין שינסו למצוא פרצה. שתפו את הקבוצה כדי לשבור את מטרת הדופמין: בידוד.",
+    "en": "Be strict with the leptin-flooding principles of water + vegetables. The cleanse's strength is in commitment — no sugar or flour at all. Watch for dopamine \"voices\" looking for a loophole. Share with the group/private chat to break dopamine's goal: isolation."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": {
+        "he": "50% ירקות מנקים בשתי הארוחות הגדולות",
+        "en": "50% cleansing vegetables in your two biggest meals"
+      },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": {
+        "he": "סדר אכילה: ירקות תחילה",
+        "en": "Eat the vegetables first"
+      },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": {
+        "he": "חופשה מסוכרים, קמחים וממתיקים",
+        "en": "Vacation from sugars, flours, and sweeteners"
+      },
+      "description": {
+        "he": "ראו רשימת \"מאכלים בחופשה\" המצורפת לשבוע זה.",
+        "en": "See the \"vacation foods\" list attached to this week."
+      }
+    },
+    {
+      "kind": "optional",
+      "title": {
+        "he": "להימנע מאגוזים, שקדים ובוטנים",
+        "en": "Avoid nuts, almonds, and peanuts"
+      },
+      "description": {
+        "he": "רוצה לרדת מהר יותר? המנעות זמנית תאיץ את התהליך.",
+        "en": "Want to drop weight faster? A temporary pause accelerates the process."
+      }
+    }
+  ]
+}

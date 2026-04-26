@@ -1,0 +1,15 @@
+{
+  "slug": "proteins",
+  "name": { "he": "חלבונים כבסיס הארוחה", "en": "Proteins as meal base" },
+  "description": null,
+  "weekSlug": null,
+  "items": [
+    { "name": { "he": "ביצים", "en": "Eggs" } },
+    { "name": { "he": "דגים", "en": "Fish" } },
+    { "name": { "he": "עוף", "en": "Chicken" } },
+    { "name": { "he": "בשר", "en": "Meat" } },
+    { "name": { "he": "מוצרי חלב", "en": "Dairy products" } },
+    { "name": { "he": "טופו", "en": "Tofu" } },
+    { "name": { "he": "סייטן", "en": "Seitan" } }
+  ]
+}

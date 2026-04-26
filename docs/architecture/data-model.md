@@ -53,21 +53,33 @@ Rotating refresh tokens, hashed at rest.
 refresh_tokens(id, user_id FK, token_hash text, expires_at, revoked_at NULL)
 ```
 
-### Aba Hatuv reference data
-Seeded from `apps/server/src/db/seeds/aba-hatuv/`. Program-version-aware so
-future revisions don't break historical logs.
+### Aba Hatuv reference data (program-shape — see ADR 0007)
+
+Aba Hatuv is a 13-week behavioral protocol, not a portion-exchange diet.
+Seeded from `apps/server/src/db/seeds/aba-hatuv/<version>/`; the seed
+loader (`src/db/seedLoader.ts`) is idempotent.
 
 ```sql
-food_categories(id, key text UNIQUE, name_he, name_en)
--- keys: protein, carb, veg, fat, fruit, dairy, free
+program_weeks(id, program_version text, week_number smallint, slug text,
+              title_he, title_en, mission_he, mission_en,
+              rationale_he NULL, rationale_en NULL, notes_he NULL, notes_en NULL,
+              UNIQUE(program_version, week_number))
 
-food_items(id, category_id FK, name_he, name_en, portion_grams, portion_desc_he,
-           portion_desc_en, kcal, protein_g, carb_g, fat_g)
+program_tasks(id, week_id FK, ordinal smallint,
+              kind text CHECK (kind IN ('required','optional')),
+              title_he, title_en, description_he NULL, description_en NULL,
+              UNIQUE(week_id, ordinal))
 
-meal_templates(id, program_version text, gender text, calorie_tier smallint,
-               meal_type text CHECK (meal_type IN ('breakfast','lunch','dinner','snack')),
-               portions jsonb)
--- portions: [{ category_key: 'protein', count: 2 }, { category_key: 'veg', count: 3 }, ...]
+food_lists(id, program_version text, slug text, name_he, name_en,
+           description_he NULL, description_en NULL,
+           week_id NULL FK program_weeks(id))
+-- week_id NULL ⇒ global list (proteins / leptin-carbs / fats / …);
+-- week_id set  ⇒ scoped to one week (e.g. cleanse-vacation in week 3).
+
+food_items(id, list_id FK, ordinal smallint,
+           name_he, name_en, portion_he NULL, portion_en NULL,
+           notes_he NULL, notes_en NULL,
+           UNIQUE(list_id, ordinal))
 ```
 
 ### Logs + goals
@@ -93,8 +105,10 @@ partner_reactions(id, couple_id FK, from_user_id FK, subject_type text,
 - `(user_id, logged_on DESC)` on every `_logs` table — covers the
   "recent activity" and chart queries.
 - `(couple_id, created_at DESC)` on `partner_reactions` — feed query.
-- `meal_templates(program_version, gender, calorie_tier, meal_type)` — daily
-  plan lookup.
+- `(program_version, week_number)` unique on `program_weeks`; `(list_id)`
+  on `food_items`; partial unique indexes on `food_lists` for
+  `(program_version, slug)` (global) and `(program_version, slug, week_id)`
+  (week-scoped) so NULL `week_id` is treated as "global" deterministically.
 
 All heavy reads are bounded by `logged_on >= $since` with these indexes in
 place, keeping per-screen queries at O(log n) lookups + O(k) returned rows.

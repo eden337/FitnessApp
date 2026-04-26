@@ -1,0 +1,11 @@
+{
+  "version": "v1",
+  "name": {
+    "he": "תוכנית אבא חטוב",
+    "en": "Aba Hatuv program"
+  },
+  "description": {
+    "he": "תוכנית התנהגותית בת 13 שבועות לאיזון לפטיני וירידה במשקל בריאה.",
+    "en": "A 13-week behavioral program for leptin balance and healthy weight loss."
+  }
+}

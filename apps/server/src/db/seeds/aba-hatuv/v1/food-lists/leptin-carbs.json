@@ -1,0 +1,33 @@
+{
+  "slug": "leptin-carbs",
+  "name": { "he": "פחמימות לפטיניות", "en": "Leptin carbs" },
+  "description": {
+    "he": "פחמימות שלמות, לא מעובדות ולא טחונות, שמומלצות בשלב הניקוי הלפטיני.",
+    "en": "Whole, unprocessed, non-ground carbs recommended during the leptin cleanse."
+  },
+  "weekSlug": null,
+  "items": [
+    { "name": { "he": "בטטה", "en": "Sweet potato" } },
+    { "name": { "he": "תפוחי אדמה", "en": "Potatoes" } },
+    { "name": { "he": "סלק", "en": "Beetroot" } },
+    { "name": { "he": "אורז", "en": "Rice" } },
+    { "name": { "he": "שעועית", "en": "Beans" } },
+    { "name": { "he": "עדשים", "en": "Lentils" } },
+    { "name": { "he": "אפונה", "en": "Peas" } },
+    { "name": { "he": "חומוס", "en": "Chickpeas" } },
+    { "name": { "he": "פירות טריים", "en": "Fresh fruit" } },
+    { "name": { "he": "שיבולת שועל עבה", "en": "Thick rolled oats" } },
+    { "name": { "he": "קינואה", "en": "Quinoa" } },
+    { "name": { "he": "כוסמת", "en": "Buckwheat" } },
+    { "name": { "he": "תירס", "en": "Corn" } },
+    { "name": { "he": "אדממה", "en": "Edamame" } },
+    { "name": { "he": "גריסים", "en": "Pearl barley" } },
+    {
+      "name": { "he": "סקיני פסטה", "en": "Skinny pasta" },
+      "notes": {
+        "he": "לא אידיאלי אך מאושר",
+        "en": "Not ideal, but approved"
+      }
+    }
+  ]
+}

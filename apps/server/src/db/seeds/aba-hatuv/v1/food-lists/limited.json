@@ -1,0 +1,25 @@
+{
+  "slug": "limited",
+  "name": { "he": "מאכלים ומשקאות בצריכה מוגבלת", "en": "Limited foods and drinks" },
+  "description": null,
+  "weekSlug": null,
+  "items": [
+    {
+      "name": { "he": "קולה זירו", "en": "Diet cola" },
+      "portion": { "he": "עד חצי ליטר ביום", "en": "Up to 0.5 L per day" }
+    },
+    {
+      "name": { "he": "יין יבש (אדום / לבן)", "en": "Dry wine (red / white)" },
+      "portion": { "he": "כוסית ביום", "en": "One glass per day" }
+    },
+    {
+      "name": { "he": "בירה", "en": "Beer" },
+      "portion": { "he": "עד שליש כוס", "en": "Up to a third of a glass" },
+      "notes": { "he": "לא מיטבי אך אפשרי", "en": "Not optimal, but allowed" }
+    },
+    {
+      "name": { "he": "דבש", "en": "Honey" },
+      "portion": { "he": "1-2 כפיות ביום להמתקות", "en": "1-2 teaspoons per day for sweetening" }
+    }
+  ]
+}
