@@ -58,14 +58,14 @@ is rate-limited and requires initialized metrics.
 |---|---|---|
 | POST | `/weight` | Upsert the caller's private daily `{ loggedOn?, weightKg, bodyFatPct?, notes? }` |
 | GET | `/weight?from=&to=&limit=` | Caller-only history, newest first; limit 1–365 |
+| POST | `/activities` | Explicitly share a safe `{ kind, note? }` couple win |
+| GET | `/feed?since=&limit=` | Current-couple shared wins; inclusive cursor, limit 1–100 |
 | POST | `/goals` | Create a goal |
 | PATCH | `/goals/:id` | Update / mark achieved |
-| GET | `/feed?since=` | Couple feed for reconciliation (meals, weights, goals, reactions) |
 | POST | `/reactions` | `{ subjectType, subjectId, kind }` |
 
-Weight entries are private in Phase 4a and are not emitted over Socket.IO.
-The sharing policy must be designed before weight can appear in a partner
-feed.
+Weight entries remain private and never appear in the feed. Shared activities
+are limited to the reviewed enum in ADR 0010.
 
 ## Socket.IO (`/`)
 

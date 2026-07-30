@@ -14,6 +14,7 @@ import { FoodListsScreen } from '../screens/program/FoodListsScreen';
 import { ProgressScreen } from '../screens/progress/ProgressScreen';
 import { ProfileScreen } from '../screens/profile/ProfileScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
+import { ActivityScreen } from '../screens/activity/ActivityScreen';
 import { useTheme } from '../theme/ThemeProvider';
 
 /**
@@ -30,12 +31,20 @@ import { useTheme } from '../theme/ThemeProvider';
  *   authed + showProgram              → TodayScreen
  *   authed + has metrics              → HomeScreen
  */
-type AppRoute = 'home' | 'pair' | 'program' | 'foodLists' | 'progress' | 'profile' | 'settings';
+type AppRoute =
+  | 'home'
+  | 'pair'
+  | 'program'
+  | 'foodLists'
+  | 'progress'
+  | 'profile'
+  | 'settings'
+  | 'activity';
 
 export const RootNavigator: React.FC = observer(() => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const { auth, profile, couple, program, progress } = useStores();
+  const { auth, profile, couple, program, progress, activity } = useStores();
   const [showSignUp, setShowSignUp] = useState(false);
   const [routeStack, setRouteStack] = useState<AppRoute[]>(['home']);
   const currentRoute = routeStack[routeStack.length - 1] ?? 'home';
@@ -62,11 +71,33 @@ export const RootNavigator: React.FC = observer(() => {
     ) {
       void progress.fetch();
     }
+    if (
+      auth.status === 'authenticated' &&
+      couple.isPaired &&
+      activity.status === 'idle'
+    ) {
+      void activity.fetch();
+    } else if (
+      auth.status === 'authenticated' &&
+      couple.status === 'ready' &&
+      !couple.isPaired &&
+      activity.status !== 'idle'
+    ) {
+      activity.reset();
+    }
+    if (
+      currentRoute === 'activity' &&
+      couple.status === 'ready' &&
+      !couple.isPaired
+    ) {
+      setRouteStack(['home']);
+    }
     if (auth.status === 'unauthenticated') {
       if (profile.status !== 'idle') profile.reset();
       if (couple.status !== 'idle') couple.reset();
       if (program.status !== 'idle') program.reset();
       if (progress.status !== 'idle') progress.reset();
+      if (activity.status !== 'idle') activity.reset();
       setRouteStack(['home']);
     }
   }, [
@@ -79,6 +110,10 @@ export const RootNavigator: React.FC = observer(() => {
     program.status,
     progress,
     progress.status,
+    activity,
+    activity.status,
+    couple.isPaired,
+    currentRoute,
     program.current?.status,
   ]);
 
@@ -138,6 +173,9 @@ export const RootNavigator: React.FC = observer(() => {
   if (currentRoute === 'foodLists') return <FoodListsScreen onClose={pop} />;
   if (currentRoute === 'profile') return <ProfileScreen onBack={pop} />;
   if (currentRoute === 'settings') return <SettingsScreen onBack={pop} />;
+  if (currentRoute === 'activity' && couple.isPaired) {
+    return <ActivityScreen onBack={pop} />;
+  }
   if (currentRoute === 'progress' && program.current?.status === 'completed') {
     return <ProgressScreen onClose={pop} />;
   }
@@ -151,7 +189,7 @@ export const RootNavigator: React.FC = observer(() => {
   }
   return (
     <HomeScreen
-      onPressPartner={() => push('pair')}
+      onPressPartner={() => push(couple.isPaired ? 'activity' : 'pair')}
       onPressProgram={() => push('program')}
       onPressProfile={() => push('profile')}
       onPressSettings={() => push('settings')}

@@ -124,6 +124,8 @@ and selected states where applicable.
 - **Food Guide:** colorful choice summary and filters first, then illustrated
   list cards with per-section counts and clear metadata.
 - **Celebration:** one result, one reward, partner acknowledgement, one next action.
+- **Shared Wins:** explicit privacy promise, colorful two-column action picker,
+  optional short note, brief celebration, then newest-first couple feed.
 - **Auth/profile/couple/progress:** share the same primitives and visual language.
 
 Every secondary screen starts with the same 48-pixel Back control. Nested

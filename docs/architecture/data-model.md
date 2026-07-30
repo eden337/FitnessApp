@@ -90,6 +90,10 @@ weight_logs(id, user_id FK, logged_on date, weight_kg numeric(5,2),
             body_fat_pct numeric(4,1) NULL, notes text NULL,
             created_at, updated_at, UNIQUE(user_id, logged_on))
 
+shared_activities(id, couple_id FK, actor_user_id FK,
+                  kind text, note varchar(160) NULL, created_at)
+-- kind: hydration | vegetables | movement | meal_together | encouragement
+
 -- Planned Phase 4 additions:
 meal_logs(id, user_id FK, logged_on date, meal_type text, items jsonb,
           kcal_total numeric(6,1), notes text NULL, created_at)
@@ -109,6 +113,8 @@ partner_reactions(id, couple_id FK, from_user_id FK, subject_type text,
 - `(user_id, logged_on DESC)` on every `_logs` table — covers the
   "recent activity" and chart queries.
 - `(couple_id, created_at DESC)` on `partner_reactions` — feed query.
+- `(couple_id, created_at DESC, id DESC)` on `shared_activities` — bounded feed
+  and reconciliation query.
 - `(program_version, week_number)` unique on `program_weeks`; `(list_id)`
   on `food_items`; partial unique indexes on `food_lists` for
   `(program_version, slug)` (global) and `(program_version, slug, week_id)`

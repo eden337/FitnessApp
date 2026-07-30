@@ -24,6 +24,9 @@ import { registerProgramRoutes } from './modules/program/routes.js';
 import { createProgressRepo } from './modules/progress/repo.js';
 import { createProgressService } from './modules/progress/service.js';
 import { registerProgressRoutes } from './modules/progress/routes.js';
+import { createActivitiesRepo } from './modules/activities/repo.js';
+import { createActivitiesService } from './modules/activities/service.js';
+import { registerActivitiesRoutes } from './modules/activities/routes.js';
 
 export type AppDeps = {
   env: Env;
@@ -131,6 +134,14 @@ export const buildAppWithSync = async ({
     const progressService = createProgressService({ repo: progressRepo });
     registerProgressRoutes(app, {
       service: progressService,
+      requireAuth,
+      enableRateLimit: env.NODE_ENV !== 'test',
+    });
+
+    const activitiesRepo = createActivitiesRepo(db);
+    const activitiesService = createActivitiesService(activitiesRepo);
+    registerActivitiesRoutes(app, {
+      service: activitiesService,
       requireAuth,
       enableRateLimit: env.NODE_ENV !== 'test',
     });

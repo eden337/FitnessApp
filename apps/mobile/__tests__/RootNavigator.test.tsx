@@ -216,6 +216,56 @@ describe('RootNavigator', () => {
     expect(queryByTestId('home-progress')).toBeNull();
   });
 
+  it('opens shared wins from the partner card when paired', () => {
+    const store = buildStore();
+    store.auth.setUser(sampleProfile);
+    (store.auth as unknown as { status: string }).status = 'authenticated';
+    store.profile.metrics = {
+      currentWeightKg: 65,
+      activityLevel: 'moderate',
+      goalType: 'maintain',
+      goalWeightKg: null,
+      dietaryRestrictions: {},
+    };
+    store.profile.status = 'ready';
+    store.program.status = 'ready';
+    store.activity.status = 'ready';
+    store.couple.status = 'ready';
+    store.couple.view = {
+      couple: {
+        id: '00000000-0000-4000-8000-000000000010',
+        inviteCode: 'ABCDEFGH',
+        createdAt: '2026-07-30T09:00:00.000Z',
+        members: [
+          {
+            userId: sampleProfile.id,
+            role: 'owner',
+            joinedAt: '2026-07-30T09:00:00.000Z',
+          },
+          {
+            userId: '00000000-0000-4000-8000-000000000011',
+            role: 'member',
+            joinedAt: '2026-07-30T09:00:00.000Z',
+          },
+        ],
+      },
+      partners: [
+        {
+          ...sampleProfile,
+          id: '00000000-0000-4000-8000-000000000011',
+          email: 'alex@example.com',
+          displayName: 'Alex',
+        },
+      ],
+    };
+
+    const { getByTestId } = render(wrap(store)(<RootNavigator />));
+    fireEvent.press(getByTestId('partner-card'));
+    expect(getByTestId('activity-screen')).toBeTruthy();
+    fireEvent.press(getByTestId('screen-back'));
+    expect(getByTestId('home-screen')).toBeTruthy();
+  });
+
   it('opens private Profile and Settings screens and returns home', () => {
     const metrics = {
       currentWeightKg: 65,

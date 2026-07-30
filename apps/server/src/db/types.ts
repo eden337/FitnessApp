@@ -121,6 +121,22 @@ export interface WeightLogsTable {
   updated_at: ManagedTimestamp;
 }
 
+export type SharedActivityKind =
+  | 'hydration'
+  | 'vegetables'
+  | 'movement'
+  | 'meal_together'
+  | 'encouragement';
+
+export interface SharedActivitiesTable {
+  id: Generated<string>;
+  couple_id: string;
+  actor_user_id: string;
+  kind: SharedActivityKind;
+  note: string | null;
+  created_at: ManagedTimestamp;
+}
+
 export interface Database {
   users: UsersTable;
   user_metrics: UserMetricsTable;
@@ -132,4 +148,5 @@ export interface Database {
   food_lists: FoodListsTable;
   food_items: FoodItemsTable;
   weight_logs: WeightLogsTable;
+  shared_activities: SharedActivitiesTable;
 }
