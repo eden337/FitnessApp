@@ -34,7 +34,9 @@ export class ProgressStore {
       this.errorMessage = null;
     });
     try {
-      const response = await this.api.get<WeightHistoryResponse>('/api/v1/progress/weight');
+      const response = await this.api.get<WeightHistoryResponse>('/api/v1/progress/weight', {
+        params: { limit: 365 },
+      });
       runInAction(() => {
         this.logs = response.data.logs;
         this.status = 'ready';

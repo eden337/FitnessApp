@@ -131,7 +131,11 @@ destinations pop to their actual parent (Food Guide → Today → Home), and And
 hardware Back follows the same route stack.
 
 Weight progress is maintenance-only. It is absent throughout the 13-week
-foundation program and appears only after completion.
+foundation program and appears only after completion. Its private trend card
+supports 30, 90, and 365-day windows, uses violet chart lines in both themes,
+and keeps language neutral: low, high, and change are facts rather than rewards.
+Every chart has a text summary and an accessibility label; food artwork and
+other semantic content must never depend on chart color.
 
 ## Motion
 

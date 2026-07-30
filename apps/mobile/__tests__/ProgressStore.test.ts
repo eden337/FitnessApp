@@ -27,7 +27,9 @@ describe('ProgressStore', () => {
 
     await store.fetch();
 
-    expect(get).toHaveBeenCalledWith('/api/v1/progress/weight');
+    expect(get).toHaveBeenCalledWith('/api/v1/progress/weight', {
+      params: { limit: 365 },
+    });
     expect(store.logs).toHaveLength(1);
     expect(store.status).toBe('ready');
   });

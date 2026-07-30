@@ -13,6 +13,18 @@
     "empty": "No weight measurements yet.",
     "bodyFat": "{{value}}% body fat"
   },
+  "trend": {
+    "title": "Maintenance trend",
+    "range": "Trend range",
+    "window30": "30 days",
+    "window90": "90 days",
+    "window365": "1 year",
+    "notEnough": "Add another measurement to see a trend.",
+    "minimum": "Low {{value}} kg",
+    "maximum": "High {{value}} kg",
+    "change": "Change {{value}} kg",
+    "accessibility": "Weight trend for {{days}} days with {{count}} measurements"
+  },
   "validation": {
     "weight": "Enter a weight between 20 and 300 kg.",
     "entry": "Check the date, body-fat percentage, and notes."

@@ -8,6 +8,7 @@ import {
 import { Button } from '../../components/Button';
 import { ScreenHeader } from '../../components/ScreenHeader';
 import { TextField } from '../../components/TextField';
+import { WeightTrendCard } from '../../components/WeightTrendCard';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
 import type { AppTheme } from '../../theme';
@@ -98,6 +99,8 @@ export const ProgressScreen: React.FC<{ onClose?: () => void }> = observer(({ on
           loading={saving}
         />
       </View>
+
+      <WeightTrendCard logs={progress.logs} />
 
       <Text style={styles.sectionTitle}>{t('progress:history.title')}</Text>
       {progress.status === 'error' ? (

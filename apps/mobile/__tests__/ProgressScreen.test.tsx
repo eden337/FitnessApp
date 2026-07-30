@@ -50,6 +50,8 @@ describe('ProgressScreen', () => {
 
     expect(getByText('81.4 kg')).toBeTruthy();
     expect(getByText('Only you can see these measurements.')).toBeTruthy();
+    expect(getByTestId('progress-trend-window-30')).toBeTruthy();
+    expect(getByText('Add another measurement to see a trend.')).toBeTruthy();
 
     fireEvent.changeText(getByTestId('progress-weight-input'), '81.4');
     fireEvent.changeText(getByTestId('progress-date-input'), '2026-07-30');
@@ -61,6 +63,34 @@ describe('ProgressScreen', () => {
         weightKg: 81.4,
       }),
     );
+  });
+
+  it('renders an accessible trend and changes the selected time window', () => {
+    const { store } = buildStore();
+    store.progress.logs = [
+      weightLog,
+      {
+        ...weightLog,
+        id: '550e8400-e29b-41d4-a716-446655440001',
+        loggedOn: '2026-07-29',
+        weightKg: 82,
+      },
+    ];
+    store.progress.status = 'ready';
+    const { getByLabelText, getByTestId } = render(
+      <StoresProvider store={store}>
+        <I18nProvider locale="en">
+          <ProgressScreen />
+        </I18nProvider>
+      </StoresProvider>,
+    );
+
+    expect(getByTestId('progress-trend-chart')).toBeTruthy();
+    expect(getByLabelText('Weight trend for 30 days with 2 measurements')).toBeTruthy();
+
+    fireEvent.press(getByTestId('progress-trend-window-365'));
+
+    expect(getByLabelText('Weight trend for 365 days with 2 measurements')).toBeTruthy();
   });
 
   it('rejects an out-of-range measurement before making a request', () => {

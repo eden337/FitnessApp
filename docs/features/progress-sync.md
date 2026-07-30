@@ -1,7 +1,7 @@
 # Feature — Progress and partner sync
 
-**Status:** Maintenance-only private weight entry and history implemented;
-partner feed, charts, goals, and reactions remain.
+**Status:** Maintenance-only private weight entry, history, and trends
+implemented; partner feed, goals, and reactions remain.
 
 ## Product boundary
 
@@ -22,11 +22,12 @@ and both weight endpoints return `409 maintenance_only`.
   measurement cannot replace a newer current value.
 - `ProgressStore` and the bilingual `ProgressScreen` support weight, optional
   date/body-fat/notes, history, errors, and logout reset.
+- The private maintenance chart supports 30, 90, and 365-day windows. Its
+  reducer uses inclusive calendar dates and neutral low/high/change language.
 - Weight is never shared by default and emits no Socket.IO event.
 
 ## Planned maintenance work
 
-- Maintenance trend charts for 30 / 90 / 365-day windows.
 - Habit-fallback signals that help preserve the program's principles.
 - Explicit consent design before any partner-visible body information.
 - Partner feed, goals, achievements, and reactions for non-private actions.
@@ -35,5 +36,5 @@ and both weight endpoints return `409 maintenance_only`.
 
 - Server service and integration tests enforce the maintenance-only boundary.
 - Mobile navigation tests ensure the route is absent during foundation.
-- Future chart reducers must cover each supported window.
+- Chart reducer tests cover date boundaries, normalization, and empty data.
 - Realtime events and reactions must remain scoped, consent-aware, and idempotent.
