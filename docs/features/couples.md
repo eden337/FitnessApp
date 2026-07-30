@@ -18,8 +18,8 @@ code, so every subsequent write is visible to their partner in real time.
 ## Surface
 
 - REST: `POST /couples`, `POST /couples/join`, `GET /couples/me`, `DELETE /couples/me`.
-- Mobile: `PairScreen` (generate + share code), `JoinScreen` (enter code),
-  `PartnerCard` component on the home feed.
+- Mobile: `PairScreen` (generate/share a code or enter a partner's code, with
+  an explicit route back to Home) and the partner card on the home feed.
 - MobX: `CoupleStore` (observable `couple`, `partner`; actions `create`,
   `join`, `leave`).
 

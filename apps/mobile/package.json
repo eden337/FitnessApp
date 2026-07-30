@@ -16,11 +16,14 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@babel/runtime": "7.24.0",
     "@expo-google-fonts/rubik": "0.2.3",
+    "@expo/metro-runtime": "~3.2.3",
     "@fitnessapp/shared": "workspace:*",
     "axios": "1.7.7",
     "dayjs": "1.11.13",
     "expo": "~51.0.0",
+    "expo-constants": "~16.0.2",
     "expo-font": "~12.0.10",
     "expo-localization": "~15.0.3",
     "expo-secure-store": "~13.0.2",
@@ -29,9 +32,11 @@
     "mobx": "6.13.3",
     "mobx-react-lite": "4.0.7",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-i18next": "15.0.2",
     "react-native": "0.74.5",
     "react-native-svg": "15.2.0",
+    "react-native-web": "~0.19.13",
     "socket.io-client": "4.8.0",
     "zod": "3.23.8"
   },

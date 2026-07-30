@@ -32,6 +32,20 @@ each other. The diet engine is seeded from the Hebrew **Aba Hatuv** program.
 3. Response: service returns DTO → handler serializes → store updates
    observable state → screens re-render.
 
+## Container topology
+
+The root Compose project provides a browser-runnable full stack:
+
+1. `postgres` becomes healthy.
+2. The one-shot `migrate` service applies pending SQL migrations.
+3. The one-shot `seed` service idempotently loads the Aba Hatuv content.
+4. `api` starts only after both initialization jobs succeed.
+5. `web` serves the static Expo web export through Nginx after the API is
+   healthy.
+
+`adminer` is an optional `tools` profile. Native Android and iOS binaries are
+Expo/EAS artifacts and are not containerized; they connect to the same API.
+
 ## Realtime flow (Socket.IO)
 
 - Client connects to `wss://.../socket.io` presenting its JWT.

@@ -50,6 +50,16 @@ describe('PairScreen', () => {
     expect(getByTestId('pair-code-input')).toBeTruthy();
   });
 
+  it('lets a user return home after opening the pairing flow', () => {
+    const { store } = buildStore();
+    const onClose = jest.fn();
+    const { getByTestId } = render(wrap(store, <PairScreen onClose={onClose} />));
+
+    fireEvent.press(getByTestId('pair-back'));
+
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
   it('Generate-code button posts to /couples and surfaces the code', async () => {
     const post = jest.fn().mockResolvedValueOnce({
       data: { couple: sampleCouple([{ userId: 'a', role: 'owner' }]), partners: [] },

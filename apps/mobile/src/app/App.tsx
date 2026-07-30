@@ -1,5 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ActivityIndicator, I18nManager, SafeAreaView, StyleSheet, View } from 'react-native';
+import {
+  ActivityIndicator,
+  I18nManager,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import {
   Rubik_400Regular,
@@ -13,8 +20,9 @@ import { I18nProvider, createI18n } from '../i18n/I18nProvider';
 import type { Locale } from '../i18n/resources';
 import { RootStore } from '../stores/RootStore';
 import { StoresProvider } from '../stores/StoresContext';
-import type { SecureStorage } from '../services/secureStorage';
+import { createInMemoryStorage, type SecureStorage } from '../services/secureStorage';
 import { createNativeSecureStorage } from '../services/nativeSecureStorage';
+import { getApiBaseUrl } from '../services/runtimeConfig';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
 import { RootNavigator } from './RootNavigator';
 
@@ -26,8 +34,6 @@ export type AppProps = {
   /** Storage backend; tests pass `createInMemoryStorage()`. */
   storage?: SecureStorage;
 };
-
-const DEFAULT_BASE_URL = 'http://localhost:4000';
 
 export const App: React.FC<AppProps> = ({ store, locale = 'he', storage }) => {
   const [bootstrapped, setBootstrapped] = useState(false);
@@ -43,9 +49,11 @@ export const App: React.FC<AppProps> = ({ store, locale = 'he', storage }) => {
 
   const rootStore = useMemo(() => {
     if (store) return store;
-    const sec = storage ?? createNativeSecureStorage();
+    const sec =
+      storage ??
+      (Platform.OS === 'web' ? createInMemoryStorage() : createNativeSecureStorage());
     return new RootStore({
-      baseURL: DEFAULT_BASE_URL,
+      baseURL: getApiBaseUrl(),
       storage: sec,
       setI18nLanguage: async (lang) => {
         await i18n.changeLanguage(lang);

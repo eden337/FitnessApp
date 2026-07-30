@@ -89,12 +89,26 @@ export const PairScreen: React.FC<PairScreenProps> = observer(({ onClose }) => {
           })}
         </Text>
       ) : null}
+
+      {onClose ? (
+        <Button
+          testID="pair-back"
+          variant="secondary"
+          label={t('common:actions.back')}
+          onPress={onClose}
+        />
+      ) : null}
     </ScrollView>
   );
 });
 
 const createStyles = (theme: AppTheme) => StyleSheet.create({
-  scroll: { flexGrow: 1, backgroundColor: theme.colors.canvas, padding: theme.spacing.lg },
+  scroll: {
+    flexGrow: 1,
+    backgroundColor: theme.colors.canvas,
+    padding: theme.spacing.lg,
+    gap: theme.spacing.md,
+  },
   title: { ...theme.typography.h1, color: theme.colors.text, marginBottom: theme.spacing.sm },
   subtitle: { ...theme.typography.body, color: theme.colors.textMuted, marginBottom: theme.spacing.lg },
   codeCard: {

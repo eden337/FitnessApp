@@ -1,28 +1,107 @@
+x-server-environment: &server-environment
+  NODE_ENV: production
+  SERVER_HOST: 0.0.0.0
+  SERVER_PORT: 4000
+  DATABASE_URL: postgres://${POSTGRES_USER:-fitnessapp}:${POSTGRES_PASSWORD:-fitnessapp}@postgres:5432/${POSTGRES_DB:-fitnessapp}
+  JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:-local-compose-access-secret-change-me}
+  JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET:-local-compose-refresh-secret-change-me}
+  JWT_ACCESS_TTL: ${JWT_ACCESS_TTL:-15m}
+  JWT_REFRESH_TTL: ${JWT_REFRESH_TTL:-30d}
+  BCRYPT_COST: ${BCRYPT_COST:-12}
+  CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:8081}
+
+x-server-image: &server-image
+  image: fitnessapp-server:local
+  build:
+    context: .
+    target: server
+
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: fitnessapp-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-fitnessapp}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-fitnessapp}
       POSTGRES_DB: ${POSTGRES_DB:-fitnessapp}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - fitnessapp_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-fitnessapp} -d ${POSTGRES_DB:-fitnessapp}"]
+      test:
+        - CMD-SHELL
+        - pg_isready -U "${POSTGRES_USER:-fitnessapp}" -d "${POSTGRES_DB:-fitnessapp}"
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 12
+      start_period: 5s
+
+  migrate:
+    <<: *server-image
+    restart: "no"
+    environment: *server-environment
+    command: ["node", "dist/src/db/migrate.js"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  seed:
+    <<: *server-image
+    restart: "no"
+    environment: *server-environment
+    command: ["node", "dist/src/db/seed.js"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  api:
+    <<: *server-image
+    restart: unless-stopped
+    environment: *server-environment
+    ports:
+      - "${API_PORT:-4000}:4000"
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - fetch('http://127.0.0.1:4000/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  web:
+    image: fitnessapp-web:local
+    build:
+      context: .
+      target: web
+      args:
+        EXPO_PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:4000}
+        EXPO_PUBLIC_SOCKET_URL: ${PUBLIC_SOCKET_URL:-http://localhost:4000}
+        EXPO_PUBLIC_DEFAULT_LOCALE: ${EXPO_PUBLIC_DEFAULT_LOCALE:-he}
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8081}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/healthz >/dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
 
   adminer:
     image: adminer:4
-    container_name: fitnessapp-adminer
     restart: unless-stopped
+    profiles: ["tools"]
     ports:
-      - "8080:8080"
+      - "${ADMINER_PORT:-8080}:8080"
     depends_on:
       postgres:
         condition: service_healthy

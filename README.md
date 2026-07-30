@@ -40,6 +40,29 @@ docs/
 
 Prerequisites: Node 20.11+, pnpm 9+, Docker.
 
+### Complete Docker stack
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+This starts Postgres, applies migrations, loads the idempotent Aba Hatuv seed,
+then starts the API and the Expo web build. Open:
+
+- App: `http://localhost:8081`
+- API health: `http://localhost:4000/health`
+
+Adminer is optional: `docker compose --profile tools up --build`, then open
+`http://localhost:8080` and use `postgres` as the database host.
+
+The default secrets and database password are suitable only for local
+development. Override them in `.env` before exposing the stack. If the browser
+will not run on the Docker host, set `PUBLIC_API_URL`, `PUBLIC_SOCKET_URL`, and
+`CORS_ORIGINS` to its externally reachable origins before building.
+
+### Split development workflow
+
 ```bash
 # 1. Install
 pnpm install
@@ -60,6 +83,11 @@ pnpm dev:server
 # 6. In another shell, start Expo
 pnpm dev:mobile
 ```
+
+For a browser-based UI preview, run
+`pnpm --filter @fitnessapp/mobile web`. The preview intentionally uses
+in-memory authentication and preferences because Expo SecureStore is a native
+facility; refreshing the browser starts a fresh preview session.
 
 ## Quality gates
 
