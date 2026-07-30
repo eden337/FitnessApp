@@ -5,9 +5,9 @@ Bilingual (Hebrew / English) couples fitness companion. Plans meals around the
 (gender, height, weight, age, activity), and keeps two partners in sync in
 real time so they can push each other forward.
 
-> Status: **Phase 0 — scaffolding**. See
-> [`docs/architecture/overview.md`](docs/architecture/overview.md) for the big
-> picture and the phase plan.
+> Status: **Phase 4a — private weight progress**. Aba Hatuv program guidance,
+> couples, authentication, and profile setup are implemented. See
+> [`docs/architecture/overview.md`](docs/architecture/overview.md) for the plan.
 
 ## Monorepo layout
 
@@ -20,6 +20,7 @@ packages/
 docs/
   architecture/   # system, data model, sync, security, i18n
   decisions/      # ADRs (numbered)
+  design/         # normative themes, components, motion, and artwork
   features/       # per-feature docs (kept current with the code)
 ```
 
@@ -49,7 +50,7 @@ cp .env.example .env
 # 3. Start Postgres
 pnpm db:up
 
-# 4. Run migrations + seeds (once server module is wired)
+# 4. Run migrations + seeds
 pnpm --filter @fitnessapp/server migrate
 pnpm --filter @fitnessapp/server seed
 
@@ -81,9 +82,11 @@ CI runs all four on every push; see
 - **Docs live with code.** Every feature has a corresponding page under
   `docs/features/`. ADRs live under `docs/decisions/`. This README and
   `CLAUDE.md` are updated whenever a cross-cutting change lands.
-- **Branch.** All scaffolding and MVP work lands on `claude/project-planning-Ho70i`.
+- **Branch.** Current MVP work lands on `Codex/project-planning-Ho70i`.
 
 ## Where to go next
+
+- [`docs/design/design.md`](docs/design/design.md) — source of truth for the mobile visual system.
 
 - [`docs/architecture/overview.md`](docs/architecture/overview.md) — system overview and phase plan.
 - [`docs/architecture/data-model.md`](docs/architecture/data-model.md) — ER model and table reference.

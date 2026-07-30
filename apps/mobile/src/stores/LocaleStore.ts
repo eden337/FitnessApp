@@ -36,7 +36,12 @@ export class LocaleStore {
   }
 
   async hydrate(): Promise<void> {
-    const stored = (await this.storage.get(STORAGE_KEYS.locale)) as Locale | null;
+    let stored: Locale | null = null;
+    try {
+      stored = (await this.storage.get(STORAGE_KEYS.locale)) as Locale | null;
+    } catch {
+      // Keep the configured initial locale when persisted state is unavailable.
+    }
     if (stored === 'he' || stored === 'en') {
       await this.set(stored, { persist: false });
     } else {

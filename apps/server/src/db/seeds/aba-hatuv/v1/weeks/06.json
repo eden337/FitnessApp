@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שבוע 5. הגבלת \"שומנים מרוכזים\" ל-2 מנות ביום. הימנעות מאוכל מטוגן (פרט למעט מאוד שמן), אגוזים, שקדים ובוטנים. בחירת \"חלון אכילה\" של 8-12 שעות ביום, והימנעות מאכילה בשאר הזמן (מים, קפה ותה ללא סוכר וללא חלב — חופשי).",
     "en": "Continue Week-5 principles. Limit concentrated fats to 2 servings/day. Avoid fried food (except very little oil), nuts, almonds, and peanuts. Pick an 8-12 hour eating window and don't eat outside it (water, coffee, tea without sugar/milk — fine)."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "חלון האכילה מוריד את רמת האינסולין הבסיסית, מפחית רעב וחשקים ומעודד שימוש יעיל יותר במאגרי השומן. הוא גם מאמן את הגוף והמוח להימנע מאכילה בזמנים רגישים כמו שעות הלילה.",
+    "en": "An eating window lowers baseline insulin, reduces hunger and cravings, and supports more efficient use of fat stores. It also trains body and mind to avoid eating at sensitive times such as late at night."
+  },
+  "notes": {
+    "he": "חלון האכילה אישי ויש לקבוע אותו מראש בתחילת היום. מחוץ לחלון מותר לשתות מים, קפה או תה ללא סוכר וחלב. בתוך החלון יש לאכול ארוחות גדולות ומסודרות במקום לנשנש ברצף.",
+    "en": "The eating window is personal and should be decided at the start of each day. Outside it, water, coffee, or tea without sugar or milk are allowed. Inside it, eat substantial planned meals instead of grazing."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לקבוע חלון אכילה של 8-12 שעות", "en": "Set an 8-12 hour eating window" },
+      "description": { "he": "להחליט מראש מתי החלון נפתח ונסגר.", "en": "Decide in advance when the window opens and closes." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "לא לאכול מחוץ לחלון", "en": "Do not eat outside the window" },
+      "description": { "he": "מים, קפה ותה ללא סוכר וחלב מותרים.", "en": "Water, coffee, and tea without sugar or milk are allowed." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך מים, ירקות, ניקוי והגבלת שומן", "en": "Continue water, vegetables, cleanse, and fat limits" },
+      "description": null
+    }
+  ]
 }

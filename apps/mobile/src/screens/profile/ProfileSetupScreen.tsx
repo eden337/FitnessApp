@@ -7,12 +7,15 @@ import { SegmentedPicker } from '../../components/SegmentedPicker';
 import { TextField } from '../../components/TextField';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
-import { colors, spacing, typography } from '../../theme';
+import type { AppTheme } from '../../theme';
+import { useTheme } from '../../theme/ThemeProvider';
 import { compactErrors, validateWeightKg } from '../../utils/validation';
 
 export const ProfileSetupScreen: React.FC = observer(() => {
   const { profile, auth } = useStores();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [weight, setWeight] = useState('');
   const [goalWeight, setGoalWeight] = useState('');
   const [activity, setActivity] = useState<ActivityLevel>('moderate');
@@ -107,15 +110,15 @@ export const ProfileSetupScreen: React.FC = observer(() => {
   );
 });
 
-const styles = StyleSheet.create({
-  scroll: { flexGrow: 1, backgroundColor: colors.background, padding: spacing.lg },
-  title: { ...typography.h1, color: colors.text, marginBottom: spacing.sm },
-  subtitle: { ...typography.body, color: colors.muted, marginBottom: spacing.lg },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  scroll: { flexGrow: 1, backgroundColor: theme.colors.canvas, padding: theme.spacing.lg },
+  title: { ...theme.typography.h1, color: theme.colors.text, marginBottom: theme.spacing.sm },
+  subtitle: { ...theme.typography.body, color: theme.colors.textMuted, marginBottom: theme.spacing.lg },
   serverError: {
-    ...typography.body,
-    color: colors.danger,
-    marginBottom: spacing.md,
+    ...theme.typography.body,
+    color: theme.colors.danger,
+    marginBottom: theme.spacing.md,
     textAlign: 'center',
   },
-  actions: { marginTop: spacing.lg },
+  actions: { marginTop: theme.spacing.lg },
 });

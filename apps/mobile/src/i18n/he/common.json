@@ -13,8 +13,23 @@
     "he": "עברית",
     "en": "English"
   },
+  "theme": {
+    "label": "מראה",
+    "system": "מערכת",
+    "light": "בהיר",
+    "dark": "כהה"
+  },
   "home": {
+    "brandOverline": "טובים יותר",
     "greeting": "היי {{name}}!",
+    "encouragement": "הניצחון הבריא הבא שלכם קרוב יותר ממה שנדמה.",
+    "momentum": "המומנטום שלכם",
+    "keepMoving": "ממשיכים בתנועה!",
+    "momentumBody": "בחירות עקביות בונות שבוע חזק.",
+    "ready": "מוכנים",
+    "todayMission": "המשימה של היום",
+    "snapshot": "התמונה שלכם",
+    "preferences": "ההעדפות שלכם",
     "needsSetup": "סיימו את הגדרת הפרופיל כדי לראות את התוכנית האישית שלכם"
   },
   "validation": {

@@ -25,11 +25,16 @@ export const createI18n = (locale: Locale = 'he'): typeof i18n => {
 export type I18nProviderProps = {
   children: React.ReactNode;
   locale?: Locale;
+  instance?: typeof i18n;
 };
 
-export const I18nProvider: React.FC<I18nProviderProps> = ({ children, locale = 'he' }) => {
-  const instance = useMemo(() => createI18n(locale), [locale]);
-  return <I18nextProvider i18n={instance}>{children}</I18nextProvider>;
+export const I18nProvider: React.FC<I18nProviderProps> = ({
+  children,
+  locale = 'he',
+  instance,
+}) => {
+  const createdInstance = useMemo(() => createI18n(locale), [locale]);
+  return <I18nextProvider i18n={instance ?? createdInstance}>{children}</I18nextProvider>;
 };
 
 export const useTranslation = useI18nextTranslation;

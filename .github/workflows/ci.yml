@@ -68,7 +68,7 @@ jobs:
         run: pnpm typecheck
 
       - name: Lint
-        run: pnpm lint || echo "No lint configs yet"
+        run: pnpm lint
 
       - name: Run server migrations against test database
         run: pnpm --filter @fitnessapp/server migrate

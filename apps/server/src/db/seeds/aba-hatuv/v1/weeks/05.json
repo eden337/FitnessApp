@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שבוע 4 + ניקוי משומנים מרוכזים: 2 מנות שומן ביום לאוכלי כל ו-3 מנות לנמנעים מחלבון מהחי. הימנעות מאוכל מטוגן (פרט לאוכל המטוגן בכף שמן), אגוזים, שקדים ובוטנים. ניקוי ממאכלים טחונים, סוכר, קמחים ופחמימות פחות לפטיניות במשך 6 ימים בשבוע.",
     "en": "Continue Week-4 principles + cleanse from concentrated fats: 2 fat servings/day (omnivores) or 3/day (those avoiding animal protein). Avoid fried food (except food fried in a tablespoon of oil), nuts, almonds, and peanuts. Stay clean from ground foods, sugar, flours, and less-leptinic carbs 6 days a week."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "צמצום שומנים מרוכזים ומזון מטוגן מוריד את הצפיפות הקלורית היומית ומאפשר לאכול נפח מזון גדול יותר. שומן בריא עדיין חיוני לתפקוד הגוף ולספיגת ויטמינים, ולכן אין להימנע ממנו לחלוטין.",
+    "en": "Reducing concentrated fats and fried food lowers daily calorie density and allows a larger food volume. Healthy fat remains important for normal body function and vitamin absorption, so it should not be eliminated."
+  },
+  "notes": {
+    "he": "יש להמשיך לאכול את כל אבות המזון ולהקפיד על ההצפה הלפטינית. יציאה אחת מהכללים מבטלת את מנת הפרי ביום הפינוק; שתי יציאות או יותר דוחות את יום הפינוק לשבוע הבא.",
+    "en": "Continue eating all food groups and maintain the leptin-flooding principles. One deviation removes the fruit serving on indulgence day; two or more deviations postpone the indulgence day to the following week."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך את עקרונות שבוע 4 שישה ימים", "en": "Continue Week-4 principles for six days" },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להגביל שומנים מרוכזים", "en": "Limit concentrated fats" },
+      "description": { "he": "2 מנות ביום לאוכלי כל ו-3 לנמנעים מחלבון מהחי.", "en": "2 servings daily for omnivores and 3 for those avoiding animal protein." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להימנע ממטוגן, אגוזים, שקדים ובוטנים", "en": "Avoid fried food, nuts, almonds, and peanuts" },
+      "description": { "he": "מותר להשתמש בכמות קטנה ומדודה של שמן.", "en": "A small measured amount of oil is allowed." }
+    }
+  ]
 }

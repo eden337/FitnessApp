@@ -1,7 +1,7 @@
 # Feature — Profile
 
-**Status:** Phase 1 — fully implemented (server + mobile setup screen).
-Edit screen lands alongside diet planner in Phase 3.
+**Status:** Phase 1 — server APIs, store, setup flow, and home summary
+implemented. A dedicated profile-edit screen remains pending.
 
 ## Goal
 

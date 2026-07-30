@@ -12,6 +12,9 @@
 - Resources live under `apps/mobile/src/i18n/<locale>/<namespace>.json`.
 - Locale preference persisted in `expo-secure-store`; default derived from
   device locale, falling back to `he`.
+- App bootstrap applies the persisted locale before main navigation renders.
+  `LocaleStore` and `I18nProvider` share the same i18next instance, so runtime
+  language changes update both store state and rendered translations.
 
 ## RTL
 

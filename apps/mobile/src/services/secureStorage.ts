@@ -31,4 +31,5 @@ export const createInMemoryStorage = (
 export const STORAGE_KEYS = {
   refreshToken: 'fitnessapp.refreshToken',
   locale: 'fitnessapp.locale',
+  theme: 'fitnessapp.theme',
 } as const;

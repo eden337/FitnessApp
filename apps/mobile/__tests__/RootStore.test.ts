@@ -1,43 +1,30 @@
+import type { AxiosInstance } from 'axios';
 import { RootStore } from '../src/stores/RootStore';
-import { createInMemoryStorage } from '../src/services/secureStorage';
+import { createInMemoryStorage, STORAGE_KEYS } from '../src/services/secureStorage';
 
-describe('RootStore', () => {
-  it('builds a default api client when none is injected', () => {
-    const store = new RootStore({
-      baseURL: 'http://localhost:4000',
-      storage: createInMemoryStorage(),
-      setI18nLanguage: jest.fn(),
-      setRtl: jest.fn(),
+describe('RootStore hydration', () => {
+  it('hydrates auth, locale, and theme together', async () => {
+    const storage = createInMemoryStorage({
+      [STORAGE_KEYS.locale]: 'en',
+      [STORAGE_KEYS.theme]: 'dark',
     });
-    expect(store.api).toBeDefined();
-    expect(typeof store.api.request).toBe('function');
-    // The default api was wired so that getTokens / setTokens / onAuthFailure
-    // delegate to the AuthStore. Set tokens through the store and verify
-    // they're observable through the AuthStore accessor.
-    store.auth.setTokens({ accessToken: 'a', refreshToken: 'r' });
-    expect(store.auth.getTokens()).toEqual({ accessToken: 'a', refreshToken: 'r' });
-  });
-
-  it('respects an injected api instance', () => {
-    const fake = { request: jest.fn() } as unknown as import('axios').AxiosInstance;
+    const setI18nLanguage = jest.fn();
+    const setRtl = jest.fn();
     const store = new RootStore({
       baseURL: 'http://x',
-      storage: createInMemoryStorage(),
-      setI18nLanguage: jest.fn(),
-      setRtl: jest.fn(),
-      api: fake,
+      storage,
+      setI18nLanguage,
+      setRtl,
+      api: { post: jest.fn() } as unknown as AxiosInstance,
     });
-    expect(store.api).toBe(fake);
-  });
 
-  it('seeds the LocaleStore with the requested initial locale', () => {
-    const store = new RootStore({
-      baseURL: 'http://x',
-      storage: createInMemoryStorage(),
-      setI18nLanguage: jest.fn(),
-      setRtl: jest.fn(),
-      initialLocale: 'en',
-    });
+    await store.hydrate();
+
+    expect(store.auth.status).toBe('unauthenticated');
     expect(store.locale.locale).toBe('en');
+    expect(store.theme.preference).toBe('dark');
+    expect(store.theme.hydrated).toBe(true);
+    expect(setI18nLanguage).toHaveBeenCalledWith('en');
+    expect(setRtl).toHaveBeenCalledWith(false);
   });
 });

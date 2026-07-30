@@ -12,6 +12,9 @@ What's wired so far:
 - `couples` module: create/join/leave/me with invite codes + RBAC scope.
 - `sync` module: Socket.IO gateway with JWT auth on connection, per-couple
   rooms, and event fan-out for `couple:member-joined / couple:member-left`.
+- `program` module: personal 13-week timeline, start/resume, week guidance,
+  week-11 fallback, and global/week-scoped food lists.
+- `progress` module: private daily weight upserts and bounded personal history.
 - `requireAuth` middleware reading Bearer access tokens.
 
 ## Layout

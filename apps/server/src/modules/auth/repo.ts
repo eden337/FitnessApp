@@ -1,4 +1,5 @@
 import type { DbClient } from '../../db/client.js';
+import { serializeDateOnly } from '../../lib/israel-date.js';
 
 export type NewUser = {
   email: string;
@@ -118,9 +119,6 @@ const mapUser = (row: {
   displayName: row.display_name,
   locale: row.locale,
   gender: row.gender,
-  birthDate:
-    row.birth_date instanceof Date
-      ? row.birth_date.toISOString().slice(0, 10)
-      : String(row.birth_date).slice(0, 10),
+  birthDate: serializeDateOnly(row.birth_date),
   heightCm: row.height_cm,
 });

@@ -93,7 +93,7 @@ describe('seed schemas', () => {
       const parsed = FoodListSeedSchema.parse({
         slug: 'proteins',
         name: validBilingual,
-        items: [{ name: { he: 'ביצים', en: 'Eggs' } }],
+        items: [{ name: { he: 'ביצים', en: 'Eggs' }, visualKey: 'eggs' }],
       });
       expect(parsed.weekSlug).toBeNull();
       expect(parsed.items.length).toBe(1);
@@ -124,10 +124,18 @@ describe('seed schemas', () => {
     it('accepts portion + notes', () => {
       const parsed = FoodItemSeedSchema.parse({
         name: validBilingual,
+        visualKey: 'bowl',
         portion: { he: 'כפית', en: 'tsp' },
         notes: { he: 'הערה', en: 'note' },
       });
       expect(parsed.portion).toEqual({ he: 'כפית', en: 'tsp' });
+    });
+
+    it('requires a supported visual key', () => {
+      expect(() =>
+        FoodItemSeedSchema.parse({ name: validBilingual, visualKey: 'unknown-food-art' }),
+      ).toThrow();
+      expect(() => FoodItemSeedSchema.parse({ name: validBilingual })).toThrow();
     });
   });
 

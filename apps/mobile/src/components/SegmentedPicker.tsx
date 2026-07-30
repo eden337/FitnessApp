@@ -1,6 +1,7 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, radii, spacing, typography } from '../theme';
+import type { AppTheme } from '../theme';
+import { useTheme } from '../theme/ThemeProvider';
 
 export type SegmentedPickerOption<V extends string> = { value: V; label: string };
 
@@ -23,6 +24,8 @@ export const SegmentedPicker = <V extends string>({
   onChange,
   testID,
 }: SegmentedPickerProps<V>): React.ReactElement => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
@@ -48,19 +51,21 @@ export const SegmentedPicker = <V extends string>({
   );
 };
 
-const styles = StyleSheet.create({
-  wrapper: { marginBottom: spacing.md },
-  label: { ...typography.caption, color: colors.muted, marginBottom: spacing.xs },
-  row: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.sm },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  wrapper: { marginBottom: theme.spacing.md },
+  label: { ...theme.typography.label, color: theme.colors.textMuted, marginBottom: theme.spacing.xs },
+  row: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm },
   chip: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
-    borderRadius: radii.pill,
-    backgroundColor: colors.surface,
+    minHeight: 44,
+    justifyContent: 'center',
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radii.pill,
+    backgroundColor: theme.colors.surface,
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: theme.colors.border,
   },
-  chipSelected: { backgroundColor: colors.primary },
-  chipText: { ...typography.body, color: colors.text },
-  chipTextSelected: { color: '#0B1020', fontWeight: '600' as const },
+  chipSelected: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  chipText: { ...theme.typography.body, color: theme.colors.text },
+  chipTextSelected: { color: theme.colors.onPrimary, fontWeight: '700' as const },
 });

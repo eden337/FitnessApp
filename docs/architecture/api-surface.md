@@ -40,26 +40,32 @@ Rate limit: 5 req / min / IP on `/register` + `/login`.
 | GET | `/me` | Current user's couple + members' public profiles |
 | DELETE | `/me` | Leave the couple |
 
-## Diet (`/diet`)
+## Program (`/program`)
 
 | Method | Path | Purpose |
 |---|---|---|
-| GET | `/catalog` | Food categories + items (localized per `?lang=`) |
-| GET | `/plan` | Today's generated plan based on user's tier + gender |
-| POST | `/meal-log` | Log a meal (see `MealLogInput` in shared) |
-| GET | `/meal-log?from=&to=` | Range query |
-| POST | `/water-log` | `{ amountMl }` |
+| GET | `/me/current` | Current bilingual week, guidance, tasks, and timeline metadata |
+| POST | `/me/start` | `{ currentWeekNumber }` → start/resume once from week 1-13 |
+| GET | `/lists?weekNumber=` | Global food lists plus lists scoped to the effective week |
+
+The timeline uses Israel calendar dates. Scheduled week 11 explicitly returns
+week-10 content with `isFallback: true`; week 12 resumes on schedule. Starting
+is rate-limited and requires initialized metrics.
 
 ## Progress (`/progress`)
 
 | Method | Path | Purpose |
 |---|---|---|
-| POST | `/weight` | `{ weightKg, bodyFatPct?, notes? }` |
-| GET | `/weight?from=&to=` | Range |
+| POST | `/weight` | Upsert the caller's private daily `{ loggedOn?, weightKg, bodyFatPct?, notes? }` |
+| GET | `/weight?from=&to=&limit=` | Caller-only history, newest first; limit 1–365 |
 | POST | `/goals` | Create a goal |
 | PATCH | `/goals/:id` | Update / mark achieved |
 | GET | `/feed?since=` | Couple feed for reconciliation (meals, weights, goals, reactions) |
 | POST | `/reactions` | `{ subjectType, subjectId, kind }` |
+
+Weight entries are private in Phase 4a and are not emitted over Socket.IO.
+The sharing policy must be designed before weight can appear in a partner
+feed.
 
 ## Socket.IO (`/`)
 

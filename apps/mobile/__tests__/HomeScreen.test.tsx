@@ -62,7 +62,8 @@ describe('HomeScreen', () => {
       dietaryRestrictions: {},
     };
     store.profile.derived = { ageYears: 35, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
-    const { getByText } = render(wrap(store, <HomeScreen />));
+    const { getByText, getByTestId } = render(wrap(store, <HomeScreen />));
+    expect(getByTestId('home-momentum-card')).toBeTruthy();
     expect(getByText('1624 kcal')).toBeTruthy();
     expect(getByText('65 kg')).toBeTruthy();
   });
@@ -77,5 +78,16 @@ describe('HomeScreen', () => {
     fireEvent.press(getByTestId('home-signout'));
     await Promise.resolve();
     expect(post).toHaveBeenCalledWith('/api/v1/auth/logout', { refreshToken: 'r' });
+  });
+
+  it('lets the user persist a dark appearance override', async () => {
+    const { store } = buildStore();
+    store.auth.setUser(sampleUser);
+    const { getByTestId } = render(wrap(store, <HomeScreen />));
+
+    fireEvent.press(getByTestId('theme-toggle-dark'));
+    await Promise.resolve();
+
+    expect(store.theme.preference).toBe('dark');
   });
 });

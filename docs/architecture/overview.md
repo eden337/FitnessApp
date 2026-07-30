@@ -50,8 +50,8 @@ each other. The diet engine is seeded from the Hebrew **Aba Hatuv** program.
 | 0 — Scaffolding | Monorepo, Docker Compose, CI, ADRs, docs skeleton, health endpoints, i18n bootstrap | `pnpm test` green, coverage gate wired |
 | 1 — Auth + profile + i18n | Register / login / refresh; profile CRUD; HE/EN + RTL | End-to-end signup + profile edit works |
 | 2 — Couples + sockets | Invite code flow; Socket.IO gateway; shared event schemas | Two accounts paired; events echo live |
-| 3 — Diet planner (Aba Hatuv) | Seeded catalog + templates; daily plan generation; meal + water logging | User sees a personalized plan and can log meals |
-| 4 — Progress + partner feed | Weight log + chart; goals; live partner feed; reactions | Both partners can see each other's activity in real time |
+| 3 — Aba Hatuv program | Authored weekly guidance, personal timeline, reference lists, mobile program screens | User can start/resume and browse the correct weekly guidance |
+| 4 — Progress + partner feed | **In progress:** private weight history implemented; charts, goals, live partner feed, and reactions remain | Both partners can see approved shared activity in real time |
 | 5 — Hardening | Coverage ≥ 80 %; OWASP checklist; docs sweep | All gates pass; docs complete |
 
 ## Non-goals (v1)

@@ -8,7 +8,8 @@ import { SegmentedPicker } from '../../components/SegmentedPicker';
 import { TextField } from '../../components/TextField';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
-import { colors, spacing, typography } from '../../theme';
+import type { AppTheme } from '../../theme';
+import { useTheme } from '../../theme/ThemeProvider';
 import {
   compactErrors,
   validateBirthDate,
@@ -31,6 +32,8 @@ type Errors = Partial<{
 export const SignUpScreen: React.FC<SignUpScreenProps> = observer(({ onSwitchToSignIn }) => {
   const { auth, locale } = useStores();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -148,16 +151,16 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = observer(({ onSwitchToS
   );
 });
 
-const styles = StyleSheet.create({
-  scroll: { flexGrow: 1, backgroundColor: colors.background, padding: spacing.lg },
-  header: { marginBottom: spacing.lg },
-  title: { ...typography.h1, color: colors.text, marginBottom: spacing.sm },
-  subtitle: { ...typography.body, color: colors.muted },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  scroll: { flexGrow: 1, backgroundColor: theme.colors.canvas, padding: theme.spacing.lg },
+  header: { marginBottom: theme.spacing.lg },
+  title: { ...theme.typography.display, color: theme.colors.text, marginBottom: theme.spacing.sm },
+  subtitle: { ...theme.typography.body, color: theme.colors.textMuted },
   serverError: {
-    ...typography.body,
-    color: colors.danger,
-    marginBottom: spacing.md,
+    ...theme.typography.body,
+    color: theme.colors.danger,
+    marginBottom: theme.spacing.md,
     textAlign: 'center',
   },
-  footer: { marginTop: spacing.lg, gap: spacing.md },
+  footer: { marginTop: theme.spacing.lg, gap: theme.spacing.md },
 });

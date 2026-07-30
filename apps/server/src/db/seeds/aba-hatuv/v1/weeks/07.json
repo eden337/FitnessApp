@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שבוע 6. שומנים מרוכזים: 2 מנות ביום (שמנים, אבוקדו, זיתים, טחינה וכו'). נמנעים מחלבון מהחי? הגבילו ל-3 כפות ביום. חלון אכילה 8-12 שעות. התמקדות ב-2-3 ארוחות משביעות ביום ללא נשנושי ביניים.",
     "en": "Continue Week-6 principles. Concentrated fats: 2 servings/day (oils, avocado, olives, tahini, etc.). Avoiding animal protein? Cap at 3 tablespoons/day. 8-12 hour eating window. Focus on 2-3 satisfying meals per day with no snacking in between."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "צמצום תדירות האכילה מוריד עוד את רמות האינסולין הבסיסיות, מאזן את רמות הסוכר ומפחית את הצורך הפסיכולוגי בנשנושים. פחות אירועי אכילה גם מצמצמים את הסיכוי ליציאה לא מתוכננת.",
+    "en": "Reducing eating frequency further lowers baseline insulin, stabilizes blood sugar, and reduces the psychological need to snack. Fewer eating events also reduce opportunities for unplanned deviations."
+  },
+  "notes": {
+    "he": "יש להתמקד בארוחות גדולות ומשביעות. בימים הראשונים אפשר להיעזר זמנית בפרי או בשייק בין הארוחות, אך המטרה היא להיפרד מהנשנוש. יש לשמור את ארוחת הצהריים כארוחה הגדולה ביותר.",
+    "en": "Focus on large, satisfying meals. During the first days, fruit or a smoothie may be used temporarily between meals, but the goal is to remove snacking. Keep lunch as the largest meal."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לאכול 2-3 ארוחות משביעות", "en": "Eat 2-3 satisfying meals" },
+      "description": { "he": "ללא נשנושי ביניים.", "en": "Without snacks between meals." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך חלון אכילה של 8-12 שעות", "en": "Continue an 8-12 hour eating window" },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך מים, ירקות והגבלת שומנים", "en": "Continue water, vegetables, and concentrated-fat limits" },
+      "description": null
+    }
+  ]
 }

@@ -5,13 +5,16 @@ import { Button } from '../../components/Button';
 import { TextField } from '../../components/TextField';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
-import { colors, radii, spacing, typography } from '../../theme';
+import type { AppTheme } from '../../theme';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export type PairScreenProps = { onClose?: () => void };
 
 export const PairScreen: React.FC<PairScreenProps> = observer(({ onClose }) => {
   const { couple } = useStores();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const [code, setCode] = useState('');
   const [touchedCode, setTouchedCode] = useState(false);
   const inviteCode = couple.inviteCode;
@@ -90,35 +93,38 @@ export const PairScreen: React.FC<PairScreenProps> = observer(({ onClose }) => {
   );
 });
 
-const styles = StyleSheet.create({
-  scroll: { flexGrow: 1, backgroundColor: colors.background, padding: spacing.lg },
-  title: { ...typography.h1, color: colors.text, marginBottom: spacing.sm },
-  subtitle: { ...typography.body, color: colors.muted, marginBottom: spacing.lg },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  scroll: { flexGrow: 1, backgroundColor: theme.colors.canvas, padding: theme.spacing.lg },
+  title: { ...theme.typography.h1, color: theme.colors.text, marginBottom: theme.spacing.sm },
+  subtitle: { ...theme.typography.body, color: theme.colors.textMuted, marginBottom: theme.spacing.lg },
   codeCard: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    padding: spacing.lg,
-    gap: spacing.sm,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.lg,
+    padding: theme.spacing.lg,
+    gap: theme.spacing.sm,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    ...theme.shadow,
   },
-  codeLabel: { ...typography.caption, color: colors.muted },
+  codeLabel: { ...theme.typography.caption, color: theme.colors.textMuted },
   codeValue: {
-    ...typography.h1,
-    color: colors.primary,
+    ...theme.typography.h1,
+    color: theme.colors.primary,
     letterSpacing: 4,
     textAlign: 'center',
   },
-  instructions: { ...typography.body, color: colors.muted },
-  actionsBlock: { gap: spacing.md },
+  instructions: { ...theme.typography.body, color: theme.colors.textMuted },
+  actionsBlock: { gap: theme.spacing.md },
   divider: {
-    ...typography.caption,
-    color: colors.muted,
+    ...theme.typography.caption,
+    color: theme.colors.textMuted,
     textAlign: 'center',
-    marginVertical: spacing.sm,
+    marginVertical: theme.spacing.sm,
   },
   serverError: {
-    ...typography.body,
-    color: colors.danger,
-    marginTop: spacing.md,
+    ...theme.typography.body,
+    color: theme.colors.danger,
+    marginTop: theme.spacing.md,
     textAlign: 'center',
   },
 });

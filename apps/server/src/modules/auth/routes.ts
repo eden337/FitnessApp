@@ -3,6 +3,7 @@ import {
   LoginInputSchema,
   RefreshInputSchema,
   RegisterInputSchema,
+  DateOnlySchema,
 } from '@fitnessapp/shared';
 import { z } from 'zod';
 import type { AuthService } from './service.js';
@@ -36,7 +37,7 @@ export const registerAuthRoutes = (
   // server-side extension schema below.
   const RegisterServerSchema = RegisterInputSchema.extend({
     gender: z.enum(['female', 'male', 'other']),
-    birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    birthDate: DateOnlySchema,
     heightCm: z.number().int().min(50).max(250),
   }).strict();
 

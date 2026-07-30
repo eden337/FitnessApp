@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שבוע 12 + הכנסת פעולה אחת למילוי \"צורך הבסיס המרכזי\" ללא אוכל, שתוודא שאכילת והשמנת היתר יהפכו למיותרות בחייך.",
     "en": "Continue Week-12 principles + add one action that fulfils a \"central baseline need\" without food, so that overeating and weight gain become irrelevant in your life."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "מעבר להרגלים התזונתיים, אכילת יתר עשויה לשמש כמענה לצרכים פסיכולוגיים בסיסיים. מילוי הצורך המרכזי בדרך שאינה אוכל נועד להפוך אכילה בלתי מודעת והשמנה למיותרות לאורך זמן.",
+    "en": "Beyond dietary habits, overeating may function as an answer to basic psychological needs. Meeting the central need without food is intended to make unconscious eating and weight gain unnecessary over time."
+  },
+  "notes": {
+    "he": "זהו ההרגל האחרון בתוכנית היסוד. יש לזהות צורך מרכזי אחד ולבחור פעולה מעשית, חיובית וחוזרת שממלאת אותו ללא אוכל, במקביל להמשך כל ההרגלים שנבנו.",
+    "en": "This is the final foundation-program habit. Identify one central need and choose a practical, positive, repeatable action that meets it without food while continuing all established habits."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לזהות צורך בסיס מרכזי", "en": "Identify a central baseline need" },
+      "description": { "he": "לבחור את הצורך שהאכילה מילאה לעיתים קרובות.", "en": "Choose the need that eating has often served." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "לבחור פעולה אחת שאינה אוכל", "en": "Choose one non-food action" },
+      "description": { "he": "פעולה מעשית שניתן לחזור עליה כדי למלא את הצורך.", "en": "A practical repeatable action that meets the need." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך את כל שכבות התוכנית", "en": "Continue all program layers" },
+      "description": { "he": "מסלול, שכפ\"ץ, פעילות, ראש חטוב וצפיפות קלורית.", "en": "Track, leptin armor, movement, sharp-mind habits, and calorie density." }
+    }
+  ]
 }

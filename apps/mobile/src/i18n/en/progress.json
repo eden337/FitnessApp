@@ -1,0 +1,27 @@
+{
+  "title": "Weight progress",
+  "privacy": "Only you can see these measurements.",
+  "form": {
+    "weight": "Weight (kg)",
+    "date": "Date (YYYY-MM-DD)",
+    "bodyFat": "Body fat % (optional)",
+    "notes": "Notes (optional)",
+    "save": "Save measurement"
+  },
+  "history": {
+    "title": "History",
+    "empty": "No weight measurements yet.",
+    "bodyFat": "{{value}}% body fat"
+  },
+  "validation": {
+    "weight": "Enter a weight between 20 and 300 kg.",
+    "entry": "Check the date, body-fat percentage, and notes."
+  },
+  "errors": {
+    "load": "Weight progress is unavailable right now.",
+    "save": "The measurement could not be saved."
+  },
+  "actions": {
+    "open": "Weight progress"
+  }
+}

@@ -1,3 +1,5 @@
+import { DateOnlySchema } from '@fitnessapp/shared';
+
 /**
  * Cheap client-side validators that mirror the shared zod constraints. Their
  * job is friendly inline feedback — the server is the source of truth and
@@ -22,7 +24,7 @@ export const validateRequired = (v: string): string | null =>
 
 export const validateBirthDate = (v: string): string | null => {
   if (!v) return 'common:validation.required';
-  return /^\d{4}-\d{2}-\d{2}$/.test(v) ? null : 'common:validation.isoDate';
+  return DateOnlySchema.safeParse(v).success ? null : 'common:validation.isoDate';
 };
 
 export const validateHeightCm = (v: number): string | null => {

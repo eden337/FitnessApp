@@ -1,10 +1,252 @@
 {
   "slug": "cleansing-vegetables",
-  "name": { "he": "ירקות מנקים", "en": "Cleansing vegetables" },
+  "name": {
+    "he": "ירקות מנקים",
+    "en": "Cleansing vegetables"
+  },
   "description": {
     "he": "ירקות מומלצים למילוי 50% מהצלחת בארוחות הגדולות.",
     "en": "Vegetables recommended to fill 50% of the plate at the larger meals."
   },
   "weekSlug": null,
-  "items": []
+  "items": [
+    {
+      "name": {
+        "he": "ארטישוק",
+        "en": "Artichoke"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "אספרגוס",
+        "en": "Asparagus"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "בצל",
+        "en": "Onion"
+      },
+      "visualKey": "onion"
+    },
+    {
+      "name": {
+        "he": "ברוקולי",
+        "en": "Broccoli"
+      },
+      "visualKey": "broccoli"
+    },
+    {
+      "name": {
+        "he": "במיה",
+        "en": "Okra"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "גזר",
+        "en": "Carrot"
+      },
+      "visualKey": "carrot"
+    },
+    {
+      "name": {
+        "he": "דלורית",
+        "en": "Butternut squash"
+      },
+      "visualKey": "squash"
+    },
+    {
+      "name": {
+        "he": "דלעת",
+        "en": "Pumpkin"
+      },
+      "visualKey": "pumpkin"
+    },
+    {
+      "name": {
+        "he": "זוקיני",
+        "en": "Zucchini"
+      },
+      "visualKey": "zucchini"
+    },
+    {
+      "name": {
+        "he": "חסה",
+        "en": "Lettuce"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "חציל",
+        "en": "Eggplant"
+      },
+      "visualKey": "eggplant"
+    },
+    {
+      "name": {
+        "he": "כוסברה",
+        "en": "Cilantro"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "כרוב לבן או סגול",
+        "en": "White or red cabbage"
+      },
+      "visualKey": "cabbage"
+    },
+    {
+      "name": {
+        "he": "כרובית",
+        "en": "Cauliflower"
+      },
+      "visualKey": "cauliflower"
+    },
+    {
+      "name": {
+        "he": "כרישה",
+        "en": "Leek"
+      },
+      "visualKey": "onion"
+    },
+    {
+      "name": {
+        "he": "לפת",
+        "en": "Turnip"
+      },
+      "visualKey": "root-vegetable"
+    },
+    {
+      "name": {
+        "he": "לבבות דקל",
+        "en": "Hearts of palm"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "מלפפון",
+        "en": "Cucumber"
+      },
+      "visualKey": "cucumber"
+    },
+    {
+      "name": {
+        "he": "מנגולד",
+        "en": "Chard"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "נבטים",
+        "en": "Sprouts"
+      },
+      "visualKey": "sprouts"
+    },
+    {
+      "name": {
+        "he": "סלרי",
+        "en": "Celery"
+      },
+      "visualKey": "celery"
+    },
+    {
+      "name": {
+        "he": "עגבנייה",
+        "en": "Tomato"
+      },
+      "visualKey": "tomato"
+    },
+    {
+      "name": {
+        "he": "עגבניות שרי",
+        "en": "Cherry tomatoes"
+      },
+      "visualKey": "tomato"
+    },
+    {
+      "name": {
+        "he": "פטרוזיליה",
+        "en": "Parsley"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "פטריות מכל סוג",
+        "en": "Mushrooms of any kind"
+      },
+      "visualKey": "mushroom"
+    },
+    {
+      "name": {
+        "he": "פלפל בכל הצבעים",
+        "en": "Bell pepper of any color"
+      },
+      "visualKey": "pepper"
+    },
+    {
+      "name": {
+        "he": "צנונית",
+        "en": "Radish"
+      },
+      "visualKey": "radish"
+    },
+    {
+      "name": {
+        "he": "קולורבי",
+        "en": "Kohlrabi"
+      },
+      "visualKey": "root-vegetable"
+    },
+    {
+      "name": {
+        "he": "קישוא",
+        "en": "Summer squash"
+      },
+      "visualKey": "squash"
+    },
+    {
+      "name": {
+        "he": "קייל",
+        "en": "Kale"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "שעועית ירוקה או צהובה",
+        "en": "Green or yellow beans"
+      },
+      "visualKey": "beans"
+    },
+    {
+      "name": {
+        "he": "שומר",
+        "en": "Fennel"
+      },
+      "visualKey": "fennel"
+    },
+    {
+      "name": {
+        "he": "תרד",
+        "en": "Spinach"
+      },
+      "visualKey": "leafy-vegetable"
+    },
+    {
+      "name": {
+        "he": "תירס גמדי",
+        "en": "Baby corn"
+      },
+      "visualKey": "corn"
+    }
+  ]
 }

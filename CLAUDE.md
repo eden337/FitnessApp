@@ -55,7 +55,7 @@ pnpm --filter @fitnessapp/shared <script>
 
 ## Branching & commits
 
-- **Branch:** all scaffolding + MVP work is on `claude/project-planning-Ho70i`.
+- **Branch:** current MVP work is on `Codex/project-planning-Ho70i`.
 - **Commits:** imperative mood, scoped by area, e.g.
   `server(auth): add register endpoint`,
   `mobile(profile): RTL layout for profile screen`.

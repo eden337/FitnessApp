@@ -1,20 +1,36 @@
 import React from 'react';
-import { render } from '@testing-library/react-native';
+import { render, waitFor } from '@testing-library/react-native';
 import { App } from '../src/app/App';
-import { createInMemoryStorage } from '../src/services/secureStorage';
+import { createInMemoryStorage, STORAGE_KEYS } from '../src/services/secureStorage';
+import * as nativeStorage from '../src/services/nativeSecureStorage';
 
 describe('App', () => {
-  it('mounts the SignIn screen by default (Hebrew title)', () => {
-    const { getByTestId, getAllByText } = render(<App storage={createInMemoryStorage()} />);
-    expect(getByTestId('signin-screen')).toBeTruthy();
-    expect(getAllByText('התחברות').length).toBeGreaterThan(0);
+  afterEach(() => {
+    jest.restoreAllMocks();
   });
 
-  it('renders the English SignIn screen when locale is en', () => {
-    const { getByTestId, getAllByText } = render(
-      <App locale="en" storage={createInMemoryStorage()} />,
-    );
-    expect(getByTestId('signin-screen')).toBeTruthy();
+  it('mounts the SignIn screen after app-state hydration', async () => {
+    const { findByTestId, getByTestId } = render(<App storage={createInMemoryStorage()} />);
+    expect(getByTestId('app-bootstrap-loading')).toBeTruthy();
+    expect(await findByTestId('signin-screen')).toBeTruthy();
+  });
+
+  it('renders with the persisted locale through the shared i18n instance', async () => {
+    const storage = createInMemoryStorage({ [STORAGE_KEYS.locale]: 'en' });
+    const { findByTestId, getAllByText } = render(<App locale="he" storage={storage} />);
+
+    expect(await findByTestId('signin-screen')).toBeTruthy();
     expect(getAllByText('Sign in').length).toBeGreaterThan(0);
+  });
+
+  it('uses native secure storage when no storage is injected', async () => {
+    const createNative = jest
+      .spyOn(nativeStorage, 'createNativeSecureStorage')
+      .mockReturnValue(createInMemoryStorage());
+
+    const { findByTestId } = render(<App locale="en" />);
+    await findByTestId('signin-screen');
+
+    await waitFor(() => expect(createNative).toHaveBeenCalledTimes(1));
   });
 });

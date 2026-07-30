@@ -17,7 +17,7 @@ describe('RegisterInputSchema', () => {
   });
 
   it('defaults locale to he when omitted', () => {
-    const { locale, ...noLocale } = valid;
+    const { locale: _locale, ...noLocale } = valid;
     expect(RegisterInputSchema.parse(noLocale).locale).toBe('he');
   });
 

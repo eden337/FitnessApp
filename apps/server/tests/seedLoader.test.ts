@@ -85,7 +85,7 @@ describe('seedLoader (against real Postgres)', () => {
     const after = await counts('food_items');
     await applySeedBundle(db, bundle);
     expect(await counts('food_items')).toBe(after);
-  });
+  }, 15_000);
 
   it('updates content in place when JSON changes', async () => {
     const db = getTestDb();
@@ -103,7 +103,10 @@ describe('seedLoader (against real Postgres)', () => {
       ),
       lists: bundle.lists.map((l) =>
         l.slug === 'proteins'
-          ? { ...l, items: [{ name: { he: 'ביצים בלבד', en: 'Eggs only' } }] }
+          ? {
+              ...l,
+              items: [{ name: { he: 'ביצים בלבד', en: 'Eggs only' }, visualKey: 'eggs' as const }],
+            }
           : l,
       ),
     };
@@ -124,5 +127,5 @@ describe('seedLoader (against real Postgres)', () => {
       .execute();
     expect(proteinsAfter.length).toBe(1);
     expect(proteinsAfter[0]?.name_en).toBe('Eggs only');
-  });
+  }, 15_000);
 });

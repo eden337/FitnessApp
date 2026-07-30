@@ -1,6 +1,7 @@
 # Feature — Progress & partner sync
 
-**Status:** Phase 4 (not yet implemented).
+**Status:** Phase 4a — private weight entry and history implemented; partner
+feed, charts, goals, and reactions remain.
 
 ## Goal
 
@@ -19,6 +20,21 @@ partner feed** of meals, weigh-ins, goal achievements, and reactions.
   - `ProgressScreen` with charts (`victory-native`).
   - `FeedScreen` — merged timeline of both partners' events.
   - `ReactionBar` component on every feed card.
+
+## Implemented weight slice
+
+- `POST /api/v1/progress/weight` creates or replaces one measurement for the
+  authenticated user and calendar day.
+- `GET /api/v1/progress/weight?from=&to=&limit=` returns only the caller's
+  bounded, newest-first history.
+- The latest dated log updates `user_metrics.current_weight_kg`; entering an
+  older measurement cannot replace a newer current value.
+- `ProgressStore` and the bilingual `ProgressScreen` support weight, optional
+  date/body-fat/notes, history, errors, and logout reset.
+- Measurements are private and no progress Socket.IO event is emitted yet.
+
+This deliberate privacy boundary remains until partner-sharing consent and
+feed visibility are designed.
 
 ## Charts
 
