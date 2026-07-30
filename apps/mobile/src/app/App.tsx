@@ -25,6 +25,7 @@ import { createNativeSecureStorage } from '../services/nativeSecureStorage';
 import { getApiBaseUrl } from '../services/runtimeConfig';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
 import { RootNavigator } from './RootNavigator';
+import { SyncConnection } from './SyncConnection';
 
 export type AppProps = {
   /** Optional override for tests / Storybook. */
@@ -93,6 +94,7 @@ const ThemedApp: React.FC<{ bootstrapped: boolean }> = ({ bootstrapped }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.canvas }}>
       <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />
+      <SyncConnection />
       {bootstrapped ? (
         <RootNavigator />
       ) : (

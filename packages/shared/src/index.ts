@@ -6,3 +6,4 @@ export * from './schemas/program.js';
 export * from './schemas/progress.js';
 export * from './schemas/activity.js';
 export * from './events/couple.js';
+export * from './events/activity.js';

@@ -1,7 +1,8 @@
 # Feature — Progress and partner sync
 
 **Status:** Maintenance-only private weight entry, history, and trends plus a
-privacy-safe shared-wins feed are implemented; realtime and reactions remain.
+privacy-safe shared-wins feed with realtime delivery are implemented; goals
+and reactions remain.
 
 ## Product boundary
 
@@ -40,13 +41,15 @@ and both weight endpoints return `409 maintenance_only`.
   reconciliation loop cannot skip intermediate events.
 - The bilingual Shared Wins screen is opened from the paired partner card and
   uses colorful, theme-safe emoji tiles plus reduced-motion-aware celebration.
+- `activity:created` is emitted only after persistence commits. The mobile
+  connection rejoins on reconnect, validates incoming events, reconciles missed
+  batches through REST, and deduplicates by persisted activity ID.
 - No body measurement, calorie, profile, or private program fields exist in the
   shared activity schema or table.
 
 ## Planned maintenance work
 
 - Habit-fallback signals that help preserve the program's principles.
-- Realtime Socket.IO delivery of persisted shared wins.
 - Goals, achievements, and reactions for non-private actions.
 - Any future body-information sharing requires a separate explicit-consent ADR.
 
@@ -57,4 +60,6 @@ and both weight endpoints return `409 maintenance_only`.
 - Chart reducer tests cover date boundaries, normalization, and empty data.
 - Shared schema and integration tests reject unsafe kinds and enforce current
   couple scope.
-- Realtime events and reactions must remain scoped, consent-aware, and idempotent.
+- Realtime integration tests prove that only the current couple room receives
+  a safe activity after its transaction commits.
+- Reactions must remain scoped, consent-aware, and idempotent.

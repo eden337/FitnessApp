@@ -81,11 +81,15 @@ Namespace default `/`. Room model: `couple:<coupleId>`.
 
 | Event | Payload shape (see `packages/shared/src/events`) |
 |---|---|
+| `activity:created` | `{ activity: SharedActivity }` |
 | `meal:logged` | `{ by: userId, log: MealLogDto }` |
 | `water:logged` | `{ by: userId, amountMl, total: number }` |
 | `weight:logged` | `{ by: userId, log: WeightLogDto }` |
 | `goal:achieved` | `{ by: userId, goal: GoalDto }` |
 | `reaction:sent` | `{ from: userId, subjectType, subjectId, kind }` |
+
+Only `activity:created` and the couple membership events are implemented in
+Phase 4d. Weight is private and has no socket event.
 
 ## Versioning
 

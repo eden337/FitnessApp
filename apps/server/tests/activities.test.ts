@@ -60,10 +60,21 @@ describe('shared activity feed', () => {
       headers: auth(solo.accessToken),
       payload: { kind: 'hydration' },
     });
+    await app.inject({
+      method: 'POST',
+      url: '/api/v1/couples',
+      headers: auth(solo.accessToken),
+    });
+    const soloCouple = await app.inject({
+      method: 'GET',
+      url: '/api/v1/progress/feed',
+      headers: auth(solo.accessToken),
+    });
 
     expect(unauthenticated.statusCode).toBe(401);
     expect(unpaired.statusCode).toBe(409);
     expect(unpaired.json().error.code).toBe('not_paired');
+    expect(soloCouple.statusCode).toBe(409);
   });
 
   it('validates the safe activity whitelist', async () => {

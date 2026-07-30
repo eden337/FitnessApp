@@ -1,5 +1,7 @@
 import type { AxiosInstance } from 'axios';
-import type { SharedActivity } from '@fitnessapp/shared';
+import { SOCKET_EVENTS, type SharedActivity } from '@fitnessapp/shared';
+import { waitFor } from '@testing-library/react-native';
+import type { Socket } from 'socket.io-client';
 import { ActivityStore } from '../src/stores/ActivityStore';
 
 const activity: SharedActivity = {
@@ -53,5 +55,46 @@ describe('ActivityStore', () => {
     expect(store.activities).toEqual([]);
     expect(store.status).toBe('idle');
     expect(store.errorMessage).toBeNull();
+  });
+
+  it('merges realtime events and reconciles from the persisted cursor', async () => {
+    const newer = {
+      ...activity,
+      id: '00000000-0000-4000-8000-000000000004',
+      kind: 'movement' as const,
+      createdAt: '2026-07-30T10:00:00.000Z',
+    };
+    const get = jest.fn().mockResolvedValue({ data: { activities: [activity, newer] } });
+    const store = new ActivityStore({ api: { get } as unknown as AxiosInstance });
+    store.activities = [activity];
+    store.status = 'ready';
+    const handlers = new Map<string, (payload: unknown) => void>();
+    const socket = {
+      connected: false,
+      on: jest.fn((event: string, handler: (payload: unknown) => void) => {
+        handlers.set(event, handler);
+      }),
+      off: jest.fn(),
+    } as unknown as Socket;
+
+    store.bindSocket(socket);
+    handlers.get(SOCKET_EVENTS.activityCreated)?.({ activity: { weightKg: 70 } });
+    expect(store.activities).toEqual([activity]);
+    handlers.get(SOCKET_EVENTS.activityCreated)?.({ activity: newer });
+    expect(store.activities.map((item) => item.id)).toEqual([newer.id, activity.id]);
+
+    handlers.get('connect')?.(undefined);
+    await waitFor(() => {
+      expect(get).toHaveBeenCalledWith('/api/v1/progress/feed', {
+        params: { since: newer.createdAt, limit: 100 },
+      });
+    });
+    expect(store.activities.map((item) => item.id)).toEqual([newer.id, activity.id]);
+
+    store.unbindSocket();
+    expect(socket.off).toHaveBeenCalledWith(
+      SOCKET_EVENTS.activityCreated,
+      store.onActivityCreated,
+    );
   });
 });

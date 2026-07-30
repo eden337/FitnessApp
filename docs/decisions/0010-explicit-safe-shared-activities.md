@@ -34,5 +34,5 @@ boundary, and clients deduplicate by activity ID.
 
 - Body and weight information stays private by construction.
 - New shareable action types require a reviewed schema and migration change.
-- The first feed slice is persisted and reconcilable; realtime delivery and
-  reactions are separate follow-up work.
+- The feed is persisted, reconcilable, and delivered live; reactions remain a
+  separate follow-up.

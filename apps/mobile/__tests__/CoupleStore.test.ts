@@ -166,15 +166,17 @@ describe('CoupleStore', () => {
       return { socket, handlers };
     };
 
-    it('bindSocket emits hello and registers handlers', () => {
+    it('bindSocket requests canonical state on every connection', () => {
       const { api } = buildApi();
       const store = new CoupleStore({ api });
       const { socket, handlers } = buildSocketStub();
       store.bindSocket(socket);
-      expect((socket.emit as jest.Mock)).toHaveBeenCalledWith(SOCKET_EVENTS.hello);
       expect(handlers.has(SOCKET_EVENTS.ready)).toBe(true);
       expect(handlers.has(SOCKET_EVENTS.memberJoined)).toBe(true);
       expect(handlers.has(SOCKET_EVENTS.memberLeft)).toBe(true);
+      expect(handlers.has('connect')).toBe(true);
+      handlers.get('connect')?.(undefined);
+      expect((socket.emit as jest.Mock)).toHaveBeenCalledWith(SOCKET_EVENTS.hello);
     });
 
     it('bindSocket replaces a previously-bound socket', () => {

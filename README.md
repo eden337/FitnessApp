@@ -5,7 +5,7 @@ Bilingual (Hebrew / English) couples fitness companion. Plans meals around the
 (gender, height, weight, age, activity), and keeps two partners in sync in
 real time so they can push each other forward.
 
-> Status: **Phase 4c — privacy-safe shared wins**. Aba Hatuv program guidance,
+> Status: **Phase 4d — realtime shared wins**. Aba Hatuv program guidance,
 > couples, authentication, and profile setup are implemented. See
 > [`docs/architecture/overview.md`](docs/architecture/overview.md) for the plan.
 

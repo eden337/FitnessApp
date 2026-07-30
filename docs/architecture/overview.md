@@ -65,7 +65,7 @@ Expo/EAS artifacts and are not containerized; they connect to the same API.
 | 1 — Auth + profile + i18n | Register / login / refresh; profile CRUD; HE/EN + RTL | End-to-end signup + profile edit works |
 | 2 — Couples + sockets | Invite code flow; Socket.IO gateway; shared event schemas | Two accounts paired; events echo live |
 | 3 — Aba Hatuv program | Authored weekly guidance, personal timeline, reference lists, mobile program screens | User can start/resume and browse the correct weekly guidance |
-| 4 — Progress + partner feed | **In progress:** private maintenance trends and persisted privacy-safe shared wins implemented; realtime delivery, goals, and reactions remain | Both partners can see approved shared activity in real time |
+| 4 — Progress + partner feed | **In progress:** private maintenance trends and realtime privacy-safe shared wins implemented; goals and reactions remain | Both partners can see approved shared activity in real time |
 | 5 — Hardening | Coverage ≥ 80 %; OWASP checklist; docs sweep | All gates pass; docs complete |
 
 ## Non-goals (v1)

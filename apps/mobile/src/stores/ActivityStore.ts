@@ -1,10 +1,13 @@
-import type {
-  CreateSharedActivityInput,
-  SharedActivity,
-  SharedActivityFeedResponse,
+import {
+  SOCKET_EVENTS,
+  SharedActivityCreatedEventSchema,
+  type CreateSharedActivityInput,
+  type SharedActivity,
+  type SharedActivityFeedResponse,
 } from '@fitnessapp/shared';
 import type { AxiosInstance } from 'axios';
 import { makeAutoObservable, runInAction } from 'mobx';
+import type { Socket } from 'socket.io-client';
 
 export type ActivityStatus = 'idle' | 'loading' | 'ready' | 'error';
 
@@ -15,10 +18,16 @@ export class ActivityStore {
   posting = false;
 
   private readonly api: AxiosInstance;
+  private socket: Socket | null = null;
+  private reconciling = false;
 
   constructor(deps: { api: AxiosInstance }) {
     this.api = deps.api;
-    makeAutoObservable<this, 'api'>(this, { api: false });
+    makeAutoObservable<this, 'api' | 'socket' | 'reconciling'>(this, {
+      api: false,
+      socket: false,
+      reconciling: false,
+    });
   }
 
   async fetch(): Promise<void> {
@@ -68,7 +77,68 @@ export class ActivityStore {
     }
   }
 
+  bindSocket = (socket: Socket): void => {
+    this.unbindSocket();
+    this.socket = socket;
+    socket.on(SOCKET_EVENTS.activityCreated, this.onActivityCreated);
+    socket.on('connect', this.onSocketConnect);
+    if (socket.connected) this.onSocketConnect();
+  };
+
+  unbindSocket = (): void => {
+    if (!this.socket) return;
+    this.socket.off(SOCKET_EVENTS.activityCreated, this.onActivityCreated);
+    this.socket.off('connect', this.onSocketConnect);
+    this.socket = null;
+  };
+
+  onActivityCreated = (payload: unknown): void => {
+    const parsed = SharedActivityCreatedEventSchema.safeParse(payload);
+    if (!parsed.success) return;
+    runInAction(() => {
+      this.activities = deduplicate([parsed.data.activity, ...this.activities]);
+      this.status = 'ready';
+    });
+  };
+
+  reconcile = async (): Promise<void> => {
+    if (this.reconciling) return;
+    this.reconciling = true;
+    try {
+      if (this.activities.length === 0) {
+        await this.fetch();
+        return;
+      }
+      let since = this.activities[0]!.createdAt;
+      for (let batch = 0; batch < 10; batch += 1) {
+        const response = await this.api.get<SharedActivityFeedResponse>(
+          '/api/v1/progress/feed',
+          { params: { since, limit: 100 } },
+        );
+        runInAction(() => {
+          this.activities = deduplicate([
+            ...response.data.activities,
+            ...this.activities,
+          ]);
+        });
+        if (response.data.activities.length < 100) break;
+        since = response.data.activities[response.data.activities.length - 1]!.createdAt;
+      }
+    } catch (error) {
+      runInAction(() => {
+        this.errorMessage = messageOf(error, 'failed to reconcile shared activity');
+      });
+    } finally {
+      this.reconciling = false;
+    }
+  };
+
+  private onSocketConnect = (): void => {
+    void this.reconcile();
+  };
+
   reset = (): void => {
+    this.unbindSocket();
     runInAction(() => {
       this.activities = [];
       this.status = 'idle';

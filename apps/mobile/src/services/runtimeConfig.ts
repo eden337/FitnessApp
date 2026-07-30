@@ -9,3 +9,6 @@ export const resolvePublicUrl = (configured: unknown, fallback: string): string 
 
 export const getApiBaseUrl = (): string =>
   resolvePublicUrl(Constants.expoConfig?.extra?.apiUrl, LOCAL_API_URL);
+
+export const getSocketBaseUrl = (): string =>
+  resolvePublicUrl(Constants.expoConfig?.extra?.socketUrl, LOCAL_API_URL);

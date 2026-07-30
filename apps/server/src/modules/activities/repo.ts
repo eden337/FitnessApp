@@ -38,6 +38,13 @@ export const createActivitiesRepo = (db: DbClient) => ({
         .forUpdate()
         .executeTakeFirst();
       if (!membership) return null;
+      const members = await transaction
+        .selectFrom('couple_members')
+        .select('user_id')
+        .where('couple_id', '=', membership.couple_id)
+        .forShare()
+        .execute();
+      if (members.length < 2) return null;
       const inserted = await transaction
         .insertInto('shared_activities')
         .values({
@@ -69,6 +76,13 @@ export const createActivitiesRepo = (db: DbClient) => ({
         .forShare()
         .executeTakeFirst();
       if (!membership) return null;
+      const members = await transaction
+        .selectFrom('couple_members')
+        .select('user_id')
+        .where('couple_id', '=', membership.couple_id)
+        .forShare()
+        .execute();
+      if (members.length < 2) return null;
       let selection = transaction
         .selectFrom('shared_activities')
         .innerJoin('users', 'users.id', 'shared_activities.actor_user_id')

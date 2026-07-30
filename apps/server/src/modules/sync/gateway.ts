@@ -1,14 +1,23 @@
 import type { FastifyInstance } from 'fastify';
 import { Server as SocketIOServer, type Socket } from 'socket.io';
-import { SOCKET_EVENTS, type Couple, type UserProfile } from '@fitnessapp/shared';
+import {
+  SOCKET_EVENTS,
+  SharedActivityCreatedEventSchema,
+  type Couple,
+  type SharedActivityCreatedEvent,
+  type UserProfile,
+} from '@fitnessapp/shared';
 import type { TokenSigner } from '../../lib/tokens.js';
 import type { CouplesService, CoupleEventEmitter } from '../couples/service.js';
+import type { ActivityEventEmitter } from '../activities/service.js';
 
 export type SyncGateway = {
   io: SocketIOServer;
-  emitter: CoupleEventEmitter;
+  emitter: SyncEventEmitter;
   close: () => Promise<void>;
 };
+
+export type SyncEventEmitter = CoupleEventEmitter & ActivityEventEmitter;
 
 export type SyncGatewayDeps = {
   app: FastifyInstance;
@@ -57,12 +66,18 @@ export const createSyncGateway = ({
     void onConnection(socket, couplesService);
   });
 
-  const emitter: CoupleEventEmitter = {
+  const emitter: SyncEventEmitter = {
     emitMemberJoined: (coupleId, payload) => {
       io.to(roomFor(coupleId)).emit(SOCKET_EVENTS.memberJoined, payload);
     },
     emitMemberLeft: (coupleId, payload) => {
       io.to(roomFor(coupleId)).emit(SOCKET_EVENTS.memberLeft, payload);
+    },
+    emitActivityCreated: (coupleId, payload: SharedActivityCreatedEvent) => {
+      io.to(roomFor(coupleId)).emit(
+        SOCKET_EVENTS.activityCreated,
+        SharedActivityCreatedEventSchema.parse(payload),
+      );
     },
   };
 

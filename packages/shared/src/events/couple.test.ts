@@ -30,6 +30,7 @@ describe('socket event schemas', () => {
       ready: 'couple:ready',
       memberJoined: 'couple:member-joined',
       memberLeft: 'couple:member-left',
+      activityCreated: 'activity:created',
       hello: 'hello',
     });
   });

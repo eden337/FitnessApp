@@ -121,7 +121,8 @@ export class CoupleStore {
     socket.on(SOCKET_EVENTS.memberLeft, (e: CoupleMemberLeftEvent) =>
       this.onMemberLeft(e),
     );
-    socket.emit(SOCKET_EVENTS.hello);
+    socket.on('connect', this.onSocketConnect);
+    if (socket.connected) this.onSocketConnect();
   };
 
   unbindSocket = (): void => {
@@ -129,7 +130,12 @@ export class CoupleStore {
     this.socket.off(SOCKET_EVENTS.ready);
     this.socket.off(SOCKET_EVENTS.memberJoined);
     this.socket.off(SOCKET_EVENTS.memberLeft);
+    this.socket.off('connect', this.onSocketConnect);
     this.socket = null;
+  };
+
+  private onSocketConnect = (): void => {
+    this.socket?.emit(SOCKET_EVENTS.hello);
   };
 
   /** Public for tests; in production only the socket bindings call these. */
