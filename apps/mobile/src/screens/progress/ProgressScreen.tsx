@@ -6,6 +6,7 @@ import {
   type CreateWeightLogInput,
 } from '@fitnessapp/shared';
 import { Button } from '../../components/Button';
+import { ScreenHeader } from '../../components/ScreenHeader';
 import { TextField } from '../../components/TextField';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
@@ -55,6 +56,7 @@ export const ProgressScreen: React.FC<{ onClose?: () => void }> = observer(({ on
 
   return (
     <ScrollView contentContainerStyle={styles.scroll} testID="progress-screen">
+      {onClose ? <ScreenHeader title={t('progress:title')} onBack={onClose} /> : null}
       <Text style={styles.title}>{t('progress:title')}</Text>
       <Text style={styles.privacy}>{t('progress:privacy')}</Text>
 
@@ -119,14 +121,6 @@ export const ProgressScreen: React.FC<{ onClose?: () => void }> = observer(({ on
         ))
       )}
 
-      {onClose ? (
-        <Button
-          testID="progress-back"
-          variant="secondary"
-          label={t('common:actions.back')}
-          onPress={onClose}
-        />
-      ) : null}
     </ScrollView>
   );
 });

@@ -30,6 +30,15 @@ const mapWeightLog = (row: {
 });
 
 export const createProgressRepo = (db: DbClient) => ({
+  async getProgramStartedOn(userId: string): Promise<string | null> {
+    const row = await db
+      .selectFrom('user_metrics')
+      .select('program_started_on')
+      .where('user_id', '=', userId)
+      .executeTakeFirst();
+    return row?.program_started_on ? serializeDateOnly(row.program_started_on) : null;
+  },
+
   async upsertWeightLog(userId: string, input: WeightWrite): Promise<WeightLog | null> {
     return db.transaction().execute(async (trx) => {
       const metrics = await trx

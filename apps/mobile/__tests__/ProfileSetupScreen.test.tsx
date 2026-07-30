@@ -72,7 +72,7 @@ describe('ProfileSetupScreen', () => {
           goalWeightKg: null,
           dietaryRestrictions: {},
         },
-        derived: { ageYears: 35, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 2124 },
+        derived: { ageYears: 35, bmi: 23.9, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 2124 },
       },
     });
     const { store } = buildStore({ put });

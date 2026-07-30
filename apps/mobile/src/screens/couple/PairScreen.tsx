@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button } from '../../components/Button';
+import { ScreenHeader } from '../../components/ScreenHeader';
 import { TextField } from '../../components/TextField';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
@@ -33,6 +34,7 @@ export const PairScreen: React.FC<PairScreenProps> = observer(({ onClose }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.scroll} testID="pair-screen">
+      {onClose ? <ScreenHeader title={t('couple:title')} onBack={onClose} /> : null}
       <Text style={styles.title}>{t('couple:title')}</Text>
       <Text style={styles.subtitle}>{t('couple:subtitle')}</Text>
 
@@ -90,14 +92,6 @@ export const PairScreen: React.FC<PairScreenProps> = observer(({ onClose }) => {
         </Text>
       ) : null}
 
-      {onClose ? (
-        <Button
-          testID="pair-back"
-          variant="secondary"
-          label={t('common:actions.back')}
-          onPress={onClose}
-        />
-      ) : null}
     </ScrollView>
   );
 });

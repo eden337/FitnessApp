@@ -19,6 +19,10 @@
     "light": "בהיר",
     "dark": "כהה"
   },
+  "settings": {
+    "title": "הגדרות",
+    "description": "בחרו את מראה האפליקציה ואת השפה שלה."
+  },
   "home": {
     "brandOverline": "טובים יותר",
     "greeting": "היי {{name}}!",

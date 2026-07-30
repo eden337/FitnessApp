@@ -5,7 +5,7 @@ import type {
   UserMetrics,
   UserProfile,
 } from '@fitnessapp/shared';
-import { ageFromBirthDate, bmrKcal } from '../../lib/bmr.js';
+import { ageFromBirthDate, bmrKcal, bodyMassIndex } from '../../lib/bmr.js';
 import { calorieTarget } from '../../lib/calorie-target.js';
 import type { AuthRepo } from '../auth/repo.js';
 import type { UsersRepo } from './repo.js';
@@ -74,5 +74,11 @@ const computeDerived = (profile: UserProfile, metrics: UserMetrics): DerivedUser
     activityLevel: metrics.activityLevel,
     goalType: metrics.goalType,
   });
-  return { ageYears, bmrKcal: bmr, tdeeKcal, targetKcal };
+  return {
+    ageYears,
+    bmi: bodyMassIndex(metrics.currentWeightKg, profile.heightCm),
+    bmrKcal: bmr,
+    tdeeKcal,
+    targetKcal,
+  };
 };

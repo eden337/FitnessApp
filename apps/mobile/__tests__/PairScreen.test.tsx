@@ -55,7 +55,7 @@ describe('PairScreen', () => {
     const onClose = jest.fn();
     const { getByTestId } = render(wrap(store, <PairScreen onClose={onClose} />));
 
-    fireEvent.press(getByTestId('pair-back'));
+    fireEvent.press(getByTestId('screen-back'));
 
     expect(onClose).toHaveBeenCalledTimes(1);
   });

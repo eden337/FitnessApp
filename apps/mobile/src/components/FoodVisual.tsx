@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet, View } from 'react-native';
 import type { FoodVisualKey } from '@fitnessapp/shared';
-import { foodVisualAssets } from './foodVisualAssets';
-import { customFoodArtwork } from './FoodArtwork';
+import { FoodArtwork } from './FoodArtwork';
+import { foodImageAssetFor } from './foodImageAssets';
 import { useTheme } from '../theme/ThemeProvider';
 
 export interface FoodVisualProps {
@@ -12,13 +12,38 @@ export interface FoodVisualProps {
 type FoodFamily = 'vegetable' | 'fruit' | 'protein' | 'carbohydrate' | 'fat' | 'limited' | 'generic';
 
 const familyKeys: Record<FoodFamily, ReadonlySet<FoodVisualKey>> = {
-  vegetable: new Set(['leafy-vegetable', 'onion', 'broccoli', 'carrot', 'squash', 'pumpkin', 'zucchini', 'eggplant', 'cabbage', 'cauliflower', 'root-vegetable', 'cucumber', 'sprouts', 'celery', 'tomato', 'mushroom', 'pepper', 'radish', 'fennel']),
-  fruit: new Set(['watermelon', 'pear', 'pineapple', 'orange-fruit', 'peach', 'citrus', 'banana', 'cherries', 'melon', 'mango', 'grapes', 'tropical-fruit', 'papaya', 'kiwi', 'pomegranate', 'plum', 'fig', 'apple', 'strawberry', 'berries', 'dried-fruit']),
-  protein: new Set(['beans', 'eggs', 'fish', 'chicken', 'meat', 'dairy', 'tofu']),
-  carbohydrate: new Set(['bread', 'corn', 'sweet-potato', 'potato', 'beet', 'rice', 'peas', 'oats', 'grain', 'pasta']),
-  fat: new Set(['butter', 'oil', 'olives', 'avocado', 'peanut', 'nuts', 'coconut']),
-  limited: new Set(['candy', 'soda', 'wine', 'beer', 'honey']),
-  generic: new Set(['meal', 'bowl']),
+  vegetable: new Set([
+    'artichoke', 'asparagus', 'onion', 'broccoli', 'okra', 'carrot',
+    'butternut-squash', 'pumpkin', 'zucchini', 'lettuce', 'eggplant',
+    'cilantro', 'white-or-red-cabbage', 'cauliflower', 'leek', 'turnip',
+    'hearts-of-palm', 'cucumber', 'chard', 'sprouts', 'celery', 'tomato',
+    'cherry-tomatoes', 'parsley', 'mushrooms', 'bell-pepper', 'radish',
+    'kohlrabi', 'summer-squash', 'kale', 'green-or-yellow-beans', 'fennel',
+    'spinach', 'baby-corn',
+  ]),
+  fruit: new Set([
+    'watermelon', 'pear', 'cherimoya', 'fresh-pineapple', 'persimmon',
+    'peach', 'grapefruit', 'banana', 'guava', 'cherries', 'quince',
+    'fresh-lychee', 'melon', 'mango', 'apricot', 'nectarine', 'prickly-pear',
+    'grapes', 'passion-fruit', 'papaya', 'kiwi', 'clementine', 'star-fruit',
+    'pomegranate', 'plum', 'loquat', 'fresh-fig', 'orange', 'apple',
+    'strawberry', 'berries', 'dried-fruit', 'fresh-fruit',
+  ]),
+  protein: new Set([
+    'beans', 'lentils', 'chickpeas', 'edamame', 'eggs', 'fish', 'chicken',
+    'meat', 'dairy-products', 'tofu', 'seitan',
+  ]),
+  carbohydrate: new Set([
+    'flours-and-ground-foods', 'sweet-potato', 'potatoes', 'beetroot',
+    'rice', 'peas', 'thick-rolled-oats', 'quinoa', 'buckwheat', 'corn',
+    'pearl-barley', 'skinny-pasta',
+  ]),
+  fat: new Set([
+    'tahini', 'butter', 'cooking-oil', 'olives', 'avocado',
+    'peanut-butter', 'almond-butter', 'nuts-almonds', 'coconut-products',
+  ]),
+  limited: new Set(['sugars', 'diet-cola', 'dry-wine', 'beer', 'honey']),
+  generic: new Set(['other-foods-on-vacation']),
 };
 
 export const foodFamilyFor = (key: FoodVisualKey): FoodFamily =>
@@ -27,22 +52,35 @@ export const foodFamilyFor = (key: FoodVisualKey): FoodFamily =>
 
 export const FoodVisual: React.FC<FoodVisualProps> = ({ visualKey }) => {
   const theme = useTheme();
-  const Artwork = customFoodArtwork[visualKey];
+  const family = foodFamilyFor(visualKey);
+  const imageSource = foodImageAssetFor(visualKey);
   return (
     <View
       style={[
         styles.tile,
         {
-          backgroundColor: theme.colors.foodTiles[foodFamilyFor(visualKey)],
+          backgroundColor: theme.colors.foodTiles[family],
           borderColor: theme.colors.border,
         },
       ]}
       testID={`food-visual-${visualKey}`}
     >
-      {Artwork ? (
-        <Artwork accessible={false} width={52} height={52} />
+      {imageSource ? (
+        <Image
+          accessible={false}
+          resizeMode="contain"
+          source={imageSource}
+          style={styles.image}
+          testID={`food-image-${visualKey}`}
+        />
       ) : (
-        <Image accessible={false} resizeMode="contain" source={foodVisualAssets[visualKey]} style={styles.image} />
+        <FoodArtwork
+          accessible={false}
+          family={family}
+          height={52}
+          visualKey={visualKey}
+          width={52}
+        />
       )}
     </View>
   );
@@ -56,9 +94,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   image: {
-    width: 48,
-    height: 48,
+    height: 58,
+    width: 58,
   },
 });

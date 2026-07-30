@@ -40,7 +40,7 @@
         "he": "מוצרי חלב",
         "en": "Dairy products"
       },
-      "visualKey": "dairy"
+      "visualKey": "dairy-products"
     },
     {
       "name": {
@@ -54,7 +54,7 @@
         "he": "סייטן",
         "en": "Seitan"
       },
-      "visualKey": "bread"
+      "visualKey": "seitan"
     }
   ]
 }

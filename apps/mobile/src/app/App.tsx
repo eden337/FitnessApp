@@ -20,7 +20,7 @@ import { I18nProvider, createI18n } from '../i18n/I18nProvider';
 import type { Locale } from '../i18n/resources';
 import { RootStore } from '../stores/RootStore';
 import { StoresProvider } from '../stores/StoresContext';
-import { createInMemoryStorage, type SecureStorage } from '../services/secureStorage';
+import { createWebStorage, type SecureStorage } from '../services/secureStorage';
 import { createNativeSecureStorage } from '../services/nativeSecureStorage';
 import { getApiBaseUrl } from '../services/runtimeConfig';
 import { ThemeProvider, useTheme } from '../theme/ThemeProvider';
@@ -51,7 +51,9 @@ export const App: React.FC<AppProps> = ({ store, locale = 'he', storage }) => {
     if (store) return store;
     const sec =
       storage ??
-      (Platform.OS === 'web' ? createInMemoryStorage() : createNativeSecureStorage());
+      (Platform.OS === 'web'
+        ? createWebStorage(globalThis.localStorage)
+        : createNativeSecureStorage());
     return new RootStore({
       baseURL: getApiBaseUrl(),
       storage: sec,

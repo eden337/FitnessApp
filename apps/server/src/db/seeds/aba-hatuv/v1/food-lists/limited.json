@@ -16,7 +16,7 @@
         "he": "עד חצי ליטר ביום",
         "en": "Up to 0.5 L per day"
       },
-      "visualKey": "soda"
+      "visualKey": "diet-cola"
     },
     {
       "name": {
@@ -27,7 +27,7 @@
         "he": "כוסית ביום",
         "en": "One glass per day"
       },
-      "visualKey": "wine"
+      "visualKey": "dry-wine"
     },
     {
       "name": {

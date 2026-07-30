@@ -14,6 +14,7 @@ const log: WeightLog = {
 
 const buildRepo = (overrides: Partial<ProgressRepo> = {}): ProgressRepo =>
   ({
+    getProgramStartedOn: jest.fn().mockResolvedValue('2026-04-01'),
     upsertWeightLog: jest.fn().mockResolvedValue(log),
     listWeightLogs: jest.fn().mockResolvedValue([log]),
     ...overrides,
@@ -63,6 +64,30 @@ describe('progress service', () => {
       }),
     ).resolves.toEqual({ kind: 'future_date' });
     expect(repo.upsertWeightLog).not.toHaveBeenCalled();
+  });
+
+  it('blocks weight logging until the 13-week foundation program is completed', async () => {
+    const repo = buildRepo({
+      getProgramStartedOn: jest.fn().mockResolvedValue('2026-07-01'),
+    });
+    const service = createProgressService({ repo, today: () => '2026-07-30' });
+
+    await expect(service.logWeight('user-id', { weightKg: 81.4 })).resolves.toEqual({
+      kind: 'maintenance_only',
+    });
+    expect(repo.upsertWeightLog).not.toHaveBeenCalled();
+  });
+
+  it('blocks weight history before the foundation program is completed', async () => {
+    const repo = buildRepo({
+      getProgramStartedOn: jest.fn().mockResolvedValue(null),
+    });
+    const service = createProgressService({ repo, today: () => '2026-07-30' });
+
+    await expect(service.getWeightHistory('user-id', { limit: 30 })).resolves.toEqual({
+      kind: 'maintenance_only',
+    });
+    expect(repo.listWeightLogs).not.toHaveBeenCalled();
   });
 
   it('returns bounded private history from the repository', async () => {

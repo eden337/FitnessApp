@@ -15,7 +15,7 @@
         "he": "טחינה",
         "en": "Tahini"
       },
-      "visualKey": "bowl"
+      "visualKey": "tahini"
     },
     {
       "name": {
@@ -29,7 +29,7 @@
         "he": "כל שמן",
         "en": "Any cooking oil"
       },
-      "visualKey": "oil"
+      "visualKey": "cooking-oil"
     },
     {
       "name": {
@@ -50,14 +50,14 @@
         "he": "חמאת בוטנים",
         "en": "Peanut butter"
       },
-      "visualKey": "peanut"
+      "visualKey": "peanut-butter"
     },
     {
       "name": {
         "he": "חמאת שקדים",
         "en": "Almond butter"
       },
-      "visualKey": "nuts"
+      "visualKey": "almond-butter"
     },
     {
       "name": {
@@ -68,7 +68,7 @@
         "he": "10-12 יחידות = מנת שומן מרוכז",
         "en": "10-12 pieces = one concentrated-fat serving"
       },
-      "visualKey": "nuts"
+      "visualKey": "nuts-almonds"
     },
     {
       "name": {
@@ -79,7 +79,7 @@
         "he": "למעט קוקוס מיובש",
         "en": "Excludes dried coconut"
       },
-      "visualKey": "coconut"
+      "visualKey": "coconut-products"
     }
   ]
 }

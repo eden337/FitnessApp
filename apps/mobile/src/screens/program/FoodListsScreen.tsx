@@ -6,6 +6,7 @@ import { Button } from '../../components/Button';
 import { AppIcon } from '../../components/AppIcon';
 import { FoodVisual } from '../../components/FoodVisual';
 import { SegmentedPicker } from '../../components/SegmentedPicker';
+import { ScreenHeader } from '../../components/ScreenHeader';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
 import type { AppTheme } from '../../theme';
@@ -28,6 +29,7 @@ export const FoodListsScreen: React.FC<FoodListsScreenProps> = observer(({ onClo
 
   return (
     <ScrollView contentContainerStyle={styles.scroll} testID="program-food-lists-screen">
+      {onClose ? <ScreenHeader title={t('program:lists.title')} onBack={onClose} /> : null}
       <View style={styles.titleRow}>
         <View>
           <Text style={styles.overline}>{t('program:lists.eyebrow')}</Text>
@@ -39,7 +41,7 @@ export const FoodListsScreen: React.FC<FoodListsScreenProps> = observer(({ onClo
       </View>
       <View style={styles.summary} testID="food-guide-summary">
         <View style={styles.summaryIcon}>
-          <FoodVisual visualKey={scope === 'global' ? 'leafy-vegetable' : 'meal'} />
+          <FoodVisual visualKey={scope === 'global' ? 'artichoke' : 'other-foods-on-vacation'} />
         </View>
         <View style={styles.summaryCopy}>
           <Text style={styles.summaryCount}>{choiceCount}</Text>
@@ -101,9 +103,6 @@ export const FoodListsScreen: React.FC<FoodListsScreenProps> = observer(({ onClo
           </View>
         ))
       )}
-      {onClose ? (
-        <Button label={t('program:actions.back')} onPress={onClose} variant="text" />
-      ) : null}
     </ScrollView>
   );
 });

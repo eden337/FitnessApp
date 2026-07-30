@@ -41,6 +41,7 @@ describe('Aba Hatuv v1 authored content', () => {
     const items = bundle.lists.flatMap((list) => list.items);
 
     expect(items).toHaveLength(105);
+    expect(new Set(items.map((item) => item.visualKey)).size).toBe(items.length);
     for (const item of items) {
       expect(item.visualKey).toMatch(/^[a-z][a-z0-9-]*$/);
     }

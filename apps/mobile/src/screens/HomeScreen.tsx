@@ -1,14 +1,12 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import type { BilingualText } from '@fitnessapp/shared';
 import { AppIcon } from '../components/AppIcon';
 import { Button } from '../components/Button';
-import { LocaleToggle } from '../components/LocaleToggle';
 import { MissionHero } from '../components/MissionHero';
 import { PartnerCard } from '../components/PartnerCard';
 import { ProgressRing } from '../components/ProgressRing';
-import { ThemeToggle } from '../components/ThemeToggle';
 import { useTranslation } from '../i18n/I18nProvider';
 import { useStores } from '../stores/StoresContext';
 import type { AppTheme } from '../theme';
@@ -18,10 +16,12 @@ export type HomeScreenProps = {
   onPressPartner?: () => void;
   onPressProgram?: () => void;
   onPressProgress?: () => void;
+  onPressProfile?: () => void;
+  onPressSettings?: () => void;
 };
 
 export const HomeScreen: React.FC<HomeScreenProps> = observer(
-  ({ onPressPartner, onPressProgram, onPressProgress }) => {
+  ({ onPressPartner, onPressProgram, onPressProgress, onPressProfile, onPressSettings }) => {
     const { auth, profile, program, locale } = useStores();
     const { t } = useTranslation();
     const theme = useTheme();
@@ -36,13 +36,33 @@ export const HomeScreen: React.FC<HomeScreenProps> = observer(
 
     return (
       <ScrollView contentContainerStyle={styles.scroll} testID="home-screen">
-        <View style={styles.brandRow}>
-          <View style={styles.brandIcon}>
-            <AppIcon name="heart" color={theme.colors.onPrimary} size={22} />
+        <View style={styles.topRow}>
+          <View style={styles.brandRow}>
+            <View style={styles.brandIcon}>
+              <AppIcon name="heart" color={theme.colors.onPrimary} size={22} />
+            </View>
+            <View>
+              <Text style={styles.brandOverline}>{t('common:home.brandOverline')}</Text>
+              <Text style={styles.brand}>{t('common:appName')}</Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.brandOverline}>{t('common:home.brandOverline')}</Text>
-            <Text style={styles.brand}>{t('common:appName')}</Text>
+          <View style={styles.headerActions}>
+            {onPressProfile ? (
+              <HomeIconButton
+                accessibilityLabel={t('profile:private.title')}
+                icon="profile"
+                onPress={onPressProfile}
+                testID="home-profile"
+              />
+            ) : null}
+            {onPressSettings ? (
+              <HomeIconButton
+                accessibilityLabel={t('common:settings.title')}
+                icon="settings"
+                onPress={onPressSettings}
+                testID="home-settings"
+              />
+            ) : null}
           </View>
         </View>
 
@@ -81,39 +101,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = observer(
 
         <PartnerCard {...(onPressPartner !== undefined && { onPress: onPressPartner })} />
 
-        {d && m ? (
-          <View style={styles.section}>
-            <Text style={styles.sectionTitle}>{t('common:home.snapshot')}</Text>
-            <View style={styles.statGrid}>
-              <StatTile
-                accent={theme.colors.primary}
-                label={t('profile:summary.target')}
-                value={`${d.targetKcal} ${t('profile:summary.kcal')}`}
-              />
-              <StatTile
-                accent={theme.colors.secondary}
-                label={t('profile:summary.weight')}
-                value={`${m.currentWeightKg} ${t('profile:summary.kg')}`}
-              />
-              <StatTile
-                accent={theme.colors.progress}
-                label={t('profile:summary.tdee')}
-                value={`${d.tdeeKcal} ${t('profile:summary.kcal')}`}
-              />
-              <StatTile
-                accent={theme.colors.reward}
-                label={t('profile:summary.bmr')}
-                value={`${d.bmrKcal} ${t('profile:summary.kcal')}`}
-              />
-              <StatTile
-                accent={theme.colors.hydration}
-                label={t('profile:summary.ageYears')}
-                value={`${d.ageYears} ${t('profile:summary.years')}`}
-              />
-            </View>
-          </View>
-        ) : null}
-
         <View style={styles.actions}>
           {onPressProgram ? (
             <Button
@@ -134,42 +121,39 @@ export const HomeScreen: React.FC<HomeScreenProps> = observer(
           ) : null}
         </View>
 
-        <View style={styles.preferences}>
-          <Text style={styles.sectionTitle}>{t('common:home.preferences')}</Text>
-          <LocaleToggle />
-          <ThemeToggle />
-          <Button
-            testID="home-signout"
-            variant="text"
-            label={t('common:actions.signOut')}
-            onPress={() => auth.signOut()}
-            leadingIcon={<AppIcon name="signOut" color={theme.colors.primary} />}
-          />
-        </View>
       </ScrollView>
     );
   },
 );
 
-const StatTile: React.FC<{ label: string; value: string; accent: string }> = ({
-  label,
-  value,
-  accent,
-}) => {
+const HomeIconButton: React.FC<{
+  accessibilityLabel: string;
+  icon: 'profile' | 'settings';
+  onPress: () => void;
+  testID: string;
+}> = ({ accessibilityLabel, icon, onPress, testID }) => {
   const theme = useTheme();
   const styles = createStyles(theme);
   return (
-    <View style={styles.statTile}>
-      <View style={[styles.statAccent, { backgroundColor: accent }]} />
-      <Text style={styles.statLabel}>{label}</Text>
-      <Text style={styles.statValue}>{value}</Text>
-    </View>
+    <Pressable
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole="button"
+      onPress={onPress}
+      style={({ pressed }) => [styles.headerButton, pressed ? styles.pressed : null]}
+      testID={testID}
+    >
+      <AppIcon name={icon} color={theme.colors.text} size={24} />
+    </Pressable>
   );
 };
 
 const createStyles = (theme: AppTheme) => StyleSheet.create({
   scroll: { flexGrow: 1, backgroundColor: theme.colors.canvas, padding: theme.spacing.lg, gap: theme.spacing.lg },
+  topRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
+  headerActions: { flexDirection: 'row', gap: theme.spacing.sm },
+  headerButton: { width: 48, height: 48, borderRadius: theme.radii.md, backgroundColor: theme.colors.surface, borderWidth: 1, borderColor: theme.colors.border, alignItems: 'center', justifyContent: 'center' },
+  pressed: { opacity: 0.76 },
   brandIcon: { width: 42, height: 42, borderRadius: theme.radii.md, backgroundColor: theme.colors.primary, alignItems: 'center', justifyContent: 'center' },
   brandOverline: { ...theme.typography.caption, color: theme.colors.textMuted, letterSpacing: 1 },
   brand: { ...theme.typography.title, color: theme.colors.primary },
@@ -181,13 +165,5 @@ const createStyles = (theme: AppTheme) => StyleSheet.create({
   cardTitle: { ...theme.typography.h2, color: theme.colors.text },
   cardBody: { ...theme.typography.caption, color: theme.colors.textMuted },
   empty: { ...theme.typography.body, color: theme.colors.textMuted, marginVertical: theme.spacing.lg },
-  section: { gap: theme.spacing.md },
-  sectionTitle: { ...theme.typography.h2, color: theme.colors.text },
-  statGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: theme.spacing.sm },
-  statTile: { minWidth: '47%', flexGrow: 1, backgroundColor: theme.colors.surface, borderRadius: theme.radii.md, padding: theme.spacing.md, borderWidth: 1, borderColor: theme.colors.border, overflow: 'hidden' },
-  statAccent: { position: 'absolute', start: 0, top: 0, bottom: 0, width: 5 },
-  statLabel: { ...theme.typography.caption, color: theme.colors.textMuted },
-  statValue: { ...theme.typography.title, color: theme.colors.text, marginTop: theme.spacing.xs },
   actions: { gap: theme.spacing.md },
-  preferences: { backgroundColor: theme.colors.surfaceAlt, borderRadius: theme.radii.lg, padding: theme.spacing.lg, gap: theme.spacing.sm, borderWidth: 1, borderColor: theme.colors.border },
 });

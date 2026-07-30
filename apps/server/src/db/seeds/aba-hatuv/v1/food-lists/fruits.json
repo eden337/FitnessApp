@@ -41,7 +41,7 @@
         "he": "1",
         "en": "1"
       },
-      "visualKey": "tropical-fruit"
+      "visualKey": "cherimoya"
     },
     {
       "name": {
@@ -52,7 +52,7 @@
         "he": "2 פרוסות",
         "en": "2 slices"
       },
-      "visualKey": "pineapple"
+      "visualKey": "fresh-pineapple"
     },
     {
       "name": {
@@ -63,7 +63,7 @@
         "he": "1",
         "en": "1"
       },
-      "visualKey": "orange-fruit"
+      "visualKey": "persimmon"
     },
     {
       "name": {
@@ -85,7 +85,7 @@
         "he": "חצי",
         "en": "1/2"
       },
-      "visualKey": "citrus"
+      "visualKey": "grapefruit"
     },
     {
       "name": {
@@ -111,7 +111,7 @@
         "he": "1",
         "en": "1"
       },
-      "visualKey": "pear"
+      "visualKey": "guava"
     },
     {
       "name": {
@@ -133,7 +133,7 @@
         "he": "1",
         "en": "1"
       },
-      "visualKey": "pear"
+      "visualKey": "quince"
     },
     {
       "name": {
@@ -144,7 +144,7 @@
         "he": "7 יחידות",
         "en": "7"
       },
-      "visualKey": "cherries"
+      "visualKey": "fresh-lychee"
     },
     {
       "name": {
@@ -177,7 +177,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "peach"
+      "visualKey": "apricot"
     },
     {
       "name": {
@@ -188,7 +188,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "peach"
+      "visualKey": "nectarine"
     },
     {
       "name": {
@@ -199,7 +199,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "tropical-fruit"
+      "visualKey": "prickly-pear"
     },
     {
       "name": {
@@ -221,7 +221,7 @@
         "he": "4 יחידות",
         "en": "4"
       },
-      "visualKey": "tropical-fruit"
+      "visualKey": "passion-fruit"
     },
     {
       "name": {
@@ -254,7 +254,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "citrus"
+      "visualKey": "clementine"
     },
     {
       "name": {
@@ -265,7 +265,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "tropical-fruit"
+      "visualKey": "star-fruit"
     },
     {
       "name": {
@@ -298,7 +298,7 @@
         "he": "4 יחידות",
         "en": "4"
       },
-      "visualKey": "orange-fruit"
+      "visualKey": "loquat"
     },
     {
       "name": {
@@ -309,7 +309,7 @@
         "he": "2 יחידות",
         "en": "2"
       },
-      "visualKey": "fig"
+      "visualKey": "fresh-fig"
     },
     {
       "name": {
@@ -320,7 +320,7 @@
         "he": "1",
         "en": "1"
       },
-      "visualKey": "citrus"
+      "visualKey": "orange"
     },
     {
       "name": {

@@ -70,18 +70,30 @@ for compact segmented choices). Radii are 8, 14, 20, 28, and pill.
 
 ## Food illustration contract
 
-- The target library has one custom outlined vector per shared `FoodVisualKey`.
-  Canvas is 96 × 96 with an 8-unit safe area.
-- Outlines use `#17213F`, rounded joins, and a four-unit standard stroke.
-- Permanent fills are theme-invariant: leaf `#58B947`, dark leaf `#2F8E42`,
-  red `#F24F4F`, orange `#F79335`, yellow `#F7C948`, purple `#7D4CB8`, blue
-  `#4EA8DE`, cream `#FFF2CF`, and brown `#9A633A`.
+- Visual tone is **polished cartoon food illustration**: immediately
+  recognizable silhouettes, dark organic outlines, saturated natural colors,
+  dimensional highlights, and restrained shadows. Do not add a repeated face
+  treatment; the food identity itself is the character.
+- Artwork identity is item-specific: every displayed food item receives its own
+  shared `FoodVisualKey`. Related foods may not share a key merely because they
+  belong to one family (for example tomato/cherry tomato,
+  broccoli/cauliflower, or peach/apricot).
+- The approved source sheets live in
+  `apps/mobile/assets/food/reference-sheets/`. They contain no captions,
+  numbering, branding, or package text.
+- The 102 global foods are extracted as individual transparent 256 × 256 PNGs
+  in `apps/mobile/assets/food/catalog/`. Keep the extraction script
+  (`scripts/slice-food-icons.py`) reproducible and its key order aligned with
+  the seeded lists.
+- The three vacation-only concepts without supplied artwork retain
+  purpose-built vectors. Do not substitute one global food image for them.
 - Never tint, invert, desaturate, fade, or blend artwork for a theme. Only the
   surrounding tile and border adapt.
 - Tile color comes from a stable family: vegetable, fruit, protein,
   carbohydrate, fat, limited, or generic. Never infer it from string length.
-- Existing Noto assets are transitional fallbacks. Every key must resolve while
-  custom art rolls out by family.
+- Every seeded item resolves either to its approved supplied PNG or to one of
+  the three explicit vacation vectors. A seed/content test enforces one unique
+  key per item, and the mobile artwork test enforces all 102 supplied mappings.
 - Images are decorative when the adjacent localized name is the accessible label.
 
 ## Components and states
@@ -101,7 +113,12 @@ and selected states where applicable.
 ## Screen patterns
 
 - **Home:** greeting, motivational line, program momentum ring, mission preview,
-  partner card, colorful health snapshot, and next actions.
+  partner card, and next actions. It never displays weight, BMI, age, BMR, TDEE,
+  calorie targets, appearance controls, or language controls.
+- **Profile:** private current weight, BMI, and age. Body information stays out
+  of shared and motivational surfaces.
+- **Settings:** language, appearance, account actions, and future app-level
+  preferences.
 - **Today:** week context, mission hero first, rationale second, numbered tactile
   tasks, then references.
 - **Food Guide:** colorful choice summary and filters first, then illustrated
@@ -109,8 +126,12 @@ and selected states where applicable.
 - **Celebration:** one result, one reward, partner acknowledgement, one next action.
 - **Auth/profile/couple/progress:** share the same primitives and visual language.
 
-Preferences remain grouped below Home actions until a dedicated settings route
-is introduced.
+Every secondary screen starts with the same 48-pixel Back control. Nested
+destinations pop to their actual parent (Food Guide → Today → Home), and Android
+hardware Back follows the same route stack.
+
+Weight progress is maintenance-only. It is absent throughout the 13-week
+foundation program and appears only after completion.
 
 ## Motion
 
@@ -132,8 +153,10 @@ any entrance animation so the first rendered frame cannot animate prematurely.
 - All visible copy comes from i18n. Validate Hebrew/English wrapping and large text.
 - Never communicate status with color alone.
 - Controls require roles, sufficient labels, disabled state, and focus order.
-- Validate Home, Today, and Food Guide in light/dark, HE/EN, RTL/LTR, large
-  text, and reduced motion.
+- Validate Home, Today, Food Guide, Profile, and Settings in light/dark, HE/EN,
+  RTL/LTR, large text, and reduced motion.
+- Run browser-level navigation flows in Playwright for release milestones;
+  cover nested Back, Profile, Settings, and foundation/maintenance route gating.
 - New UI must use semantic tokens, reuse shared components, meet contrast and
   target sizes, cover relevant states, and update this document when the shared
   language changes.

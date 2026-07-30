@@ -5,6 +5,7 @@ import type { BilingualText, ProgramWeekNumber } from '@fitnessapp/shared';
 import { Button } from '../../components/Button';
 import { CelebrationBanner } from '../../components/CelebrationBanner';
 import { MissionHero } from '../../components/MissionHero';
+import { ScreenHeader } from '../../components/ScreenHeader';
 import { SegmentedPicker } from '../../components/SegmentedPicker';
 import { useTranslation } from '../../i18n/I18nProvider';
 import { useStores } from '../../stores/StoresContext';
@@ -35,6 +36,7 @@ export const TodayScreen: React.FC<TodayScreenProps> = observer(
     if (!current) {
       return (
         <View style={styles.center} testID="program-today-screen">
+          {onClose ? <ScreenHeader title={t('program:today.title')} onBack={onClose} /> : null}
           {program.status === 'loading' ? <ActivityIndicator color={theme.colors.primary} /> : null}
           <Text style={styles.body}>
             {t(
@@ -43,9 +45,6 @@ export const TodayScreen: React.FC<TodayScreenProps> = observer(
                 : 'program:today.unavailable',
             )}
           </Text>
-          {onClose ? (
-            <Button label={t('program:actions.back')} onPress={onClose} variant="text" />
-          ) : null}
         </View>
       );
     }
@@ -53,6 +52,7 @@ export const TodayScreen: React.FC<TodayScreenProps> = observer(
     if (current.status === 'not_started') {
       return (
         <ScrollView contentContainerStyle={styles.scroll} testID="program-today-screen">
+          {onClose ? <ScreenHeader title={t('program:today.title')} onBack={onClose} /> : null}
           <Text style={styles.title}>{t('program:start.title')}</Text>
           <Text style={styles.body}>{t('program:start.description')}</Text>
           <SegmentedPicker
@@ -73,15 +73,13 @@ export const TodayScreen: React.FC<TodayScreenProps> = observer(
           {program.errorMessage ? (
             <Text style={styles.error}>{errorText(program.errorMessage, t)}</Text>
           ) : null}
-          {onClose ? (
-            <Button label={t('program:actions.back')} onPress={onClose} variant="text" />
-          ) : null}
         </ScrollView>
       );
     }
 
     return (
       <ScrollView contentContainerStyle={styles.scroll} testID="program-today-screen">
+        {onClose ? <ScreenHeader title={t('program:today.title')} onBack={onClose} /> : null}
         <View style={styles.headingRow}>
           <View>
             <Text style={styles.overline}>
@@ -164,9 +162,6 @@ export const TodayScreen: React.FC<TodayScreenProps> = observer(
             onPress={onOpenLists}
             variant="secondary"
           />
-        ) : null}
-        {onClose ? (
-          <Button label={t('program:actions.back')} onPress={onClose} variant="text" />
         ) : null}
       </ScrollView>
     );

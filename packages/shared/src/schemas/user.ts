@@ -57,6 +57,7 @@ export type UserMetrics = z.infer<typeof UserMetricsSchema>;
 export const DerivedUserMetricsSchema = z
   .object({
     ageYears: z.number().int().min(0),
+    bmi: z.number().positive(),
     bmrKcal: z.number(),
     tdeeKcal: z.number(),
     targetKcal: z.number(),

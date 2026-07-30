@@ -30,7 +30,7 @@ const sampleMetrics = {
   dietaryRestrictions: {},
 };
 
-const sampleDerived = { ageYears: 35, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
+const sampleDerived = { ageYears: 35, bmi: 23.9, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
 
 describe('ProfileStore', () => {
   const buildStores = () => {

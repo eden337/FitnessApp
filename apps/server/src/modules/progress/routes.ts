@@ -33,9 +33,12 @@ export const registerProgressRoutes = (
       return reply.code(isFutureDate ? 400 : 409).send({
         error: {
           code: result.kind,
-          message: isFutureDate
-            ? 'weight measurements cannot be dated in the future'
-            : 'profile metrics must be set up first',
+          message:
+            result.kind === 'maintenance_only'
+              ? 'weight tracking is available after the foundation program'
+              : isFutureDate
+                ? 'weight measurements cannot be dated in the future'
+                : 'profile metrics must be set up first',
         },
       });
     }
@@ -52,7 +55,16 @@ export const registerProgressRoutes = (
           .code(400)
           .send({ error: { code: 'invalid_query', message: parsed.error.message } });
       }
-      return reply.send(await deps.service.getWeightHistory(req.userId!, parsed.data));
+      const result = await deps.service.getWeightHistory(req.userId!, parsed.data);
+      if ('kind' in result) {
+        return reply.code(409).send({
+          error: {
+            code: result.kind,
+            message: 'weight tracking is available after the foundation program',
+          },
+        });
+      }
+      return reply.send(result);
     },
   );
 };

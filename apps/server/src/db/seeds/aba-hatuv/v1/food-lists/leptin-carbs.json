@@ -22,14 +22,14 @@
         "he": "תפוחי אדמה",
         "en": "Potatoes"
       },
-      "visualKey": "potato"
+      "visualKey": "potatoes"
     },
     {
       "name": {
         "he": "סלק",
         "en": "Beetroot"
       },
-      "visualKey": "beet"
+      "visualKey": "beetroot"
     },
     {
       "name": {
@@ -50,7 +50,7 @@
         "he": "עדשים",
         "en": "Lentils"
       },
-      "visualKey": "beans"
+      "visualKey": "lentils"
     },
     {
       "name": {
@@ -64,14 +64,14 @@
         "he": "חומוס",
         "en": "Chickpeas"
       },
-      "visualKey": "beans"
+      "visualKey": "chickpeas"
     },
     {
       "name": {
         "he": "פירות טריים",
         "en": "Fresh fruit"
       },
-      "visualKey": "apple"
+      "visualKey": "fresh-fruit"
     },
     {
       "name": {
@@ -82,21 +82,21 @@
         "he": "עד 4 כפות ביום בשלבי הניקוי",
         "en": "Up to 4 tablespoons daily during cleanse phases"
       },
-      "visualKey": "oats"
+      "visualKey": "thick-rolled-oats"
     },
     {
       "name": {
         "he": "קינואה",
         "en": "Quinoa"
       },
-      "visualKey": "grain"
+      "visualKey": "quinoa"
     },
     {
       "name": {
         "he": "כוסמת",
         "en": "Buckwheat"
       },
-      "visualKey": "grain"
+      "visualKey": "buckwheat"
     },
     {
       "name": {
@@ -110,14 +110,14 @@
         "he": "אדממה",
         "en": "Edamame"
       },
-      "visualKey": "beans"
+      "visualKey": "edamame"
     },
     {
       "name": {
         "he": "גריסים",
         "en": "Pearl barley"
       },
-      "visualKey": "grain"
+      "visualKey": "pearl-barley"
     },
     {
       "name": {
@@ -128,7 +128,7 @@
         "he": "לא אידיאלי אך מאושר",
         "en": "Not ideal, but approved"
       },
-      "visualKey": "pasta"
+      "visualKey": "skinny-pasta"
     }
   ]
 }

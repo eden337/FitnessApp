@@ -124,7 +124,7 @@ describe('seed schemas', () => {
     it('accepts portion + notes', () => {
       const parsed = FoodItemSeedSchema.parse({
         name: validBilingual,
-        visualKey: 'bowl',
+        visualKey: 'tahini',
         portion: { he: 'כפית', en: 'tsp' },
         notes: { he: 'הערה', en: 'note' },
       });

@@ -15,14 +15,14 @@
         "he": "ארטישוק",
         "en": "Artichoke"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "artichoke"
     },
     {
       "name": {
         "he": "אספרגוס",
         "en": "Asparagus"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "asparagus"
     },
     {
       "name": {
@@ -43,7 +43,7 @@
         "he": "במיה",
         "en": "Okra"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "okra"
     },
     {
       "name": {
@@ -57,7 +57,7 @@
         "he": "דלורית",
         "en": "Butternut squash"
       },
-      "visualKey": "squash"
+      "visualKey": "butternut-squash"
     },
     {
       "name": {
@@ -78,7 +78,7 @@
         "he": "חסה",
         "en": "Lettuce"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "lettuce"
     },
     {
       "name": {
@@ -92,14 +92,14 @@
         "he": "כוסברה",
         "en": "Cilantro"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "cilantro"
     },
     {
       "name": {
         "he": "כרוב לבן או סגול",
         "en": "White or red cabbage"
       },
-      "visualKey": "cabbage"
+      "visualKey": "white-or-red-cabbage"
     },
     {
       "name": {
@@ -113,21 +113,21 @@
         "he": "כרישה",
         "en": "Leek"
       },
-      "visualKey": "onion"
+      "visualKey": "leek"
     },
     {
       "name": {
         "he": "לפת",
         "en": "Turnip"
       },
-      "visualKey": "root-vegetable"
+      "visualKey": "turnip"
     },
     {
       "name": {
         "he": "לבבות דקל",
         "en": "Hearts of palm"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "hearts-of-palm"
     },
     {
       "name": {
@@ -141,7 +141,7 @@
         "he": "מנגולד",
         "en": "Chard"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "chard"
     },
     {
       "name": {
@@ -169,28 +169,28 @@
         "he": "עגבניות שרי",
         "en": "Cherry tomatoes"
       },
-      "visualKey": "tomato"
+      "visualKey": "cherry-tomatoes"
     },
     {
       "name": {
         "he": "פטרוזיליה",
         "en": "Parsley"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "parsley"
     },
     {
       "name": {
         "he": "פטריות מכל סוג",
         "en": "Mushrooms of any kind"
       },
-      "visualKey": "mushroom"
+      "visualKey": "mushrooms"
     },
     {
       "name": {
         "he": "פלפל בכל הצבעים",
         "en": "Bell pepper of any color"
       },
-      "visualKey": "pepper"
+      "visualKey": "bell-pepper"
     },
     {
       "name": {
@@ -204,28 +204,28 @@
         "he": "קולורבי",
         "en": "Kohlrabi"
       },
-      "visualKey": "root-vegetable"
+      "visualKey": "kohlrabi"
     },
     {
       "name": {
         "he": "קישוא",
         "en": "Summer squash"
       },
-      "visualKey": "squash"
+      "visualKey": "summer-squash"
     },
     {
       "name": {
         "he": "קייל",
         "en": "Kale"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "kale"
     },
     {
       "name": {
         "he": "שעועית ירוקה או צהובה",
         "en": "Green or yellow beans"
       },
-      "visualKey": "beans"
+      "visualKey": "green-or-yellow-beans"
     },
     {
       "name": {
@@ -239,14 +239,14 @@
         "he": "תרד",
         "en": "Spinach"
       },
-      "visualKey": "leafy-vegetable"
+      "visualKey": "spinach"
     },
     {
       "name": {
         "he": "תירס גמדי",
         "en": "Baby corn"
       },
-      "visualKey": "corn"
+      "visualKey": "baby-corn"
     }
   ]
 }

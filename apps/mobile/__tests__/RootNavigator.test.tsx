@@ -70,7 +70,7 @@ describe('RootNavigator', () => {
       goalWeightKg: 60,
       dietaryRestrictions: {},
     };
-    const derived = { ageYears: 35, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
+    const derived = { ageYears: 35, bmi: 23.9, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
     const get = jest.fn().mockResolvedValueOnce({
       data: { profile: sampleProfile, metrics, derived },
     });
@@ -173,9 +173,13 @@ describe('RootNavigator', () => {
     expect(getByTestId('program-today-screen')).toBeTruthy();
     fireEvent.press(getByTestId('program-open-lists'));
     expect(getByTestId('program-food-lists-screen')).toBeTruthy();
+    fireEvent.press(getByTestId('screen-back'));
+    expect(getByTestId('program-today-screen')).toBeTruthy();
+    fireEvent.press(getByTestId('screen-back'));
+    expect(getByTestId('home-screen')).toBeTruthy();
   });
 
-  it('opens private weight progress from Home', () => {
+  it('keeps weight progress unavailable during the foundation program', () => {
     const metrics = {
       currentWeightKg: 65,
       activityLevel: 'moderate' as const,
@@ -188,11 +192,61 @@ describe('RootNavigator', () => {
     (store.auth as unknown as { status: string }).status = 'authenticated';
     store.profile.metrics = metrics;
     store.profile.status = 'ready';
+    store.program.current = {
+      status: 'active',
+      startedOn: '2026-07-01',
+      scheduledWeekNumber: 5,
+      contentWeekNumber: 5,
+      isFallback: false,
+      week: {
+        id: '00000000-0000-4000-8000-000000000005',
+        weekNumber: 5,
+        slug: 'week-5',
+        title: { he: 'שבוע 5', en: 'Week 5' },
+        mission: { he: 'משימה', en: 'Mission' },
+        rationale: null,
+        notes: null,
+        tasks: [],
+      },
+    };
+    store.program.status = 'ready';
     store.progress.status = 'ready';
 
-    const { getByTestId } = render(wrap(store)(<RootNavigator />));
-    fireEvent.press(getByTestId('home-progress'));
+    const { queryByTestId } = render(wrap(store)(<RootNavigator />));
+    expect(queryByTestId('home-progress')).toBeNull();
+  });
 
-    expect(getByTestId('progress-screen')).toBeTruthy();
+  it('opens private Profile and Settings screens and returns home', () => {
+    const metrics = {
+      currentWeightKg: 65,
+      activityLevel: 'moderate' as const,
+      goalType: 'lose' as const,
+      goalWeightKg: 60,
+      dietaryRestrictions: {},
+    };
+    const store = buildStore();
+    store.auth.setUser(sampleProfile);
+    (store.auth as unknown as { status: string }).status = 'authenticated';
+    store.profile.profile = sampleProfile;
+    store.profile.metrics = metrics;
+    store.profile.derived = {
+      ageYears: 35,
+      bmi: 23.9,
+      bmrKcal: 1370.3,
+      tdeeKcal: 2124,
+      targetKcal: 1624,
+    };
+    store.profile.status = 'ready';
+    store.program.status = 'ready';
+
+    const { getByTestId, getByText } = render(wrap(store)(<RootNavigator />));
+    fireEvent.press(getByTestId('home-profile'));
+    expect(getByTestId('profile-screen')).toBeTruthy();
+    expect(getByText('65 kg')).toBeTruthy();
+    expect(getByText('23.9')).toBeTruthy();
+    fireEvent.press(getByTestId('screen-back'));
+    fireEvent.press(getByTestId('home-settings'));
+    expect(getByTestId('settings-screen')).toBeTruthy();
+    expect(getByTestId('theme-toggle-dark')).toBeTruthy();
   });
 });

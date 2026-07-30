@@ -1,24 +1,41 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import { Image } from 'react-native';
 import { FOOD_VISUAL_KEYS } from '@fitnessapp/shared';
 import { FoodVisual } from '../src/components/FoodVisual';
 import { foodFamilyFor } from '../src/components/FoodVisual';
-import { foodVisualAssets } from '../src/components/foodVisualAssets';
+import { hasPurposeBuiltFoodArtwork } from '../src/components/FoodArtwork';
+import {
+  foodImageAssetFor,
+  SUPPLIED_FOOD_IMAGE_KEYS,
+} from '../src/components/foodImageAssets';
 
 describe('FoodVisual', () => {
-  it('bundles artwork for every API-supported visual key', () => {
-    expect(Object.keys(foodVisualAssets).sort()).toEqual([...FOOD_VISUAL_KEYS].sort());
-    for (const key of FOOD_VISUAL_KEYS) {
-      expect(foodVisualAssets[key]).toBeTruthy();
+  it('uses the supplied text-free image set for all 102 global foods', () => {
+    expect(SUPPLIED_FOOD_IMAGE_KEYS).toHaveLength(102);
+    expect(new Set(SUPPLIED_FOOD_IMAGE_KEYS).size).toBe(102);
+
+    for (const key of SUPPLIED_FOOD_IMAGE_KEYS) {
+      expect(foodImageAssetFor(key)).toBeDefined();
+      const { getByTestId, unmount } = render(<FoodVisual visualKey={key} />);
+      expect(getByTestId(`food-visual-${key}`)).toBeTruthy();
+      expect(getByTestId(`food-image-${key}`)).toBeTruthy();
+      unmount();
     }
   });
 
-  it('renders the requested artwork as a decorative image', () => {
-    const { getByTestId, UNSAFE_getByType } = render(<FoodVisual visualKey="apple" />);
-
-    expect(getByTestId('food-visual-apple')).toBeTruthy();
-    expect(UNSAFE_getByType(Image).props.accessible).toBe(false);
+  it('keeps purpose-built fallbacks for the three vacation-only concepts', () => {
+    const vacationKeys = FOOD_VISUAL_KEYS.filter((key) => foodImageAssetFor(key) === undefined);
+    expect(vacationKeys).toEqual([
+      'sugars',
+      'flours-and-ground-foods',
+      'other-foods-on-vacation',
+    ]);
+    for (const key of vacationKeys) {
+      expect(hasPurposeBuiltFoodArtwork(key)).toBe(true);
+      const { getByTestId, unmount } = render(<FoodVisual visualKey={key} />);
+      expect(getByTestId(`food-visual-${key}`)).toBeTruthy();
+      unmount();
+    }
   });
 
   it('assigns stable semantic families rather than deriving tones from key length', () => {
@@ -26,6 +43,6 @@ describe('FoodVisual', () => {
     expect(foodFamilyFor('apple')).toBe('fruit');
     expect(foodFamilyFor('fish')).toBe('protein');
     expect(foodFamilyFor('avocado')).toBe('fat');
-    expect(foodFamilyFor('wine')).toBe('limited');
+    expect(foodFamilyFor('dry-wine')).toBe('limited');
   });
 });

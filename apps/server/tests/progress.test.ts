@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify';
 import {
   buildTestApp,
   closeTestDb,
+  getTestDb,
   truncateAll,
   validRegisterPayload,
 } from './helpers/test-app.js';
@@ -30,7 +31,7 @@ describe('weight progress routes', () => {
     await closeTestDb();
   });
 
-  const createUser = async (withMetrics = true): Promise<string> => {
+  const createUser = async (withMetrics = true, maintenance = false): Promise<string> => {
     const register = await app.inject({
       method: 'POST',
       url: '/api/v1/auth/register',
@@ -46,6 +47,14 @@ describe('weight progress routes', () => {
         payload: metrics,
       });
       expect(setupMetrics.statusCode).toBe(200);
+      if (maintenance) {
+        const userId = register.json<{ user: { id: string } }>().user.id;
+        await getTestDb()
+          .updateTable('user_metrics')
+          .set({ program_started_on: '2026-01-01' })
+          .where('user_id', '=', userId)
+          .execute();
+      }
     }
     return token;
   };
@@ -60,6 +69,28 @@ describe('weight progress routes', () => {
 
     expect(write.statusCode).toBe(401);
     expect(read.statusCode).toBe(401);
+  });
+
+  it('blocks foundation-program weigh-ins and history', async () => {
+    const token = await createUser();
+    const headers = { authorization: `Bearer ${token}` };
+
+    const write = await app.inject({
+      method: 'POST',
+      url: '/api/v1/progress/weight',
+      headers,
+      payload: { weightKg: 81 },
+    });
+    const read = await app.inject({
+      method: 'GET',
+      url: '/api/v1/progress/weight',
+      headers,
+    });
+
+    expect(write.statusCode).toBe(409);
+    expect(write.json().error.code).toBe('maintenance_only');
+    expect(read.statusCode).toBe(409);
+    expect(read.json().error.code).toBe('maintenance_only');
   });
 
   it('requires initialized metrics and validates inputs', async () => {
@@ -96,8 +127,8 @@ describe('weight progress routes', () => {
   });
 
   it('upserts one private measurement per calendar day', async () => {
-    const ownerToken = await createUser();
-    const otherToken = await createUser();
+    const ownerToken = await createUser(true, true);
+    const otherToken = await createUser(true, true);
     const ownerHeaders = { authorization: `Bearer ${ownerToken}` };
 
     await app.inject({
@@ -142,7 +173,7 @@ describe('weight progress routes', () => {
   });
 
   it('returns bounded newest-first history and keeps the latest weight current', async () => {
-    const token = await createUser();
+    const token = await createUser(true, true);
     const headers = { authorization: `Bearer ${token}` };
     for (const entry of [
       { loggedOn: '2026-07-30', weightKg: 80 },

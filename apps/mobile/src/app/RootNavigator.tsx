@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, BackHandler, StyleSheet, Text, View } from 'react-native';
 import { Button } from '../components/Button';
 import { useTranslation } from '../i18n/I18nProvider';
 import { useStores } from '../stores/StoresContext';
@@ -12,6 +12,8 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { TodayScreen } from '../screens/program/TodayScreen';
 import { FoodListsScreen } from '../screens/program/FoodListsScreen';
 import { ProgressScreen } from '../screens/progress/ProgressScreen';
+import { ProfileScreen } from '../screens/profile/ProfileScreen';
+import { SettingsScreen } from '../screens/SettingsScreen';
 import { useTheme } from '../theme/ThemeProvider';
 
 /**
@@ -28,15 +30,19 @@ import { useTheme } from '../theme/ThemeProvider';
  *   authed + showProgram              → TodayScreen
  *   authed + has metrics              → HomeScreen
  */
+type AppRoute = 'home' | 'pair' | 'program' | 'foodLists' | 'progress' | 'profile' | 'settings';
+
 export const RootNavigator: React.FC = observer(() => {
   const theme = useTheme();
   const { t } = useTranslation();
   const { auth, profile, couple, program, progress } = useStores();
   const [showSignUp, setShowSignUp] = useState(false);
-  const [showPair, setShowPair] = useState(false);
-  const [showProgram, setShowProgram] = useState(false);
-  const [showLists, setShowLists] = useState(false);
-  const [showProgress, setShowProgress] = useState(false);
+  const [routeStack, setRouteStack] = useState<AppRoute[]>(['home']);
+  const currentRoute = routeStack[routeStack.length - 1] ?? 'home';
+  const push = (route: AppRoute): void =>
+    setRouteStack((routes) => (routes[routes.length - 1] === route ? routes : [...routes, route]));
+  const pop = (): void =>
+    setRouteStack((routes) => (routes.length > 1 ? routes.slice(0, -1) : routes));
 
   useEffect(() => {
     if (auth.status === 'authenticated' && profile.status === 'idle') {
@@ -51,6 +57,7 @@ export const RootNavigator: React.FC = observer(() => {
     if (
       auth.status === 'authenticated' &&
       profile.isMetricsInitialized &&
+      program.current?.status === 'completed' &&
       progress.status === 'idle'
     ) {
       void progress.fetch();
@@ -60,10 +67,7 @@ export const RootNavigator: React.FC = observer(() => {
       if (couple.status !== 'idle') couple.reset();
       if (program.status !== 'idle') program.reset();
       if (progress.status !== 'idle') progress.reset();
-      setShowPair(false);
-      setShowProgram(false);
-      setShowLists(false);
-      setShowProgress(false);
+      setRouteStack(['home']);
     }
   }, [
     auth.status,
@@ -75,7 +79,17 @@ export const RootNavigator: React.FC = observer(() => {
     program.status,
     progress,
     progress.status,
+    program.current?.status,
   ]);
+
+  useEffect(() => {
+    const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+      if (routeStack.length <= 1) return false;
+      pop();
+      return true;
+    });
+    return () => subscription.remove();
+  }, [routeStack.length]);
 
   if (auth.status === 'loading' && !auth.user) {
     return (
@@ -120,22 +134,30 @@ export const RootNavigator: React.FC = observer(() => {
   }
 
   if (!profile.isMetricsInitialized) return <ProfileSetupScreen />;
-  if (showPair) return <PairScreen onClose={() => setShowPair(false)} />;
-  if (showLists) return <FoodListsScreen onClose={() => setShowLists(false)} />;
-  if (showProgress) return <ProgressScreen onClose={() => setShowProgress(false)} />;
-  if (showProgram) {
+  if (currentRoute === 'pair') return <PairScreen onClose={pop} />;
+  if (currentRoute === 'foodLists') return <FoodListsScreen onClose={pop} />;
+  if (currentRoute === 'profile') return <ProfileScreen onBack={pop} />;
+  if (currentRoute === 'settings') return <SettingsScreen onBack={pop} />;
+  if (currentRoute === 'progress' && program.current?.status === 'completed') {
+    return <ProgressScreen onClose={pop} />;
+  }
+  if (currentRoute === 'program') {
     return (
       <TodayScreen
-        onClose={() => setShowProgram(false)}
-        onOpenLists={() => setShowLists(true)}
+        onClose={pop}
+        onOpenLists={() => push('foodLists')}
       />
     );
   }
   return (
     <HomeScreen
-      onPressPartner={() => setShowPair(true)}
-      onPressProgram={() => setShowProgram(true)}
-      onPressProgress={() => setShowProgress(true)}
+      onPressPartner={() => push('pair')}
+      onPressProgram={() => push('program')}
+      onPressProfile={() => push('profile')}
+      onPressSettings={() => push('settings')}
+      {...(program.current?.status === 'completed'
+        ? { onPressProgress: () => push('progress') }
+        : {})}
     />
   );
 });

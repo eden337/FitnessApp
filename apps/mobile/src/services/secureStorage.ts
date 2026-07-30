@@ -28,6 +28,18 @@ export const createInMemoryStorage = (
   };
 };
 
+export const createWebStorage = (storage: Storage): SecureStorage => ({
+  async get(key) {
+    return storage.getItem(key);
+  },
+  async set(key, value) {
+    storage.setItem(key, value);
+  },
+  async remove(key) {
+    storage.removeItem(key);
+  },
+});
+
 export const STORAGE_KEYS = {
   refreshToken: 'fitnessapp.refreshToken',
   locale: 'fitnessapp.locale',
