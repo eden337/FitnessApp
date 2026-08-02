@@ -15,7 +15,6 @@ const config: ExpoConfig = {
     socketUrl: process.env.EXPO_PUBLIC_SOCKET_URL ?? 'http://localhost:4000',
     defaultLocale: process.env.EXPO_PUBLIC_DEFAULT_LOCALE ?? 'he',
   },
-  experiments: { typedRoutes: true },
 };
 
 export default config;

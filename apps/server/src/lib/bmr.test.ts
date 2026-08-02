@@ -1,4 +1,4 @@
-import { ageFromBirthDate, bmrKcal } from './bmr.js';
+import { ageFromBirthDate, bmrKcal, bodyMassIndex } from './bmr.js';
 
 describe('bmrKcal (Mifflin-St Jeor)', () => {
   it('matches the canonical male example', () => {
@@ -22,6 +22,12 @@ describe('bmrKcal (Mifflin-St Jeor)', () => {
     const young = bmrKcal({ gender: 'male', weightKg: 80, heightCm: 178, ageYears: 25 });
     const old = bmrKcal({ gender: 'male', weightKg: 80, heightCm: 178, ageYears: 65 });
     expect(young).toBeGreaterThan(old);
+  });
+});
+
+describe('bodyMassIndex', () => {
+  it('returns a one-decimal BMI from metric measurements', () => {
+    expect(bodyMassIndex(65, 165)).toBe(23.9);
   });
 });
 

@@ -15,9 +15,22 @@ import { createUsersRepo } from './modules/users/repo.js';
 import { createUsersService } from './modules/users/service.js';
 import { registerUsersRoutes } from './modules/users/routes.js';
 import { createCouplesRepo } from './modules/couples/repo.js';
-import { createCouplesService, type CoupleEventEmitter } from './modules/couples/service.js';
+import { createCouplesService } from './modules/couples/service.js';
 import { registerCouplesRoutes } from './modules/couples/routes.js';
-import { createSyncGateway, type SyncGateway } from './modules/sync/gateway.js';
+import {
+  createSyncGateway,
+  type SyncEventEmitter,
+  type SyncGateway,
+} from './modules/sync/gateway.js';
+import { createProgramRepo } from './modules/program/repo.js';
+import { createProgramService } from './modules/program/service.js';
+import { registerProgramRoutes } from './modules/program/routes.js';
+import { createProgressRepo } from './modules/progress/repo.js';
+import { createProgressService } from './modules/progress/service.js';
+import { registerProgressRoutes } from './modules/progress/routes.js';
+import { createActivitiesRepo } from './modules/activities/repo.js';
+import { createActivitiesService } from './modules/activities/service.js';
+import { registerActivitiesRoutes } from './modules/activities/routes.js';
 
 export type AppDeps = {
   env: Env;
@@ -101,7 +114,7 @@ export const buildAppWithSync = async ({
 
     // Couples + realtime sync. The gateway is created lazily so the same
     // emitter reference is shared between REST writes and socket fan-out.
-    const eventsRef: { current: CoupleEventEmitter | null } = { current: null };
+    const eventsRef: { current: SyncEventEmitter | null } = { current: null };
     const couplesRepo = createCouplesRepo(db);
     const couplesService = createCouplesService({
       repo: couplesRepo,
@@ -112,6 +125,36 @@ export const buildAppWithSync = async ({
       },
     });
     registerCouplesRoutes(app, { service: couplesService, requireAuth });
+
+    const programRepo = createProgramRepo(db);
+    const programService = createProgramService({ repo: programRepo });
+    registerProgramRoutes(app, {
+      service: programService,
+      requireAuth,
+      enableRateLimit: env.NODE_ENV !== 'test',
+    });
+
+    const progressRepo = createProgressRepo(db);
+    const progressService = createProgressService({ repo: progressRepo });
+    registerProgressRoutes(app, {
+      service: progressService,
+      requireAuth,
+      enableRateLimit: env.NODE_ENV !== 'test',
+    });
+
+    const activitiesRepo = createActivitiesRepo(db);
+    const activitiesService = createActivitiesService({
+      repo: activitiesRepo,
+      events: {
+        emitActivityCreated: (id, payload) =>
+          eventsRef.current?.emitActivityCreated(id, payload),
+      },
+    });
+    registerActivitiesRoutes(app, {
+      service: activitiesService,
+      requireAuth,
+      enableRateLimit: env.NODE_ENV !== 'test',
+    });
 
     if (attachSync) {
       // The Socket.IO server attaches to the underlying HTTP listener; we

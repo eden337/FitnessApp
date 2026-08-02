@@ -6,10 +6,32 @@
     "en": "Week 2 — Leptin flooding"
   },
   "mission": {
-    "he": "להמשיך עם שתי כוסות מים לפני כל פעולת אכילה במסגרת 2-4 ליטר ביום.",
-    "en": "Continue drinking two cups of water before every eating event, within 2-4 L total per day."
+    "he": "להמשיך עם שתי כוסות מים לפני כל פעולת אכילה במסגרת 2-4 ליטר ביום. לפחות בשתי הארוחות הגדולות ביום לאכול כ-50% ירקות מנקים, או פעם אחת ירקות ופעם אחת שייק לפטיני. לאכול קודם את הירקות ורק לאחר מכן את שאר הארוחה.",
+    "en": "Continue with two cups of water before every eating event within a 2-4 L daily total. In at least the two largest meals, make about 50% of the meal cleansing vegetables, or have vegetables once and a leptin smoothie once. Eat the vegetables before the rest of the meal."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "הגדלת נפח הירקות והפירות מורידה את הצפיפות הקלורית הממוצעת של הארוחה, מעלה את צריכת המים והסיבים ומעודדת שובע גדול יותר ללא הגבלת כמויות.",
+    "en": "Increasing vegetables and fruit lowers the meal's average calorie density, raises water and fiber intake, and supports greater fullness without restricting quantities."
+  },
+  "notes": {
+    "he": "אין הגבלה על כמות הירקות, התיבול או הפירות בשלב זה. אפשר להשתמש בירקות טריים או קפואים; המטרה היא למצוא צורות הכנה מהנות ונוחות ולהגדיל בהדרגה את צריכת הסיבים.",
+    "en": "There is no quantity limit on vegetables, seasoning, or fruit at this stage. Fresh or frozen vegetables are both suitable; find enjoyable, convenient preparations and increase fiber gradually."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לשתות שתי כוסות מים לפני כל אכילה", "en": "Drink two cups of water before every eating event" },
+      "description": { "he": "הכוסות נכללות בסך היומי של 2-4 ליטר.", "en": "These cups count toward the daily 2-4 L total." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "למלא 50% משתי הארוחות הגדולות בירקות מנקים", "en": "Fill 50% of the two largest meals with cleansing vegetables" },
+      "description": { "he": "אפשר להחליף אחת מהן בשייק לפטיני.", "en": "One of them may be replaced by a leptin smoothie." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "לאכול את הירקות תחילה", "en": "Eat the vegetables first" },
+      "description": { "he": "לאחר הירקות להמשיך לשאר הארוחה.", "en": "Continue with the rest of the meal after the vegetables." }
+    }
+  ]
 }

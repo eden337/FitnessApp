@@ -3,7 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from '../i18n/I18nProvider';
 import { useStores } from '../stores/StoresContext';
-import { colors, radii, spacing, typography } from '../theme';
+import type { AppTheme } from '../theme';
+import { useTheme } from '../theme/ThemeProvider';
 
 export type PartnerCardProps = { onPress?: () => void };
 
@@ -14,6 +15,8 @@ export type PartnerCardProps = { onPress?: () => void };
 export const PartnerCard: React.FC<PartnerCardProps> = observer(({ onPress }) => {
   const { couple } = useStores();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const partner = couple.view?.partners[0];
 
   return (
@@ -37,15 +40,18 @@ export const PartnerCard: React.FC<PartnerCardProps> = observer(({ onPress }) =>
   );
 });
 
-const styles = StyleSheet.create({
+const createStyles = (theme: AppTheme) => StyleSheet.create({
   wrapper: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.lg,
-    padding: spacing.lg,
-    marginBottom: spacing.md,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.lg,
+    padding: theme.spacing.lg,
+    marginBottom: theme.spacing.md,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
+    ...theme.shadow,
   },
-  label: { ...typography.caption, color: colors.muted, marginBottom: spacing.xs },
-  row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  name: { ...typography.h2, color: colors.text },
-  empty: { ...typography.body, color: colors.muted },
+  label: { ...theme.typography.label, color: theme.colors.secondary, marginBottom: theme.spacing.xs },
+  row: { flexDirection: 'row', alignItems: 'center', gap: theme.spacing.sm },
+  name: { ...theme.typography.h2, color: theme.colors.text },
+  empty: { ...theme.typography.body, color: theme.colors.textMuted },
 });

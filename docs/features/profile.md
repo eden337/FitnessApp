@@ -1,73 +1,50 @@
 # Feature — Profile
 
-**Status:** Phase 1 — fully implemented (server + mobile setup screen).
-Edit screen lands alongside diet planner in Phase 3.
+**Status:** Server APIs, store, setup flow, and private Profile summary
+implemented. Editing remains pending.
 
 ## Goal
 
-Capture the personalization inputs that drive the diet engine: gender,
-birth date (→ age), height, current weight, activity level, goal (lose /
-maintain / gain) and optional goal weight, dietary restrictions, locale.
+Capture the private personalization inputs that drive the plan: gender, birth
+date, height, initial/current weight, activity level, goal, optional goal
+weight, dietary restrictions, and locale.
 
 ## Data model
 
-Two tables (see `docs/architecture/data-model.md`):
-
-- `users` — identity + display fields (display_name, locale, gender,
-  birth_date, height_cm).
-- `user_metrics` — 1:1, mutable: current weight, activity level, goal
-  type, goal weight, dietary restrictions JSON.
+- `users`: identity and display fields.
+- `user_metrics`: private current weight, activity level, goal data, dietary
+  restrictions, and the foundation start date.
 
 ## REST surface
 
-| Method | Path | Body | Purpose |
-|---|---|---|---|
-| GET | `/api/v1/users/me/profile` | — | `{ profile, metrics, derived }` |
-| PATCH | `/api/v1/users/me/profile` | UpdateProfileInput | Patch identity-side fields |
-| PATCH | `/api/v1/users/me/metrics` | UpdateMetricsInput | Patch one or more metrics fields |
-| PUT | `/api/v1/users/me/metrics` | ProfileSetupInput \| UserMetrics | Initial setup; can also update profile fields |
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/v1/users/me/profile` | Return `{ profile, metrics, derived }` |
+| PATCH | `/api/v1/users/me/profile` | Patch identity-side fields |
+| PATCH | `/api/v1/users/me/metrics` | Patch initialized metrics |
+| PUT | `/api/v1/users/me/metrics` | Complete initial setup |
 
-## Derived metrics (server-computed)
+## Derived metrics
 
-When metrics exist, the response includes:
+The server computes:
 
-- `ageYears` — derived from `birthDate`.
-- `bmrKcal` — Mifflin-St Jeor (`apps/server/src/lib/bmr.ts`).
-- `tdeeKcal` — BMR × activity factor (`calorie-target.ts`).
-- `targetKcal` — TDEE ± goal delta, floored at 1200 kcal for safety.
+- `ageYears` from birth date.
+- `bmi` from weight and height, rounded to one decimal.
+- `bmrKcal` with Mifflin–St Jeor.
+- `tdeeKcal` from BMR and activity.
+- `targetKcal` from TDEE and goal.
 
-The mobile client never recomputes — it reads `derived` directly so a
-single source of truth (the metrics row) flows through the system.
+The mobile client reads these values and does not recompute them.
 
-## Mobile flow
+## Mobile information architecture
 
-- `ProfileStore` (`apps/mobile/src/stores/ProfileStore.ts`): `fetch`,
-  `setupMetrics`, `updateProfile`, `updateMetrics`, `reset`.
-- `ProfileSetupScreen` collects current weight, activity level, goal,
-  optional goal weight, then calls `setupMetrics`. After a successful
-  PUT the navigator falls through to `HomeScreen`.
-- `HomeScreen` shows a summary card with target / TDEE / BMR / weight /
-  age, plus a sign-out button and the locale toggle.
+- `ProfileSetupScreen` captures the initial inputs.
+- `ProfileScreen` privately shows current weight, BMI, and age.
+- Home never displays private body data, BMR, TDEE, or calorie targets.
+- Language, appearance, and sign-out live in `SettingsScreen`.
 
-## Validation
+## Validation and scope
 
-- `heightCm`: 50–250.
-- `currentWeightKg` / `goalWeightKg`: 20–300.
-- `birthDate`: ISO YYYY-MM-DD; age 10–120 enforced upstream by zod.
-- `activityLevel`: `sedentary | light | moderate | high | athlete`.
-- `goalType`: `lose | maintain | gain`.
-- `dietaryRestrictions`: known keys only (kosher / vegetarian / vegan /
-  glutenFree / allergies); unknown keys rejected.
-
-## Auth scope
-
-- Every route is gated by `requireAuth` (Bearer access token).
-- `/users/me/*` is implicitly user-scoped: a user can only see/edit
-  their own data; `userId` comes from the verified JWT, never the URL.
-
-## Tests
-
-- **Server:** `tests/users.test.ts` (Supertest); pure-helper tests for
-  `bmr` and `calorie-target`.
-- **Mobile:** `__tests__/ProfileStore.test.ts`,
-  `__tests__/ProfileSetupScreen.test.tsx`, `__tests__/HomeScreen.test.tsx`.
+All inputs use shared Zod schemas. Every route is authenticated and implicitly
+scoped to the caller's verified user ID. No profile or metric is couple-visible
+by default.

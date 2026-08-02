@@ -1,6 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, radii, spacing, typography } from '../theme';
+import type { AppTheme } from '../theme';
+import { useTheme } from '../theme/ThemeProvider';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'text';
 
@@ -11,6 +12,7 @@ export type ButtonProps = {
   loading?: boolean;
   disabled?: boolean;
   testID?: string;
+  leadingIcon?: React.ReactNode;
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -20,8 +22,21 @@ export const Button: React.FC<ButtonProps> = ({
   loading = false,
   disabled = false,
   testID,
+  leadingIcon,
 }) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const isDisabled = disabled || loading;
+  const variantStyles = {
+    primary: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+    secondary: { backgroundColor: theme.colors.surface, borderColor: theme.colors.border },
+    text: { backgroundColor: 'transparent', borderColor: 'transparent' },
+  };
+  const textColor = {
+    primary: theme.colors.onPrimary,
+    secondary: theme.colors.text,
+    text: theme.colors.primary,
+  };
   return (
     <Pressable
       testID={testID}
@@ -37,34 +52,25 @@ export const Button: React.FC<ButtonProps> = ({
     >
       <View style={styles.row}>
         {loading ? <ActivityIndicator color={textColor[variant]} /> : null}
+        {!loading && leadingIcon ? leadingIcon : null}
         <Text style={[styles.label, { color: textColor[variant] }]}>{label}</Text>
       </View>
     </Pressable>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (theme: AppTheme) => StyleSheet.create({
   base: {
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderRadius: radii.md,
+    minHeight: 48,
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.lg,
+    borderRadius: theme.radii.md,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
   },
-  pressed: { opacity: 0.85 },
+  pressed: { opacity: 0.82, transform: [{ scale: 0.985 }] },
   disabled: { opacity: 0.5 },
-  row: { flexDirection: 'row', gap: spacing.sm, alignItems: 'center' },
-  label: { ...typography.body, fontWeight: '600' as const },
+  row: { flexDirection: 'row', gap: theme.spacing.sm, alignItems: 'center' },
+  label: { ...theme.typography.body, fontWeight: '700' as const },
 });
-
-const variantStyles: Record<ButtonVariant, object> = {
-  primary: { backgroundColor: colors.primary },
-  secondary: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.muted },
-  text: { backgroundColor: 'transparent' },
-};
-
-const textColor: Record<ButtonVariant, string> = {
-  primary: '#0B1020',
-  secondary: colors.text,
-  text: colors.primary,
-};

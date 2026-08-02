@@ -7,8 +7,14 @@ import {
   UuidSchema,
 } from './common.js';
 
-/** ISO YYYY-MM-DD date as a string. Server stores DATE; client renders. */
-export const DateOnlySchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'expected YYYY-MM-DD');
+/** Real ISO YYYY-MM-DD calendar date. Server stores DATE; client renders. */
+export const DateOnlySchema = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, 'expected YYYY-MM-DD')
+  .refine((value) => {
+    const parsed = new Date(`${value}T00:00:00.000Z`);
+    return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
+  }, 'expected a valid calendar date');
 
 export const HeightCmSchema = z.number().int().min(50).max(250);
 export const WeightKgSchema = z.number().positive().min(20).max(300);
@@ -51,6 +57,7 @@ export type UserMetrics = z.infer<typeof UserMetricsSchema>;
 export const DerivedUserMetricsSchema = z
   .object({
     ageYears: z.number().int().min(0),
+    bmi: z.number().positive(),
     bmrKcal: z.number(),
     tdeeKcal: z.number(),
     targetKcal: z.number(),

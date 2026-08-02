@@ -11,6 +11,8 @@ src/
   schemas/
     common.ts     # enums (locale, gender, activity, goal) + uuid alias
     auth.ts       # register/login inputs, token shapes
+    program.ts    # program week, task, food-list, start/query DTOs
+    progress.ts   # weight write, history query, and response DTOs
     <feature>.ts  # added per feature as it lands
   events/         # Socket.IO event schemas (Phase 2+)
   dto/            # response DTOs (Phase 1+)

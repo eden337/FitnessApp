@@ -9,7 +9,29 @@
     "he": "המשך \"השכפ\"ץ הלפטיני\": מים לפני ארוחה ובאופן כללי, 50% ירקות מנקים/שייק פעמיים ביום, סדר אכילה נכון, חלון אכילה 8-12 שעות, ומיקוד ב-2-3 ארוחות משביעות ללא נשנושים. הגבלת שומנים מרוכזים ל-2-3 כפות ביום (לרבות 10-12 שקדים/אגוזים). בחירת אסטרטגיית המשך ירידה מותאמת אישית בין \"המסלול המהיר\", \"מסלול הניקוי\" ו\"המסלול המתון\".",
     "en": "Continue the leptin armor: water before meals and overall, 50% cleansing vegetables/smoothie twice a day, correct eating order, 8-12 hour eating window, focus on 2-3 satisfying meals with no snacking. Concentrated fats limited to 2-3 tablespoons/day (10-12 nuts/almonds counts). Choose your personalized continuation strategy: \"fast track\", \"cleanse track\", or \"moderate track\"."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "בחירת מסלול אישי מתאימה את המשך התהליך להעדפות וליכולת ההתמדה שלך. התחלת ניסוי וטעייה עם מזונות פחות לפטיניים וימי פינוק גמישים יותר מכינה לחיי השימור והשחרור בהמשך.",
+    "en": "Choosing a personal track adapts the next stage to your preferences and ability to persist. Carefully experimenting with less-leptinic foods and more flexible indulgence days prepares you for maintenance and release later."
+  },
+  "notes": {
+    "he": "שלב המסלולים אינו סוף התהליך ואינו התחייבות לכל החיים. אפשר להתנסות במסלול במשך שבוע ולדייק אותו בהמשך, אך חובה להמשיך לצפות בתכנים ולשמור על השכפ\"ץ הלפטיני.",
+    "en": "The pathways phase is neither the end of the process nor a lifelong commitment. Try a track for a week and refine it later, while continuing all content and the leptin armor."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לבחור מסלול חיטוב", "en": "Choose a fat-loss track" },
+      "description": { "he": "המסלול המהיר, מסלול הניקוי או המסלול המתון.", "en": "Fast, cleanse, or moderate." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "ליישם את כללי המסלול הנבחר", "en": "Follow the selected track's rules" },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך את השכפ\"ץ הלפטיני", "en": "Continue the leptin armor" },
+      "description": { "he": "מים, ירקות, סדר אכילה, חלון אכילה וארוחות ללא נשנושים.", "en": "Water, vegetables, eating order, eating window, and meals without snacks." }
+    }
+  ]
 }

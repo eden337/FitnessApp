@@ -34,6 +34,7 @@ Current mutable metrics (1:1 with `users`). Historical weight lives in
 | goal_type | text | `'lose' | 'maintain' | 'gain'` |
 | goal_weight_kg | numeric(5,2) NULL | |
 | dietary_restrictions | jsonb | e.g. `{"kosher":true,"vegetarian":false,"allergies":["peanut"]}` |
+| program_started_on | date NULL | personal 13-week timeline anchor; NULL = preview only |
 | updated_at | timestamptz | |
 
 ### `couples` + `couple_members`
@@ -76,7 +77,7 @@ food_lists(id, program_version text, slug text, name_he, name_en,
 -- week_id NULL ⇒ global list (proteins / leptin-carbs / fats / …);
 -- week_id set  ⇒ scoped to one week (e.g. cleanse-vacation in week 3).
 
-food_items(id, list_id FK, ordinal smallint,
+food_items(id, list_id FK, ordinal smallint, visual_key text,
            name_he, name_en, portion_he NULL, portion_en NULL,
            notes_he NULL, notes_en NULL,
            UNIQUE(list_id, ordinal))
@@ -85,11 +86,18 @@ food_items(id, list_id FK, ordinal smallint,
 ### Logs + goals
 
 ```sql
+weight_logs(id, user_id FK, logged_on date, weight_kg numeric(5,2),
+            body_fat_pct numeric(4,1) NULL, notes text NULL,
+            created_at, updated_at, UNIQUE(user_id, logged_on))
+
+shared_activities(id, couple_id FK, actor_user_id FK,
+                  kind text, note varchar(160) NULL, created_at)
+-- kind: hydration | vegetables | movement | meal_together | encouragement
+
+-- Planned Phase 4 additions:
 meal_logs(id, user_id FK, logged_on date, meal_type text, items jsonb,
           kcal_total numeric(6,1), notes text NULL, created_at)
 water_logs(id, user_id FK, logged_on date, amount_ml integer)
-weight_logs(id, user_id FK, logged_on date, weight_kg numeric(5,2),
-            body_fat_pct numeric(4,1) NULL, notes text NULL, created_at)
 goals(id, user_id FK, type text, target_value numeric, target_date date,
       created_at, achieved_at NULL)
 partner_reactions(id, couple_id FK, from_user_id FK, subject_type text,
@@ -105,6 +113,8 @@ partner_reactions(id, couple_id FK, from_user_id FK, subject_type text,
 - `(user_id, logged_on DESC)` on every `_logs` table — covers the
   "recent activity" and chart queries.
 - `(couple_id, created_at DESC)` on `partner_reactions` — feed query.
+- `(couple_id, created_at DESC, id DESC)` on `shared_activities` — bounded feed
+  and reconciliation query.
 - `(program_version, week_number)` unique on `program_weeks`; `(list_id)`
   on `food_items`; partial unique indexes on `food_lists` for
   `(program_version, slug)` (global) and `(program_version, slug, week_id)`

@@ -38,6 +38,7 @@ export const SOCKET_EVENTS = {
   ready: 'couple:ready',
   memberJoined: 'couple:member-joined',
   memberLeft: 'couple:member-left',
+  activityCreated: 'activity:created',
   // client → server
   hello: 'hello',
 } as const;

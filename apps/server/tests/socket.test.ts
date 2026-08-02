@@ -172,4 +172,41 @@ describe('Socket.IO gateway', () => {
     expect(event.userId).toBe(b.user.id);
     sockA.disconnect();
   });
+
+  it('emits persisted safe activities to the current couple room', async () => {
+    const a = await register(built, { email: 'activity-a@b.io', displayName: 'Jane' });
+    const b = await register(built, { email: 'activity-b@b.io', displayName: 'Alex' });
+    const create = await built.app.inject({
+      method: 'POST',
+      url: '/api/v1/couples',
+      headers: { authorization: `Bearer ${a.accessToken}` },
+    });
+    await built.app.inject({
+      method: 'POST',
+      url: '/api/v1/couples/join',
+      headers: { authorization: `Bearer ${b.accessToken}` },
+      payload: { inviteCode: create.json().couple.inviteCode },
+    });
+
+    const socketB = await connect(url, { token: b.accessToken });
+    socketB.emit(SOCKET_EVENTS.hello);
+    await waitFor(socketB, SOCKET_EVENTS.ready);
+    const received = waitFor<{ activity: { kind: string; actor: { id?: string; userId: string } } }>(
+      socketB,
+      SOCKET_EVENTS.activityCreated,
+    );
+
+    const response = await built.app.inject({
+      method: 'POST',
+      url: '/api/v1/progress/activities',
+      headers: { authorization: `Bearer ${a.accessToken}` },
+      payload: { kind: 'hydration' },
+    });
+    expect(response.statusCode).toBe(201);
+    const event = await received;
+    expect(event.activity.kind).toBe('hydration');
+    expect(event.activity.actor.userId).toBe(a.user.id);
+    expect(event.activity).not.toHaveProperty('weightKg');
+    socketB.disconnect();
+  });
 });

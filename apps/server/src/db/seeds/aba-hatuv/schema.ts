@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { FoodVisualKeySchema } from '@fitnessapp/shared';
 
 /**
  * Bilingual string with at least one Hebrew form. English is required so the
@@ -51,6 +52,7 @@ export type ProgramWeekSeed = z.infer<typeof ProgramWeekSeedSchema>;
 export const FoodItemSeedSchema = z
   .object({
     name: Bilingual,
+    visualKey: FoodVisualKeySchema,
     portion: OptionalBilingual.optional(),
     notes: OptionalBilingual.optional(),
   })

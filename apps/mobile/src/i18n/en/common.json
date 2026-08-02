@@ -13,8 +13,27 @@
     "he": "עברית",
     "en": "English"
   },
+  "theme": {
+    "label": "Appearance",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Choose how the app looks and which language it uses."
+  },
   "home": {
+    "brandOverline": "BETTER",
     "greeting": "Hi {{name}}!",
+    "encouragement": "Your next healthy win is closer than you think.",
+    "momentum": "YOUR MOMENTUM",
+    "keepMoving": "Keep it moving!",
+    "momentumBody": "Steady choices build a strong week.",
+    "ready": "Ready",
+    "todayMission": "TODAY'S MISSION",
+    "snapshot": "Your snapshot",
+    "preferences": "Your preferences",
     "needsSetup": "Finish profile setup to see your personalized plan"
   },
   "validation": {

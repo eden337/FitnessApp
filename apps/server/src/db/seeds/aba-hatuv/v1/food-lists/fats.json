@@ -1,26 +1,85 @@
 {
   "slug": "fats",
-  "name": { "he": "שומנים", "en": "Fats" },
+  "name": {
+    "he": "שומנים",
+    "en": "Fats"
+  },
   "description": {
     "he": "מנת שומן מומלצת: מתוקנן בכל שבוע (ראו משימת השבוע).",
     "en": "Recommended fat servings vary per week (see the weekly mission)."
   },
   "weekSlug": null,
   "items": [
-    { "name": { "he": "טחינה", "en": "Tahini" } },
-    { "name": { "he": "חמאה", "en": "Butter" } },
-    { "name": { "he": "כל שמן", "en": "Any cooking oil" } },
-    { "name": { "he": "זיתים", "en": "Olives" } },
-    { "name": { "he": "אבוקדו", "en": "Avocado" } },
-    { "name": { "he": "חמאת בוטנים", "en": "Peanut butter" } },
-    { "name": { "he": "חמאת שקדים", "en": "Almond butter" } },
     {
-      "name": { "he": "אגוזים / שקדים", "en": "Nuts / almonds" },
-      "portion": { "he": "10-12 יחידות = מנת שומן מרוכז", "en": "10-12 pieces = one concentrated-fat serving" }
+      "name": {
+        "he": "טחינה",
+        "en": "Tahini"
+      },
+      "visualKey": "tahini"
     },
     {
-      "name": { "he": "מוצרי קוקוס", "en": "Coconut products" },
-      "notes": { "he": "למעט קוקוס מיובש", "en": "Excludes dried coconut" }
+      "name": {
+        "he": "חמאה",
+        "en": "Butter"
+      },
+      "visualKey": "butter"
+    },
+    {
+      "name": {
+        "he": "כל שמן",
+        "en": "Any cooking oil"
+      },
+      "visualKey": "cooking-oil"
+    },
+    {
+      "name": {
+        "he": "זיתים",
+        "en": "Olives"
+      },
+      "visualKey": "olives"
+    },
+    {
+      "name": {
+        "he": "אבוקדו",
+        "en": "Avocado"
+      },
+      "visualKey": "avocado"
+    },
+    {
+      "name": {
+        "he": "חמאת בוטנים",
+        "en": "Peanut butter"
+      },
+      "visualKey": "peanut-butter"
+    },
+    {
+      "name": {
+        "he": "חמאת שקדים",
+        "en": "Almond butter"
+      },
+      "visualKey": "almond-butter"
+    },
+    {
+      "name": {
+        "he": "אגוזים / שקדים",
+        "en": "Nuts / almonds"
+      },
+      "portion": {
+        "he": "10-12 יחידות = מנת שומן מרוכז",
+        "en": "10-12 pieces = one concentrated-fat serving"
+      },
+      "visualKey": "nuts-almonds"
+    },
+    {
+      "name": {
+        "he": "מוצרי קוקוס",
+        "en": "Coconut products"
+      },
+      "notes": {
+        "he": "למעט קוקוס מיובש",
+        "en": "Excludes dried coconut"
+      },
+      "visualKey": "coconut-products"
     }
   ]
 }

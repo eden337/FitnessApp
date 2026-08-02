@@ -4,16 +4,19 @@ Expo managed workflow, React Native + TypeScript + MobX + react-i18next.
 What's wired so far:
 - `services/`: secure-store wrapper + axios apiClient with auto-refresh +
   socket.io client wrapper.
-- `stores/`: AuthStore, ProfileStore, CoupleStore, LocaleStore, RootStore +
+- `stores/`: AuthStore, ProfileStore, CoupleStore, ProgramStore, ProgressStore, LocaleStore, RootStore +
   StoresContext.
 - `components/`: Button, TextField, SegmentedPicker, LocaleToggle, PartnerCard.
 - `screens/auth/`: SignInScreen, SignUpScreen.
 - `screens/profile/`: ProfileSetupScreen.
 - `screens/couple/`: PairScreen.
+- `screens/program/`: TodayScreen + FoodListsScreen.
+- `screens/progress/`: private weight entry + history.
 - `screens/HomeScreen.tsx`: PartnerCard + target/TDEE/BMR summary card.
 - `app/RootNavigator.tsx`: state-driven navigator
-  (loading → auth → setup → home ↔ pair).
-- i18n bundles for `auth` + `profile` + `couple` in he/en, key-parity tested.
+  (loading → auth → setup → home ↔ pair/program/food lists).
+- i18n bundles for `auth` + `profile` + `couple` + `program` in he/en,
+  key-parity tested.
 
 ## Layout
 

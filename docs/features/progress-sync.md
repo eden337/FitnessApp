@@ -1,40 +1,65 @@
-# Feature — Progress & partner sync
+# Feature — Progress and partner sync
 
-**Status:** Phase 4 (not yet implemented).
+**Status:** Maintenance-only private weight entry, history, and trends plus a
+privacy-safe shared-wins feed with realtime delivery are implemented; goals
+and reactions remain.
 
-## Goal
+## Product boundary
 
-Capture weight + optional body-fat over time, draw the line chart both
-partners can see, let users set and achieve goals, and surface a **live
-partner feed** of meals, weigh-ins, goal achievements, and reactions.
+The Aba Hatuv foundation program forbids weighing throughout all 13 weeks.
+Initial weight is private profile setup data, not program progress.
 
-## Surface
+Weight logging and history unlock only after `/program/me/current` reports
+`completed`. Before then, the mobile app does not fetch or show weight progress,
+and both weight endpoints return `409 maintenance_only`.
 
-- REST: `POST/GET /progress/weight`, `POST/PATCH /progress/goals`,
-  `POST /progress/reactions`, `GET /progress/feed?since=`.
-- Socket events: `meal:logged`, `water:logged`, `weight:logged`,
-  `goal:achieved`, `reaction:sent` (see `docs/architecture/sync-realtime.md`).
-- Mobile:
-  - `WeightLogModal` (quick entry).
-  - `ProgressScreen` with charts (`victory-native`).
-  - `FeedScreen` — merged timeline of both partners' events.
-  - `ReactionBar` component on every feed card.
+## Implemented maintenance slice
 
-## Charts
+- `POST /api/v1/progress/weight` creates or replaces one private measurement
+  for the authenticated user and calendar day.
+- `GET /api/v1/progress/weight?from=&to=&limit=` returns only the caller's
+  bounded, newest-first history.
+- The latest dated log updates `user_metrics.current_weight_kg`; an older
+  measurement cannot replace a newer current value.
+- `ProgressStore` and the bilingual `ProgressScreen` support weight, optional
+  date/body-fat/notes, history, errors, and logout reset.
+- The private maintenance chart supports 30, 90, and 365-day windows. Its
+  reducer uses inclusive calendar dates and neutral low/high/change language.
+- Weight is never shared by default and emits no Socket.IO event.
 
-- Weight line chart, 7 / 30 / 90 / 365 day windows; moving-average overlay.
-- Streak indicator: consecutive days with at least one meal log.
+## Implemented shared-wins slice
 
-## Goals
+- Users explicitly share one of five reviewed actions: hydration, colorful
+  vegetables, movement, a meal together, or encouragement.
+- `POST /api/v1/progress/activities` accepts the safe action and an optional
+  160-character note. Unknown fields and action kinds are rejected.
+- `GET /api/v1/progress/feed?since=&limit=` returns only the caller's current
+  couple feed. Membership is resolved and locked in the same DB transaction.
+- Reconciliation includes the timestamp boundary; `ActivityStore` deduplicates
+  by activity ID so sub-millisecond database precision cannot lose an event.
+  Initial reads are newest-first; `since` batches are oldest-first so a bounded
+  reconciliation loop cannot skip intermediate events.
+- The bilingual Shared Wins screen is opened from the paired partner card and
+  uses colorful, theme-safe emoji tiles plus reduced-motion-aware celebration.
+- `activity:created` is emitted only after persistence commits. The mobile
+  connection rejoins on reconnect, validates incoming events, reconciles missed
+  batches through REST, and deduplicates by persisted activity ID.
+- No body measurement, calorie, profile, or private program fields exist in the
+  shared activity schema or table.
 
-- Types: `weight_target`, `streak_days`, `adherence_pct`.
-- Achieved when the corresponding metric crosses the target at least once
-  (server-side check on every relevant write).
+## Planned maintenance work
+
+- Habit-fallback signals that help preserve the program's principles.
+- Goals, achievements, and reactions for non-private actions.
+- Any future body-information sharing requires a separate explicit-consent ADR.
 
 ## Tests
 
-- Chart data: given a sequence of logs, the reducer produces the expected
-  series for each window.
-- Goals: achievement fires exactly once; idempotent on repeat writes.
-- Sockets: write on A → emit on room → B receives and updates store.
-- Reactions: duplicate reactions are idempotent (unique constraint).
+- Server service and integration tests enforce the maintenance-only boundary.
+- Mobile navigation tests ensure the route is absent during foundation.
+- Chart reducer tests cover date boundaries, normalization, and empty data.
+- Shared schema and integration tests reject unsafe kinds and enforce current
+  couple scope.
+- Realtime integration tests prove that only the current couple room receives
+  a safe activity after its transaction commits.
+- Reactions must remain scoped, consent-aware, and idempotent.

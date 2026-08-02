@@ -22,6 +22,7 @@ coverage/
 .idea/
 .vscode/*
 !.vscode/settings.json.example
+.codex/
 *.log
 logs/
 

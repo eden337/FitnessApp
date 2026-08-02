@@ -2,7 +2,8 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useStores } from '../stores/StoresContext';
-import { colors, radii, spacing, typography } from '../theme';
+import type { AppTheme } from '../theme';
+import { useTheme } from '../theme/ThemeProvider';
 import { useTranslation } from '../i18n/I18nProvider';
 
 /**
@@ -13,6 +14,8 @@ import { useTranslation } from '../i18n/I18nProvider';
 export const LocaleToggle: React.FC = observer(() => {
   const { locale } = useStores();
   const { t } = useTranslation();
+  const theme = useTheme();
+  const styles = createStyles(theme);
   const choices: Array<{ value: 'he' | 'en'; label: string }> = [
     { value: 'he', label: t('common:locale.he') },
     { value: 'en', label: t('common:locale.en') },
@@ -42,17 +45,21 @@ export const LocaleToggle: React.FC = observer(() => {
   );
 });
 
-const styles = StyleSheet.create({
-  wrapper: { marginBottom: spacing.md },
-  label: { ...typography.caption, color: colors.muted, marginBottom: spacing.xs },
-  row: { flexDirection: 'row', gap: spacing.sm },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  wrapper: { marginBottom: theme.spacing.md },
+  label: { ...theme.typography.label, color: theme.colors.textMuted, marginBottom: theme.spacing.xs },
+  row: { flexDirection: 'row', gap: theme.spacing.sm },
   chip: {
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.md,
-    borderRadius: radii.pill,
-    backgroundColor: colors.surface,
+    minHeight: 44,
+    justifyContent: 'center',
+    paddingVertical: theme.spacing.xs,
+    paddingHorizontal: theme.spacing.md,
+    borderRadius: theme.radii.pill,
+    backgroundColor: theme.colors.surface,
+    borderWidth: 1,
+    borderColor: theme.colors.border,
   },
-  chipSelected: { backgroundColor: colors.primary },
-  chipText: { ...typography.body, color: colors.text },
-  chipTextSelected: { color: '#0B1020', fontWeight: '600' as const },
+  chipSelected: { backgroundColor: theme.colors.primary, borderColor: theme.colors.primary },
+  chipText: { ...theme.typography.body, color: theme.colors.text },
+  chipTextSelected: { color: theme.colors.onPrimary, fontWeight: '700' as const },
 });

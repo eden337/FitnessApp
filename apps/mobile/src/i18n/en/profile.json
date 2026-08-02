@@ -1,4 +1,11 @@
 {
+  "loadError": "We couldn't load your profile. Check your connection and try again.",
+  "retry": "Try again",
+  "private": {
+    "title": "My profile",
+    "description": "Your private body information is kept here, away from the dashboard.",
+    "privacy": "Only you can see these measurements."
+  },
   "setup": {
     "title": "Profile setup",
     "subtitle": "So we can compute your personalized plan",
@@ -24,6 +31,7 @@
     "ageYears": "Age",
     "height": "Height",
     "weight": "Weight",
+    "bmi": "BMI",
     "bmr": "BMR",
     "tdee": "TDEE",
     "target": "Daily target (kcal)",

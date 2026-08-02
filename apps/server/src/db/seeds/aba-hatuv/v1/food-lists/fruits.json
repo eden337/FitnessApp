@@ -1,10 +1,370 @@
 {
   "slug": "fruits",
-  "name": { "he": "פירות", "en": "Fruits" },
+  "name": {
+    "he": "פירות",
+    "en": "Fruits"
+  },
   "description": {
-    "he": "כל הפירות בשפע, מלבד תמרים ופירות יבשים.",
-    "en": "All fresh fruit, except dates and dried fruit."
+    "he": "רוב הפירות מוגבלים למנת פרי יומית אחת. תות שדה ופירות יער מותרים ללא הגבלה; תמרים ופירות יבשים מותרים רק במסגרת ארוחת הפינוק.",
+    "en": "Most fruit is limited to one daily fruit serving. Strawberries and berries are unrestricted; dates and dried fruit are reserved for an indulgence meal."
   },
   "weekSlug": null,
-  "items": []
+  "items": [
+    {
+      "name": {
+        "he": "אבטיח",
+        "en": "Watermelon"
+      },
+      "portion": {
+        "he": "כוס חד-פעמית",
+        "en": "1 disposable cup"
+      },
+      "visualKey": "watermelon"
+    },
+    {
+      "name": {
+        "he": "אגס",
+        "en": "Pear"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "pear"
+    },
+    {
+      "name": {
+        "he": "אנונה",
+        "en": "Cherimoya"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "cherimoya"
+    },
+    {
+      "name": {
+        "he": "אננס טבעי",
+        "en": "Fresh pineapple"
+      },
+      "portion": {
+        "he": "2 פרוסות",
+        "en": "2 slices"
+      },
+      "visualKey": "fresh-pineapple"
+    },
+    {
+      "name": {
+        "he": "אפרסמון",
+        "en": "Persimmon"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "persimmon"
+    },
+    {
+      "name": {
+        "he": "אפרסק",
+        "en": "Peach"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "peach"
+    },
+    {
+      "name": {
+        "he": "אשכולית",
+        "en": "Grapefruit"
+      },
+      "portion": {
+        "he": "חצי",
+        "en": "1/2"
+      },
+      "visualKey": "grapefruit"
+    },
+    {
+      "name": {
+        "he": "בננה",
+        "en": "Banana"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "notes": {
+        "he": "לא להוסיף לשייק",
+        "en": "Do not add to a smoothie"
+      },
+      "visualKey": "banana"
+    },
+    {
+      "name": {
+        "he": "גויאבה",
+        "en": "Guava"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "guava"
+    },
+    {
+      "name": {
+        "he": "דובדבנים",
+        "en": "Cherries"
+      },
+      "portion": {
+        "he": "כוס חד-פעמית",
+        "en": "1 disposable cup"
+      },
+      "visualKey": "cherries"
+    },
+    {
+      "name": {
+        "he": "חבוש",
+        "en": "Quince"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "quince"
+    },
+    {
+      "name": {
+        "he": "ליצ'י טרי",
+        "en": "Fresh lychee"
+      },
+      "portion": {
+        "he": "7 יחידות",
+        "en": "7"
+      },
+      "visualKey": "fresh-lychee"
+    },
+    {
+      "name": {
+        "he": "מלון",
+        "en": "Melon"
+      },
+      "portion": {
+        "he": "כוס חד-פעמית",
+        "en": "1 disposable cup"
+      },
+      "visualKey": "melon"
+    },
+    {
+      "name": {
+        "he": "מנגו",
+        "en": "Mango"
+      },
+      "portion": {
+        "he": "חצי",
+        "en": "1/2"
+      },
+      "visualKey": "mango"
+    },
+    {
+      "name": {
+        "he": "משמש",
+        "en": "Apricot"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "apricot"
+    },
+    {
+      "name": {
+        "he": "נקטרינה",
+        "en": "Nectarine"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "nectarine"
+    },
+    {
+      "name": {
+        "he": "סברס",
+        "en": "Prickly pear"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "prickly-pear"
+    },
+    {
+      "name": {
+        "he": "ענבים",
+        "en": "Grapes"
+      },
+      "portion": {
+        "he": "כוס חד-פעמית",
+        "en": "1 disposable cup"
+      },
+      "visualKey": "grapes"
+    },
+    {
+      "name": {
+        "he": "פסיפלורה",
+        "en": "Passion fruit"
+      },
+      "portion": {
+        "he": "4 יחידות",
+        "en": "4"
+      },
+      "visualKey": "passion-fruit"
+    },
+    {
+      "name": {
+        "he": "פפאיה",
+        "en": "Papaya"
+      },
+      "portion": {
+        "he": "כוס חד-פעמית",
+        "en": "1 disposable cup"
+      },
+      "visualKey": "papaya"
+    },
+    {
+      "name": {
+        "he": "קיווי",
+        "en": "Kiwi"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "kiwi"
+    },
+    {
+      "name": {
+        "he": "קלמנטינה",
+        "en": "Clementine"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "clementine"
+    },
+    {
+      "name": {
+        "he": "קרמבולה",
+        "en": "Star fruit"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "star-fruit"
+    },
+    {
+      "name": {
+        "he": "רימון",
+        "en": "Pomegranate"
+      },
+      "portion": {
+        "he": "חצי",
+        "en": "1/2"
+      },
+      "visualKey": "pomegranate"
+    },
+    {
+      "name": {
+        "he": "שזיף",
+        "en": "Plum"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "plum"
+    },
+    {
+      "name": {
+        "he": "שסק",
+        "en": "Loquat"
+      },
+      "portion": {
+        "he": "4 יחידות",
+        "en": "4"
+      },
+      "visualKey": "loquat"
+    },
+    {
+      "name": {
+        "he": "תאנה טרייה",
+        "en": "Fresh fig"
+      },
+      "portion": {
+        "he": "2 יחידות",
+        "en": "2"
+      },
+      "visualKey": "fresh-fig"
+    },
+    {
+      "name": {
+        "he": "תפוז",
+        "en": "Orange"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "orange"
+    },
+    {
+      "name": {
+        "he": "תפוח",
+        "en": "Apple"
+      },
+      "portion": {
+        "he": "1",
+        "en": "1"
+      },
+      "visualKey": "apple"
+    },
+    {
+      "name": {
+        "he": "תות שדה",
+        "en": "Strawberry"
+      },
+      "notes": {
+        "he": "טרי או קפוא, ללא הגבלה",
+        "en": "Fresh or frozen, unrestricted"
+      },
+      "visualKey": "strawberry"
+    },
+    {
+      "name": {
+        "he": "פירות יער",
+        "en": "Berries"
+      },
+      "notes": {
+        "he": "דומדמניות, חמוציות טבעיות, פטל ואוכמניות; טריים או קפואים, ללא הגבלה",
+        "en": "Currants, natural cranberries, raspberries, and blueberries; fresh or frozen, unrestricted"
+      },
+      "visualKey": "berries"
+    },
+    {
+      "name": {
+        "he": "פירות יבשים",
+        "en": "Dried fruit"
+      },
+      "notes": {
+        "he": "תמרים, חמוציות מיובשות, חרובים וכל פרי שעבר ייבוש מותרים רק בארוחת הפינוק",
+        "en": "Dates, dried cranberries, carob, and any dried fruit are reserved for an indulgence meal"
+      },
+      "visualKey": "dried-fruit"
+    }
+  ]
 }

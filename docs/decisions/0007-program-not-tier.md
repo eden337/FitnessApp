@@ -68,7 +68,17 @@ mobile screens land in a follow-up; this ADR is only about the data shape.
   migration (only described in earlier docs / ADRs), so no data migration
   is needed.
 
-## Open items
+## Implementation update (2026-07-29)
+
+- The supplied companion PDFs filled the bilingual rationale, notes, tasks,
+  cleansing-vegetables list, and fruit guidance for the Phase 3b release.
+- The authoritative cleansing-vegetables source contains 34 entries.
+- Week 11 remains unavailable. The runtime schedules week 11 normally while
+  displaying week 10 content with an explicit fallback marker.
+- Shared runtime DTOs, authenticated program APIs, and the bilingual mobile
+  Today and food-list screens now implement this decision.
+
+## Historical open items
 
 - Week 11 PDF is missing from the upload — the seed bundle skips it for now
   with a clear gap. Drop the PDF in and add `weeks/11.json` whenever it's

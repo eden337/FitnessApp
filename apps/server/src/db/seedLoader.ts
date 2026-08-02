@@ -175,6 +175,7 @@ export const applySeedBundle = async (db: DbClient, bundle: SeedBundle): Promise
             list.items.map((it, i) => ({
               list_id: existing!.id,
               ordinal: i,
+              visual_key: it.visualKey,
               name_he: it.name.he,
               name_en: it.name.en,
               portion_he: it.portion?.he ?? null,

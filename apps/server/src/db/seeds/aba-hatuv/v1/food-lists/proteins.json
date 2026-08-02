@@ -1,15 +1,60 @@
 {
   "slug": "proteins",
-  "name": { "he": "חלבונים כבסיס הארוחה", "en": "Proteins as meal base" },
+  "name": {
+    "he": "חלבונים כבסיס הארוחה",
+    "en": "Proteins as meal base"
+  },
   "description": null,
   "weekSlug": null,
   "items": [
-    { "name": { "he": "ביצים", "en": "Eggs" } },
-    { "name": { "he": "דגים", "en": "Fish" } },
-    { "name": { "he": "עוף", "en": "Chicken" } },
-    { "name": { "he": "בשר", "en": "Meat" } },
-    { "name": { "he": "מוצרי חלב", "en": "Dairy products" } },
-    { "name": { "he": "טופו", "en": "Tofu" } },
-    { "name": { "he": "סייטן", "en": "Seitan" } }
+    {
+      "name": {
+        "he": "ביצים",
+        "en": "Eggs"
+      },
+      "visualKey": "eggs"
+    },
+    {
+      "name": {
+        "he": "דגים",
+        "en": "Fish"
+      },
+      "visualKey": "fish"
+    },
+    {
+      "name": {
+        "he": "עוף",
+        "en": "Chicken"
+      },
+      "visualKey": "chicken"
+    },
+    {
+      "name": {
+        "he": "בשר",
+        "en": "Meat"
+      },
+      "visualKey": "meat"
+    },
+    {
+      "name": {
+        "he": "מוצרי חלב",
+        "en": "Dairy products"
+      },
+      "visualKey": "dairy-products"
+    },
+    {
+      "name": {
+        "he": "טופו",
+        "en": "Tofu"
+      },
+      "visualKey": "tofu"
+    },
+    {
+      "name": {
+        "he": "סייטן",
+        "en": "Seitan"
+      },
+      "visualKey": "seitan"
+    }
   ]
 }

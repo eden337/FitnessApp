@@ -69,7 +69,15 @@ export class AuthStore {
     runInAction(() => {
       this.status = 'loading';
     });
-    const refresh = await this.storage.get(STORAGE_KEYS.refreshToken);
+    let refresh: string | null = null;
+    try {
+      refresh = await this.storage.get(STORAGE_KEYS.refreshToken);
+    } catch {
+      runInAction(() => {
+        this.status = 'unauthenticated';
+      });
+      return;
+    }
     if (!refresh) {
       runInAction(() => {
         this.status = 'unauthenticated';

@@ -1,5 +1,6 @@
 import {
   DateOnlySchema,
+  DerivedUserMetricsSchema,
   DietaryRestrictionsSchema,
   HeightCmSchema,
   ProfileSetupInputSchema,
@@ -82,6 +83,20 @@ describe('UserProfileSchema + UserMetricsSchema', () => {
       dietaryRestrictions: { kosher: true },
     };
     expect(UserMetricsSchema.parse(metrics)).toEqual(metrics);
+  });
+});
+
+describe('DerivedUserMetricsSchema', () => {
+  it('includes BMI for the private profile summary', () => {
+    expect(
+      DerivedUserMetricsSchema.parse({
+        ageYears: 35,
+        bmi: 23.9,
+        bmrKcal: 1370.3,
+        tdeeKcal: 2124,
+        targetKcal: 1624,
+      }).bmi,
+    ).toBe(23.9);
   });
 });
 

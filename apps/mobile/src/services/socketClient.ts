@@ -9,8 +9,8 @@ export type SocketClient = {
 
 export type CreateSocketClientOptions = {
   url: string;
-  /** Access token presented in the auth handshake. Refreshed by the AuthStore. */
-  token: string;
+  /** Read at every handshake so reconnects use the latest refreshed token. */
+  getToken: () => string | null;
 };
 
 /**
@@ -19,9 +19,9 @@ export type CreateSocketClientOptions = {
  * polling fallback) because the server has TLS-terminated WebSocket support
  * end-to-end and polling is a needless extra round-trip on RN.
  */
-export const createSocketClient = ({ url, token }: CreateSocketClientOptions): SocketClient => {
+export const createSocketClient = ({ url, getToken }: CreateSocketClientOptions): SocketClient => {
   const socket = io(url, {
-    auth: { token },
+    auth: (callback) => callback({ token: getToken() }),
     transports: ['websocket'],
     forceNew: true,
     reconnection: true,

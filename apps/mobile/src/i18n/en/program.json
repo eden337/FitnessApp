@@ -1,0 +1,57 @@
+{
+  "today": {
+    "title": "Today",
+    "weekLabel": "Week {{week}}",
+    "week": "week",
+    "focus": "THIS WEEK'S FOCUS",
+    "mission": "This week's mission",
+    "rationale": "Why it matters",
+    "notes": "Important notes",
+    "tasks": "Weekly checklist",
+    "taskCount_one": "{{count}} action",
+    "taskCount_two": "{{count}} actions",
+    "taskCount_many": "{{count}} actions",
+    "taskCount_other": "{{count}} actions",
+    "required": "Required",
+    "optional": "Optional",
+    "completed": "You completed the 13-week foundation program.",
+    "fallback": "The week 11 guide is unavailable. Week 10 guidance is shown again and week 12 will resume on schedule.",
+    "loading": "Loading your program...",
+    "unavailable": "Program guidance is unavailable right now."
+  },
+  "start": {
+    "title": "Start or resume your program",
+    "description": "Choose the week you are currently following. You will receive a full seven days before advancing.",
+    "weekPicker": "Current week",
+    "action": "Start from week {{week}}"
+  },
+  "lists": {
+    "eyebrow": "COLORFUL FOOD, CLEAR CHOICES",
+    "title": "Food references",
+    "colorfulChoices": "colorful choices",
+    "summary": "Natural food colors stay vibrant in every theme.",
+    "itemCount_one": "{{count}} choice",
+    "itemCount_two": "{{count}} choices",
+    "itemCount_many": "{{count}} choices",
+    "itemCount_other": "{{count}} choices",
+    "open": "Browse food references",
+    "filter": "Reference scope",
+    "global": "Global",
+    "current": "This week",
+    "empty": "No reference lists are assigned to this week.",
+    "portion": "Portion: {{portion}}"
+  },
+  "listRefresh": {
+    "error": "Your program started, but food references could not be refreshed.",
+    "retry": "Retry food references"
+  },
+  "actions": {
+    "open": "Open weekly program",
+    "back": "Back"
+  },
+  "errors": {
+    "already_started": "The program has already started.",
+    "missing_metrics": "Complete profile setup before starting.",
+    "generic": "Something went wrong. Please try again."
+  }
+}

@@ -5,6 +5,10 @@ import { AuthStore } from './AuthStore';
 import { CoupleStore } from './CoupleStore';
 import { LocaleStore, type LocaleStoreDeps } from './LocaleStore';
 import { ProfileStore } from './ProfileStore';
+import { ProgramStore } from './ProgramStore';
+import { ProgressStore } from './ProgressStore';
+import { ThemeStore } from './ThemeStore';
+import { ActivityStore } from './ActivityStore';
 
 export type RootStoreDeps = {
   baseURL: string;
@@ -23,9 +27,13 @@ export type RootStoreDeps = {
  */
 export class RootStore {
   readonly auth: AuthStore;
+  readonly activity: ActivityStore;
   readonly profile: ProfileStore;
   readonly couple: CoupleStore;
   readonly locale: LocaleStore;
+  readonly program: ProgramStore;
+  readonly progress: ProgressStore;
+  readonly theme: ThemeStore;
   readonly api: AxiosInstance;
 
   constructor(deps: RootStoreDeps) {
@@ -40,13 +48,28 @@ export class RootStore {
       });
     auth = new AuthStore({ api: this.api, storage: deps.storage });
     this.auth = auth;
+    this.activity = new ActivityStore({ api: this.api });
     this.profile = new ProfileStore({ api: this.api, authStore: this.auth });
     this.couple = new CoupleStore({ api: this.api });
+    this.program = new ProgramStore({ api: this.api });
+    this.progress = new ProgressStore({
+      api: this.api,
+      afterLog: () => this.profile.fetch(),
+    });
     this.locale = new LocaleStore({
       storage: deps.storage,
       setI18nLanguage: deps.setI18nLanguage,
       setRtl: deps.setRtl,
       initial: deps.initialLocale ?? 'he',
     });
+    this.theme = new ThemeStore({ storage: deps.storage });
+  }
+
+  async hydrate(): Promise<void> {
+    await Promise.allSettled([
+      this.theme.hydrate(),
+      this.locale.hydrate(),
+      this.auth.hydrate(),
+    ]);
   }
 }

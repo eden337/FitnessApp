@@ -24,6 +24,9 @@ export const bmrKcal = ({ gender, weightKg, heightCm, ageYears }: BmrInput): num
   return Math.round((base + genderOffset) * 10) / 10;
 };
 
+export const bodyMassIndex = (weightKg: number, heightCm: number): number =>
+  Math.round((weightKg / (heightCm / 100) ** 2) * 10) / 10;
+
 export const ageFromBirthDate = (birthDate: Date, today: Date = new Date()): number => {
   let age = today.getUTCFullYear() - birthDate.getUTCFullYear();
   const before =

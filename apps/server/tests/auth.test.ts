@@ -49,6 +49,24 @@ describe('auth module', () => {
       expect(res.statusCode).toBe(400);
     });
 
+    it('rejects impossible calendar dates with 400', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/api/v1/auth/register',
+        payload: validRegisterPayload({ birthDate: '2026-02-31' }),
+      });
+      expect(res.statusCode).toBe(400);
+    });
+
+    it('accepts a valid leap-day birth date', async () => {
+      const res = await app.inject({
+        method: 'POST',
+        url: '/api/v1/auth/register',
+        payload: validRegisterPayload({ birthDate: '1992-02-29' }),
+      });
+      expect(res.statusCode).toBe(201);
+    });
+
     it('rejects a duplicate email with 409', async () => {
       const payload = validRegisterPayload();
       const first = await app.inject({ method: 'POST', url: '/api/v1/auth/register', payload });

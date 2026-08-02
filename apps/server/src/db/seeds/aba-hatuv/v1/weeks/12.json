@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שלב המסלולים. מקסום \"גרעון קלורי ספונטני\" — שילוב 3-5 \"פעולות שורפות שומן\" ו-3-5 הרגלי \"ראש חטוב\" על בסיס יומיומי, להפסקת ההתניה בין אכילה בלתי מודעת לאכילת יתר. מקסום עקרון \"צפיפות קלורית\" על-ידי שילוב לפחות אחת מהאסטרטגיות (החלפת חלבון שמן בחלבון רזה או הכנסת ארוחה \"סופר-לפטינית\") להורדת הצפיפות הקלורית היומית הממוצעת.",
     "en": "Continue the pathways-phase principles. Maximize \"spontaneous calorie deficit\" — combine 3-5 fat-burning actions and 3-5 \"sharp-mind\" habits daily to break the conditioning between unconscious eating and overeating. Maximize the \"calorie density\" principle by combining at least one strategy (swap fatty protein for lean protein, or insert a \"super-leptinic\" meal) to lower the average daily calorie density."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "הורדת הצפיפות הקלורית מאפשרת לאכול יותר משקל ונפח מזון בפחות קלוריות, מחזקת שובע ומסייעת לשבור או למנוע תקיעות. ההרגלים נועדו גם למנוע ריבאונד של הורמון הרעב ככל שהתהליך מתקדם.",
+    "en": "Lower calorie density allows more food weight and volume for fewer calories, strengthens fullness, and helps prevent or break plateaus. The habits also aim to prevent hunger-hormone rebound as the process advances."
+  },
+  "notes": {
+    "he": "יש לבחור אסטרטגיות שניתן לבצע באופן עקבי: חלבון רזה במקום חלבון שמן ו/או ארוחה סופר-לפטינית. ממשיכים במקביל את המסלול האישי, השכפ\"ץ והפעילות היומיומית.",
+    "en": "Choose strategies you can apply consistently: lean protein instead of fatty protein and/or a super-leptinic meal. Continue the personal track, leptin armor, and daily movement alongside them."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לבצע 3-5 פעולות שורפות שומן ביום", "en": "Perform 3-5 fat-burning actions daily" },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": { "he": "ליישם 3-5 הרגלי ראש חטוב ביום", "en": "Apply 3-5 sharp-mind habits daily" },
+      "description": { "he": "לשבור את הקשר בין אכילה בלתי מודעת לאכילת יתר.", "en": "Break the link between unconscious eating and overeating." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להוריד את הצפיפות הקלורית", "en": "Lower calorie density" },
+      "description": { "he": "להחליף חלבון שמן ברזה ו/או להוסיף ארוחה סופר-לפטינית.", "en": "Swap fatty protein for lean protein and/or add a super-leptinic meal." }
+    }
+  ]
 }

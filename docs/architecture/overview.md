@@ -32,6 +32,20 @@ each other. The diet engine is seeded from the Hebrew **Aba Hatuv** program.
 3. Response: service returns DTO → handler serializes → store updates
    observable state → screens re-render.
 
+## Container topology
+
+The root Compose project provides a browser-runnable full stack:
+
+1. `postgres` becomes healthy.
+2. The one-shot `migrate` service applies pending SQL migrations.
+3. The one-shot `seed` service idempotently loads the Aba Hatuv content.
+4. `api` starts only after both initialization jobs succeed.
+5. `web` serves the static Expo web export through Nginx after the API is
+   healthy.
+
+`adminer` is an optional `tools` profile. Native Android and iOS binaries are
+Expo/EAS artifacts and are not containerized; they connect to the same API.
+
 ## Realtime flow (Socket.IO)
 
 - Client connects to `wss://.../socket.io` presenting its JWT.
@@ -50,8 +64,8 @@ each other. The diet engine is seeded from the Hebrew **Aba Hatuv** program.
 | 0 — Scaffolding | Monorepo, Docker Compose, CI, ADRs, docs skeleton, health endpoints, i18n bootstrap | `pnpm test` green, coverage gate wired |
 | 1 — Auth + profile + i18n | Register / login / refresh; profile CRUD; HE/EN + RTL | End-to-end signup + profile edit works |
 | 2 — Couples + sockets | Invite code flow; Socket.IO gateway; shared event schemas | Two accounts paired; events echo live |
-| 3 — Diet planner (Aba Hatuv) | Seeded catalog + templates; daily plan generation; meal + water logging | User sees a personalized plan and can log meals |
-| 4 — Progress + partner feed | Weight log + chart; goals; live partner feed; reactions | Both partners can see each other's activity in real time |
+| 3 — Aba Hatuv program | Authored weekly guidance, personal timeline, reference lists, mobile program screens | User can start/resume and browse the correct weekly guidance |
+| 4 — Progress + partner feed | **In progress:** private maintenance trends and realtime privacy-safe shared wins implemented; goals and reactions remain | Both partners can see approved shared activity in real time |
 | 5 — Hardening | Coverage ≥ 80 %; OWASP checklist; docs sweep | All gates pass; docs complete |
 
 ## Non-goals (v1)

@@ -1,0 +1,31 @@
+{
+  "title": "Shared wins",
+  "subtitle": "Celebrate healthy actions together. Body measurements always stay private.",
+  "choose": "What went well?",
+  "kinds": {
+    "hydration": "Hydration",
+    "vegetables": "Colorful vegetables",
+    "movement": "Movement",
+    "meal_together": "Meal together",
+    "encouragement": "Encouragement"
+  },
+  "note": {
+    "label": "Add a note (optional)",
+    "placeholder": "A small detail for your partner"
+  },
+  "actions": {
+    "share": "Share this win",
+    "retry": "Try again"
+  },
+  "success": "Shared! One more win for your team.",
+  "feed": {
+    "title": "Our latest wins",
+    "loading": "Loading shared wins…",
+    "empty": "Your shared wins will appear here.",
+    "date": "{{date}}"
+  },
+  "errors": {
+    "load": "Shared wins are unavailable right now.",
+    "share": "This win could not be shared."
+  }
+}

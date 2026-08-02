@@ -13,3 +13,4 @@ docs
 .env
 .env.*
 !.env.example
+apps/mobile/dist

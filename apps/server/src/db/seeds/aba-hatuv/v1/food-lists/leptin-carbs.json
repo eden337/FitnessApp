@@ -1,33 +1,134 @@
 {
   "slug": "leptin-carbs",
-  "name": { "he": "פחמימות לפטיניות", "en": "Leptin carbs" },
+  "name": {
+    "he": "פחמימות לפטיניות",
+    "en": "Leptin carbs"
+  },
   "description": {
-    "he": "פחמימות שלמות, לא מעובדות ולא טחונות, שמומלצות בשלב הניקוי הלפטיני.",
-    "en": "Whole, unprocessed, non-ground carbs recommended during the leptin cleanse."
+    "he": "פחמימות עשירות יחסית בסיבים, מים או חלבון. קטניות הן הבחירה הלפטינית ביותר; בהמשך המסלולים מצטרפות פחמימות נוספות לפי דרגה.",
+    "en": "Carbohydrates relatively rich in fiber, water, or protein. Legumes are the most leptinic choice; later tracks add other carbohydrates by rank."
   },
   "weekSlug": null,
   "items": [
-    { "name": { "he": "בטטה", "en": "Sweet potato" } },
-    { "name": { "he": "תפוחי אדמה", "en": "Potatoes" } },
-    { "name": { "he": "סלק", "en": "Beetroot" } },
-    { "name": { "he": "אורז", "en": "Rice" } },
-    { "name": { "he": "שעועית", "en": "Beans" } },
-    { "name": { "he": "עדשים", "en": "Lentils" } },
-    { "name": { "he": "אפונה", "en": "Peas" } },
-    { "name": { "he": "חומוס", "en": "Chickpeas" } },
-    { "name": { "he": "פירות טריים", "en": "Fresh fruit" } },
-    { "name": { "he": "שיבולת שועל עבה", "en": "Thick rolled oats" } },
-    { "name": { "he": "קינואה", "en": "Quinoa" } },
-    { "name": { "he": "כוסמת", "en": "Buckwheat" } },
-    { "name": { "he": "תירס", "en": "Corn" } },
-    { "name": { "he": "אדממה", "en": "Edamame" } },
-    { "name": { "he": "גריסים", "en": "Pearl barley" } },
     {
-      "name": { "he": "סקיני פסטה", "en": "Skinny pasta" },
+      "name": {
+        "he": "בטטה",
+        "en": "Sweet potato"
+      },
+      "visualKey": "sweet-potato"
+    },
+    {
+      "name": {
+        "he": "תפוחי אדמה",
+        "en": "Potatoes"
+      },
+      "visualKey": "potatoes"
+    },
+    {
+      "name": {
+        "he": "סלק",
+        "en": "Beetroot"
+      },
+      "visualKey": "beetroot"
+    },
+    {
+      "name": {
+        "he": "אורז",
+        "en": "Rice"
+      },
+      "visualKey": "rice"
+    },
+    {
+      "name": {
+        "he": "שעועית",
+        "en": "Beans"
+      },
+      "visualKey": "beans"
+    },
+    {
+      "name": {
+        "he": "עדשים",
+        "en": "Lentils"
+      },
+      "visualKey": "lentils"
+    },
+    {
+      "name": {
+        "he": "אפונה",
+        "en": "Peas"
+      },
+      "visualKey": "peas"
+    },
+    {
+      "name": {
+        "he": "חומוס",
+        "en": "Chickpeas"
+      },
+      "visualKey": "chickpeas"
+    },
+    {
+      "name": {
+        "he": "פירות טריים",
+        "en": "Fresh fruit"
+      },
+      "visualKey": "fresh-fruit"
+    },
+    {
+      "name": {
+        "he": "שיבולת שועל עבה",
+        "en": "Thick rolled oats"
+      },
+      "portion": {
+        "he": "עד 4 כפות ביום בשלבי הניקוי",
+        "en": "Up to 4 tablespoons daily during cleanse phases"
+      },
+      "visualKey": "thick-rolled-oats"
+    },
+    {
+      "name": {
+        "he": "קינואה",
+        "en": "Quinoa"
+      },
+      "visualKey": "quinoa"
+    },
+    {
+      "name": {
+        "he": "כוסמת",
+        "en": "Buckwheat"
+      },
+      "visualKey": "buckwheat"
+    },
+    {
+      "name": {
+        "he": "תירס",
+        "en": "Corn"
+      },
+      "visualKey": "corn"
+    },
+    {
+      "name": {
+        "he": "אדממה",
+        "en": "Edamame"
+      },
+      "visualKey": "edamame"
+    },
+    {
+      "name": {
+        "he": "גריסים",
+        "en": "Pearl barley"
+      },
+      "visualKey": "pearl-barley"
+    },
+    {
+      "name": {
+        "he": "סקיני פסטה",
+        "en": "Skinny pasta"
+      },
       "notes": {
         "he": "לא אידיאלי אך מאושר",
         "en": "Not ideal, but approved"
-      }
+      },
+      "visualKey": "skinny-pasta"
     }
   ]
 }

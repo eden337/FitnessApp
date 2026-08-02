@@ -50,7 +50,7 @@ describe('HomeScreen', () => {
     expect(getByTestId('home-empty')).toBeTruthy();
   });
 
-  it('shows the summary card when derived metrics are present', () => {
+  it('shows program momentum without exposing private body metrics', () => {
     const { store } = buildStore();
     store.auth.setUser(sampleUser);
     store.profile.profile = sampleUser;
@@ -61,21 +61,24 @@ describe('HomeScreen', () => {
       goalWeightKg: 60,
       dietaryRestrictions: {},
     };
-    store.profile.derived = { ageYears: 35, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
-    const { getByText } = render(wrap(store, <HomeScreen />));
-    expect(getByText('1624 kcal')).toBeTruthy();
-    expect(getByText('65 kg')).toBeTruthy();
+    store.profile.derived = { ageYears: 35, bmi: 23.9, bmrKcal: 1370.3, tdeeKcal: 2124, targetKcal: 1624 };
+    const { queryByText, getByTestId } = render(wrap(store, <HomeScreen />));
+    expect(getByTestId('home-momentum-card')).toBeTruthy();
+    expect(queryByText('1624 kcal')).toBeNull();
+    expect(queryByText('65 kg')).toBeNull();
   });
 
-  it('signs out when the Sign out button is pressed', async () => {
-    const { store, post } = buildStore();
+  it('opens settings instead of rendering preferences on the dashboard', () => {
+    const { store } = buildStore();
     store.auth.setUser(sampleUser);
-    // Pretend the user is authenticated so signOut takes the network path.
-    (store.auth as unknown as { status: string }).status = 'authenticated';
-    store.auth.setTokens({ accessToken: 'a', refreshToken: 'r' });
-    const { getByTestId } = render(wrap(store, <HomeScreen />));
-    fireEvent.press(getByTestId('home-signout'));
-    await Promise.resolve();
-    expect(post).toHaveBeenCalledWith('/api/v1/auth/logout', { refreshToken: 'r' });
+    const onPressSettings = jest.fn();
+    const { getByTestId, queryByTestId } = render(
+      wrap(store, <HomeScreen onPressSettings={onPressSettings} />),
+    );
+
+    expect(queryByTestId('theme-toggle-dark')).toBeNull();
+    expect(queryByTestId('home-signout')).toBeNull();
+    fireEvent.press(getByTestId('home-settings'));
+    expect(onPressSettings).toHaveBeenCalledTimes(1);
   });
 });

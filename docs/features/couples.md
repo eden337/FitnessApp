@@ -1,6 +1,6 @@
 # Feature — Couples
 
-**Status:** Phase 2 (not yet implemented).
+**Status:** Phase 2 — implemented on server and mobile.
 
 ## Goal
 
@@ -18,8 +18,8 @@ code, so every subsequent write is visible to their partner in real time.
 ## Surface
 
 - REST: `POST /couples`, `POST /couples/join`, `GET /couples/me`, `DELETE /couples/me`.
-- Mobile: `PairScreen` (generate + share code), `JoinScreen` (enter code),
-  `PartnerCard` component on the home feed.
+- Mobile: `PairScreen` (generate/share a code or enter a partner's code, with
+  an explicit route back to Home) and the partner card on the home feed.
 - MobX: `CoupleStore` (observable `couple`, `partner`; actions `create`,
   `join`, `leave`).
 
@@ -36,3 +36,5 @@ code, so every subsequent write is visible to their partner in real time.
 - Happy path: A creates, B joins, both see each other via `GET /couples/me`.
 - Code collision: server retries code generation until unique (bounded).
 - Access: non-member gets 403 on couple-scoped routes; verified per route.
+- Socket integration covers authenticated room membership and member
+  join/leave events. Progress activity events remain part of Phase 4.

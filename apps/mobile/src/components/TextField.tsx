@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TextInput, type TextInputProps, View, StyleSheet } from 'react-native';
-import { colors, radii, spacing, typography } from '../theme';
+import type { AppTheme } from '../theme';
+import { useTheme } from '../theme/ThemeProvider';
 
 export type TextFieldProps = Omit<TextInputProps, 'style'> & {
   label: string;
@@ -20,13 +21,15 @@ export const TextField: React.FC<TextFieldProps> = ({
   testID,
   ...rest
 }) => {
+  const theme = useTheme();
+  const styles = createStyles(theme);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         {...rest}
         testID={testID}
-        placeholderTextColor={colors.muted}
+        placeholderTextColor={theme.colors.textMuted}
         style={[styles.input, error ? styles.inputError : null]}
       />
       {error ? (
@@ -40,26 +43,27 @@ export const TextField: React.FC<TextFieldProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  wrapper: { marginBottom: spacing.md },
+const createStyles = (theme: AppTheme) => StyleSheet.create({
+  wrapper: { marginBottom: theme.spacing.md },
   label: {
-    ...typography.caption,
-    color: colors.muted,
-    marginBottom: spacing.xs,
+    ...theme.typography.label,
+    color: theme.colors.textMuted,
+    marginBottom: theme.spacing.xs,
     textAlign: 'auto',
   },
   input: {
-    ...typography.body,
-    color: colors.text,
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.md,
+    ...theme.typography.body,
+    color: theme.colors.text,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.md,
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: theme.colors.border,
+    minHeight: 48,
     textAlign: 'auto',
   },
-  inputError: { borderColor: colors.danger },
-  helper: { ...typography.caption, color: colors.muted, marginTop: spacing.xs },
-  error: { ...typography.caption, color: colors.danger, marginTop: spacing.xs },
+  inputError: { borderColor: theme.colors.danger },
+  helper: { ...theme.typography.caption, color: theme.colors.textMuted, marginTop: theme.spacing.xs },
+  error: { ...theme.typography.caption, color: theme.colors.danger, marginTop: theme.spacing.xs },
 });

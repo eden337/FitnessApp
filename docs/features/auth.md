@@ -40,8 +40,10 @@ both ends of the wire.
 
 - `AuthStore` (`apps/mobile/src/stores/AuthStore.ts`):
   `signUp / signIn / signOut / hydrate / handleAuthFailure`.
-- On app launch, `hydrate()` reads the refresh token from secure storage
-  and calls `/auth/refresh` to silently restore the session.
+- On app launch, `RootStore.hydrate()` restores authentication, locale, and
+  theme from native secure storage before the navigator mounts. `AuthStore`
+  then calls `/auth/refresh` to silently restore a persisted session; storage
+  failures fail closed to the signed-out state.
 - `apiClient.ts` injects the access token on every request and on a 401
   refreshes once (deduplicated across concurrent calls), retrying the
   original request transparently. If refresh itself fails it calls

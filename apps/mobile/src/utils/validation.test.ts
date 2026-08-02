@@ -33,6 +33,8 @@ describe('validators', () => {
     expect(validateBirthDate('')).toBe('common:validation.required');
     expect(validateBirthDate('15/04/1990')).toBe('common:validation.isoDate');
     expect(validateBirthDate('1990-04-15')).toBeNull();
+    expect(validateBirthDate('2026-02-31')).toBe('common:validation.isoDate');
+    expect(validateBirthDate('2024-02-29')).toBeNull();
   });
 
   it('heightCm: 50–250, finite', () => {

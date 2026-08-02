@@ -9,7 +9,29 @@
     "he": "המשך עקרונות שבוע 9 + שילוב 3-5 \"פעולות שורפות שומן\" מהרשימה במהלך השבוע, ולנסות להגיע ל-8,000-10,000 צעדים ביום, או עלייה של 20-25% מסך הצעדים היומי הנוכחי שלך.",
     "en": "Continue Week-9 principles + integrate 3-5 \"fat-burning actions\" from the list over the week, and aim for 8,000-10,000 steps a day, or a 20-25% increase over your current daily step count."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "הגדלת הפעילות היומיומית מעלה את הוצאת האנרגיה בלי להגביר את הורמון הרעב כפי שעלול לקרות בפעילות אירובית מאומצת. היא מרחיבה את החופש התזונתי ותומכת בבריאות השרירים והשלד.",
+    "en": "Increasing everyday movement raises energy expenditure without stimulating hunger as strenuous aerobic work can. It expands dietary flexibility and supports muscle and skeletal health."
+  },
+  "notes": {
+    "he": "התקדמות עדיפה על מושלמות. אין צורך להפוך למרתוניסט בשבוע אחד; יש להעלות את הפעילות בהדרגה ביחס לנקודת הפתיחה האישית ולהמשיך את כל עקרונות המסלול.",
+    "en": "Progress beats perfection. Do not try to become a marathon runner in one week; increase activity gradually from your own baseline while continuing all track principles."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "לשלב 3-5 פעולות שורפות שומן", "en": "Add 3-5 fat-burning actions" },
+      "description": { "he": "לבחור פעולות יומיומיות מהרשימה ולפזר אותן במהלך השבוע.", "en": "Choose everyday actions from the guide and spread them through the week." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להעלות את מספר הצעדים", "en": "Increase daily steps" },
+      "description": { "he": "לכוון ל-8,000-10,000 צעדים או לעלייה של 20-25% מהמצב הנוכחי.", "en": "Aim for 8,000-10,000 steps or a 20-25% increase from the current baseline." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך במסלול החיטוב ובשכפ\"ץ", "en": "Continue the selected track and leptin armor" },
+      "description": null
+    }
+  ]
 }

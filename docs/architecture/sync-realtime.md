@@ -13,7 +13,7 @@
 ```
 client connect (JWT in `auth.token`)
   └─► server: verify JWT, look up couple_id
-        ├── couple_id null  → disconnect (client must create/join couple first)
+        ├── couple_id null  → emit `ready` with a null view
         └── couple_id set    → socket.join(`couple:<id>`) → emit `ready`
 ```
 
@@ -35,8 +35,10 @@ export const MealLoggedEvent = z.object({
 ## Ordering & idempotency
 
 - Every event carries a `createdAt` timestamp from the backing row.
-- The client keeps a per-room `lastSeenAt` in `SocketStore` and drops events
-  with `createdAt <= lastSeenAt` during reconciliation.
+- `ActivityStore` keeps persisted activity IDs and a latest `createdAt` cursor.
+  Reconciliation includes the boundary timestamp and deduplicates by ID.
+- Initial feed reads are newest-first. Cursor reads are oldest-first so bounded
+  batches advance without skipping intermediate events.
 - Reactions are idempotent: `(couple_id, from_user_id, subject_id, kind)` is
   unique; a repeat POST returns 200 with the existing row.
 
@@ -44,8 +46,9 @@ export const MealLoggedEvent = z.object({
 
 - **Socket drops mid-session:** client auto-reconnects (Socket.IO default);
   reconciles via `/feed?since=`.
-- **JWT expires on socket:** server disconnects with reason `token_expired`;
-  client refreshes and reconnects.
+- **JWT expires while connected:** the authenticated connection remains valid.
+  If it later reconnects, the handshake callback reads the latest refreshed
+  access token from `AuthStore`.
 - **Backend restart:** rooms rebuild on demand as clients reconnect; no
   persistence needed in-memory.
 
@@ -54,4 +57,5 @@ export const MealLoggedEvent = z.object({
 - Server: spin up real Socket.IO with a test HTTP server; integration tests
   assert that a write on client A produces the expected event on client B
   connected to the same couple room.
-- Mobile: `mock-socket` in store tests + `msw` for the REST reconcile path.
+- Mobile: socket stubs verify binding, payload validation, cleanup, and the REST
+  reconciliation cursor; lifecycle tests verify refreshed-token handshakes.

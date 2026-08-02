@@ -32,6 +32,7 @@ export interface UserMetricsTable {
   goal_type: GoalType;
   goal_weight_kg: number | null;
   dietary_restrictions: ColumnType<unknown, unknown, unknown>;
+  program_started_on: ColumnType<Date | string | null, Date | string | null | undefined, Date | string | null>;
   updated_at: ManagedTimestamp;
 }
 
@@ -100,12 +101,40 @@ export interface FoodItemsTable {
   id: Generated<string>;
   list_id: string;
   ordinal: number;
+  visual_key: string;
   name_he: string;
   name_en: string;
   portion_he: string | null;
   portion_en: string | null;
   notes_he: string | null;
   notes_en: string | null;
+}
+
+export interface WeightLogsTable {
+  id: Generated<string>;
+  user_id: string;
+  logged_on: ColumnType<Date | string, Date | string, Date | string>;
+  weight_kg: number;
+  body_fat_pct: number | null;
+  notes: string | null;
+  created_at: ManagedTimestamp;
+  updated_at: ManagedTimestamp;
+}
+
+export type SharedActivityKind =
+  | 'hydration'
+  | 'vegetables'
+  | 'movement'
+  | 'meal_together'
+  | 'encouragement';
+
+export interface SharedActivitiesTable {
+  id: Generated<string>;
+  couple_id: string;
+  actor_user_id: string;
+  kind: SharedActivityKind;
+  note: string | null;
+  created_at: ManagedTimestamp;
 }
 
 export interface Database {
@@ -118,4 +147,6 @@ export interface Database {
   program_tasks: ProgramTasksTable;
   food_lists: FoodListsTable;
   food_items: FoodItemsTable;
+  weight_logs: WeightLogsTable;
+  shared_activities: SharedActivitiesTable;
 }

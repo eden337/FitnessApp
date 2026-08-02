@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { render } from '@testing-library/react-native';
-import { I18nProvider, useTranslation } from '../src/i18n/I18nProvider';
+import { act, render } from '@testing-library/react-native';
+import { createI18n, I18nProvider, useTranslation } from '../src/i18n/I18nProvider';
 
 const Probe: React.FC = () => {
   const { t } = useTranslation();
@@ -25,5 +25,20 @@ describe('I18nProvider', () => {
       </I18nProvider>,
     );
     expect(getByTestId('probe').props.children).toBe('Couple Fit');
+  });
+
+  it('renders from a supplied i18n instance and follows its language changes', async () => {
+    const instance = createI18n('en');
+    const { getByTestId } = render(
+      <I18nProvider instance={instance}>
+        <Probe />
+      </I18nProvider>,
+    );
+
+    expect(getByTestId('probe').props.children).toBe('Couple Fit');
+    await act(async () => {
+      await instance.changeLanguage('he');
+    });
+    expect(getByTestId('probe').props.children).toBe('כושר לזוגות');
   });
 });

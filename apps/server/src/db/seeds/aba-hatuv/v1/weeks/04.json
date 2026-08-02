@@ -9,7 +9,34 @@
     "he": "שתי כוסות מים לפני כל ארוחה במסגרת 2-4 ליטר ביום. בשתי הארוחות הגדולות ביותר — 50% מהארוחה ירקות מנקים (או פעם אחת ביום ירקות מנקים ובפעם השנייה שייק לפטיני), עם סדר אכילה נכון: ירקות תחילה. בנוסף להימנעות ממאכלים טחונים, סוכרים וקמחים, התמקדות בפחמימות הלפטיניות ביותר ולקיחת \"חופשה מתוכננת\" מכל השאר. הגבלה למנת פרי אחת ביום.",
     "en": "Two cups of water before each eating event within a 2-4 L daily total. In your two largest meals: 50% cleansing vegetables (or once a day vegetables, the other a leptin smoothie), eating vegetables first. Continue avoiding ground foods, sugars, and flours; focus on the most-leptinic carbs and stay on a planned vacation from the rest. Limit to one fruit serving per day."
   },
-  "rationale": null,
-  "notes": null,
-  "tasks": []
+  "rationale": {
+    "he": "ההתמקדות בפחמימות הלפטיניות ביותר מורידה עוד את רמות האינסולין ואת הרגישות אליו, מסירה את אפקט החסימה של הלפטין ומסייעת להפחית חשקים לבצקים ומתוקים.",
+    "en": "Focusing on the most leptinic carbohydrates further lowers insulin levels and insulin sensitivity, reduces leptin's blocking effect, and helps reduce cravings for baked goods and sweets."
+  },
+  "notes": {
+    "he": "חובה לאכול פחמימות לפטיניות ולא להפוך את התוכנית לדיאטת חלבון וירקות בלבד. יש להקפיד במיוחד על מים וירקות, ולהגביל את הפירות למנה יומית אחת.",
+    "en": "Leptinic carbohydrates are required; do not turn the program into a protein-and-vegetable crash diet. Be especially consistent with water and vegetables, and limit fruit to one daily serving."
+  },
+  "tasks": [
+    {
+      "kind": "required",
+      "title": { "he": "להמשיך מים, ירקות וסדר אכילה נכון", "en": "Continue water, vegetables, and the correct eating order" },
+      "description": { "he": "שתי כוסות מים לפני אכילה ו-50% ירקות בשתי הארוחות הגדולות.", "en": "Two cups of water before eating and 50% vegetables in the two largest meals." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להימנע מסוכר, קמחים ומאכלים טחונים", "en": "Avoid sugar, flour, and ground foods" },
+      "description": null
+    },
+    {
+      "kind": "required",
+      "title": { "he": "לבחור רק בפחמימות הלפטיניות ביותר", "en": "Choose only the most leptinic carbohydrates" },
+      "description": { "he": "קטניות, כוסמת, קינואה, ארטישוק ירושלמי ועד 4 כפות שיבולת שועל עבה.", "en": "Legumes, buckwheat, quinoa, Jerusalem artichoke, and up to 4 tablespoons of thick oats." }
+    },
+    {
+      "kind": "required",
+      "title": { "he": "להגביל לפירות למנה אחת ביום", "en": "Limit fruit to one serving per day" },
+      "description": null
+    }
+  ]
 }
