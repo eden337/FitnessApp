@@ -1,9 +1,101 @@
-# FitnessApp
+# Couple Fit — כושר לזוגות
 
-Bilingual (Hebrew / English) couples fitness companion. Plans meals around the
-**אבא חטוב (Aba Hatuv)** program, tracks progress against personalized goals
-(gender, height, weight, age, activity), and keeps two partners in sync in
-real time so they can push each other forward.
+> **Product name:** Couple Fit (`כושר לזוגות`)
+> **Repository name:** FitnessApp
+
+Couple Fit is a bilingual Hebrew/English wellness companion that helps two
+partners build healthier routines together. It turns the 13-week
+**אבא חטוב (Aba Hatuv)** foundation program into a friendly daily journey:
+clear weekly guidance, illustrated food references, small achievable actions,
+shared wins, and timely encouragement from the person doing the journey with
+you.
+
+The app is deliberately not a calorie-counting dashboard or a competitive
+weight-loss leaderboard. During the 13-week foundation program, weighing and
+weight-progress tracking stay out of the experience in accordance with the
+program's principles. Private weight trends become available only later, in
+maintenance, as a neutral tool for noticing whether habits are slipping.
+
+## The idea
+
+Healthy change is easier to sustain when it feels clear, rewarding, and
+socially supported. Couple Fit combines three ideas:
+
+1. **A guided program.** Each week has one understandable mission, practical
+   tasks, and relevant food guidance instead of an overwhelming collection of
+   measurements.
+2. **Progress through accomplishment.** The interface highlights the next
+   achievable action and celebrates consistency, hydration, movement, meals,
+   vegetables, and encouragement.
+3. **A private team of two.** Partners can share a small, intentionally safe
+   set of wins in real time. Sensitive information such as weight, BMI, age,
+   calories, and body measurements is never placed in the shared feed.
+
+The result should feel less like filling out a health spreadsheet and more
+like completing a positive quest with someone who cares about you.
+
+## Who it is for
+
+Couple Fit is designed primarily for:
+
+- couples following the Aba Hatuv program together;
+- Hebrew-speaking users who need a first-class RTL experience, with an equal
+  English experience for bilingual households;
+- busy adults and parents who respond better to clear daily actions than dense
+  nutrition analytics;
+- partners who want accountability and encouragement without exposing private
+  body data or turning wellness into a competition;
+- people transitioning from the structured 13-week program into long-term
+  maintenance of its principles.
+
+It is a behavioral wellness companion, not a medical device and not a
+replacement for individual medical or nutritional advice.
+
+## Inspiration
+
+The product draws from several complementary sources:
+
+- **Aba Hatuv:** the program supplies the 13-week behavioral structure, weekly
+  guidance, food categories, recipes, and the rule that weight should not drive
+  the foundation phase.
+- **Partner accountability:** progress is framed as cooperation—shared wins,
+  gentle nudges, and celebration—rather than comparison between partners.
+- **Gameful habit design:** missions, momentum, progress rings, streak-like
+  consistency, badges, and brief celebrations make useful actions satisfying
+  without allowing points to replace the real habit.
+- **Modern learning and wellness products:** short lessons, one clear next
+  action, visible progress, friendly language, and forgiving recovery after a
+  missed day inform the interaction model.
+- **Colorful editorial illustration:** recognizable cartoon food artwork and
+  warm, expressive surfaces make nutritional reference material inviting and
+  easy to scan.
+
+These are design influences, not an attempt to reproduce another product. The
+app's defining combination is Aba Hatuv content, bilingual Israeli context,
+privacy-safe couple support, and a celebration-first visual language.
+
+## Design direction
+
+The visual character is **playful wellness for two**: warm, optimistic, clear,
+and accomplishment-oriented. Everyday screens remain calm and readable; color
+and motion become more expressive around missions, partner moments, milestones,
+and celebrations.
+
+- Coral communicates action.
+- Teal communicates teamwork.
+- Violet communicates progress.
+- Gold communicates reward.
+- Blue communicates hydration.
+- Green communicates success.
+
+Light mode uses warm cream surfaces, while dark mode uses layered deep navy.
+Food illustrations always retain their saturated natural colors in both
+themes. Rubik supports a unified Hebrew/English identity, and every interaction
+is designed for RTL, reduced motion, accessible contrast, and meaningful text
+labels in addition to color and icons.
+
+The normative visual rules live in
+[`docs/design/design.md`](docs/design/design.md).
 
 > Status: **Phase 4d — realtime shared wins**. Aba Hatuv program guidance,
 > couples, authentication, and profile setup are implemented. See
